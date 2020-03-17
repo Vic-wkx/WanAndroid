@@ -54,4 +54,5 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     api "androidx.navigation:navigation-fragment-ktx:2.2.1"
     api "androidx.navigation:navigation-ui-ktx:2.2.1"
+    api "com.youth.banner:banner:2.0.0-alpha02"
 }

@@ -13,5 +13,14 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+        val a = listOf(1, 2, 3, 4, 5)
+        run outside@{
+            a.forEach {
+                println(it)
+                if (it > 3) return@outside
+                println("end$it")
+            }
+        }
+        return
     }
 }

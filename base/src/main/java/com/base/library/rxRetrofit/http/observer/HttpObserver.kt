@@ -3,6 +3,11 @@ package com.base.library.rxRetrofit.http.observer
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.base.library.rxRetrofit.RxRetrofitApp
 import com.base.library.rxRetrofit.http.api.BaseApi
 import com.base.library.rxRetrofit.http.listener.HttpListener
@@ -18,17 +23,20 @@ import io.reactivex.disposables.Disposable
  */
 @SuppressLint("CheckResult")
 class HttpObserver(
+    private val activity: AppCompatActivity?,
+    private val fragment: Fragment?,
     private val context: Context,
     private val api: BaseApi,
     private val listener: HttpListener
-) :
-    Observer<String> {
+) : Observer<String>, DefaultLifecycleObserver {
 
     var loading: ProgressDialog? = null
     var disposable: Disposable? = null
 
     override fun onSubscribe(d: Disposable) {
         disposable = d
+        activity?.lifecycle?.addObserver(this)
+        fragment?.lifecycle?.addObserver(this)
         listener.onSubscribe(d)
         showLoadingIfNeed()
     }
@@ -58,5 +66,11 @@ class HttpObserver(
     override fun onComplete() {
         loading?.dismiss()
         listener.onComplete()
+    }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+        Log.d("~~~", "onDestroy:dispose")
+        disposable?.dispose()
+        super.onDestroy(owner)
     }
 }

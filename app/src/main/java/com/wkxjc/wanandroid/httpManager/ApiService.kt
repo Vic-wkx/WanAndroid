@@ -181,7 +181,7 @@ interface ApiService {
 
     // 首页 banner
     @GET("banner/json")
-    fun getBanner()
+    fun getBanner(): Observable<String>
 
     // 首页文章
     @GET("article/list/{page}/json")

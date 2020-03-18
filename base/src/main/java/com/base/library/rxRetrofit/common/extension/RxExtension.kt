@@ -17,14 +17,14 @@ import io.reactivex.schedulers.Schedulers
  * Date:    2019-04-25
  */
 
-/**
- * 获取activity/fragment生命周期
- */
-fun <T> lifeCycle(fragment: RxFragment?, activity: RxAppCompatActivity?): LifecycleTransformer<T>? {
-    val fragmentLife = fragment?.bindUntilEvent<T>(FragmentEvent.DESTROY_VIEW)
-    val activityLife = activity?.bindUntilEvent<T>(ActivityEvent.DESTROY)
-    return fragmentLife ?: activityLife
-}
+///**
+// * 获取activity/fragment生命周期
+// */
+//fun <T> lifeCycle(fragment: RxFragment?, activity: RxAppCompatActivity?): LifecycleTransformer<T>? {
+//    val fragmentLife = fragment?.bindUntilEvent<T>(FragmentEvent.DESTROY_VIEW)
+//    val activityLife = activity?.bindUntilEvent<T>(ActivityEvent.DESTROY)
+//    return fragmentLife ?: activityLife
+//}
 
 /**
  * 设置订阅在io线程发生，在主线程观察
@@ -35,12 +35,12 @@ fun <T> Observable<T>.bindIOToMainThread(): Observable<T> {
         .observeOn(AndroidSchedulers.mainThread())
 }
 
-/**
- * 绑定生命周期
- */
-fun <T> Observable<T>.bindLifeCycle(lifeCycle: LifecycleTransformer<T>?): Observable<T> {
-    lifeCycle ?: return this
-    /*绑定生命周期*/
-    return compose(lifeCycle)
-}
+///**
+// * 绑定生命周期
+// */
+//fun <T> Observable<T>.bindLifeCycle(lifeCycle: LifecycleTransformer<T>?): Observable<T> {
+//    lifeCycle ?: return this
+//    /*绑定生命周期*/
+//    return compose(lifeCycle)
+//}
 

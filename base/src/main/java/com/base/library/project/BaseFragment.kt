@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.trello.rxlifecycle3.components.RxFragment
 
 abstract class BaseFragment : Fragment(), IBase {
     override fun onCreateView(

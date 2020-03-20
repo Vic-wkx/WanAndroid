@@ -185,7 +185,7 @@ interface ApiService {
 
     // 首页文章
     @GET("article/list/{page}/json")
-    fun getHomeArticles(@Path("page") page: Int)
+    fun getHomeArticles(@Path("page") page: Int): Observable<String>
 
     // 微信公众号列表接口
     @GET("wxarticle/chapters/json")

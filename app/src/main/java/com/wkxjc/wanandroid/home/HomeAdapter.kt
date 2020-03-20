@@ -1,12 +1,14 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.banner.ImageAdapter
 import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.home.common.bean.Articles
 import com.wkxjc.wanandroid.home.common.bean.BannerBean
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import com.youth.banner.Banner
@@ -34,7 +36,8 @@ class HomeAdapter(private val homeBean: HomeBean) :
                 banner.setAdapter(ImageAdapter(homeBean.banners.map { it.imagePath }))
             }
             ARTICLE -> {
-                holder.itemView.tvTitle.text = homeBean.articles[position - 1]
+                Log.d("~~~",homeBean.articles.data[position - 1].title)
+                holder.itemView.tvTitle.text = homeBean.articles.data[position - 1].title
             }
         }
     }
@@ -59,9 +62,8 @@ class HomeAdapter(private val homeBean: HomeBean) :
         }
     }
 
-    fun refreshBanner(banners: List<BannerBean>) {
-        homeBean.banners.clear()
-        homeBean.banners.addAll(banners)
+    fun refresh(banners: List<BannerBean>, articles: Articles) {
+        homeBean.refresh(banners, articles)
         notifyDataSetChanged()
     }
 

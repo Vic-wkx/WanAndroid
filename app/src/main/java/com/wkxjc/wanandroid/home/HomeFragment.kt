@@ -7,6 +7,7 @@ import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.api.BaseApi
 import com.base.library.rxRetrofit.http.httpList.HttpListListener
 import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.home.common.api.ArticleApi
 import com.wkxjc.wanandroid.home.common.api.BannerApi
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -14,11 +15,12 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : BaseFragment() {
     private val httpManager = HttpManager(this)
     private val bannerApi = BannerApi()
-    private val homeData = HomeBean()
-    private val homeAdapter = HomeAdapter(homeData)
+    private val articleApi = ArticleApi()
+    private val homeBean = HomeBean()
+    private val homeAdapter = HomeAdapter(homeBean)
     private val homeListListener = object : HttpListListener() {
         override fun onNext(resultMap: HashMap<BaseApi, Any>) {
-            homeAdapter.refreshBanner(bannerApi.convert(resultMap))
+            homeAdapter.refresh(bannerApi.convert(resultMap), articleApi.convert(resultMap))
         }
 
         override fun onError(error: Throwable) {
@@ -36,6 +38,6 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initData() {
-        httpManager.request(arrayOf(bannerApi), homeListListener)
+        httpManager.request(arrayOf(bannerApi, articleApi), homeListListener)
     }
 }

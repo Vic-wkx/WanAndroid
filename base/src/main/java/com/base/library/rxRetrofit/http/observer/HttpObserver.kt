@@ -22,13 +22,8 @@ import io.reactivex.disposables.Disposable
  * Date:    2019/4/23
  */
 @SuppressLint("CheckResult")
-class HttpObserver(
-    private val activity: AppCompatActivity?,
-    private val fragment: Fragment?,
-    private val context: Context,
-    private val api: BaseApi,
-    private val listener: HttpListener
-) : Observer<String>, DefaultLifecycleObserver {
+class HttpObserver(private val activity: AppCompatActivity?, private val fragment: Fragment?, private val context: Context,
+                   private val api: BaseApi, private val listener: HttpListener) : Observer<String>, DefaultLifecycleObserver {
 
     var loading: ProgressDialog? = null
     var disposable: Disposable? = null
@@ -45,6 +40,7 @@ class HttpObserver(
         // 如果使用的系统application的Context，不允许弹窗
         if (!api.showLoading || context == RxRetrofitApp.application.applicationContext) return
         if (loading == null) {
+            // TODO 换成接口的形式：onLoading、onCancel，让使用者在 onLoading 回调时显示 ProgressBar，onCancel 时取消
             loading = ProgressDialog.show(context, null, "Loading", false, api.loadingCancelable) {
                 disposable?.dispose()
                 listener.onError(Throwable("request cancel"))

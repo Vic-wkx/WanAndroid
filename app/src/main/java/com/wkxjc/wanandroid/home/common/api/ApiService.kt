@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.httpManager
+package com.wkxjc.wanandroid.home.common.api
 
 import io.reactivex.Observable
 import retrofit2.http.*

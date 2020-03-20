@@ -7,7 +7,7 @@ package com.base.library.rxRetrofit.http.converter
  * @author  Alpinist Wang
  * Date:    2019-05-04
  */
-class DefaultResultConverter : IResultConverter {
+open class DefaultResultConverter : IResultConverter {
     /**
      * 直接返回原始数据
      */

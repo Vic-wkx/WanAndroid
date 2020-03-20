@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.httpManager
 
 import com.base.library.rxRetrofit.http.api.BaseApi
+import com.wkxjc.wanandroid.home.common.api.ApiService
 import io.reactivex.Observable
 
 class WeChatPublicAccountApi : BaseApi() {

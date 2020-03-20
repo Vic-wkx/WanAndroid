@@ -1,6 +1,5 @@
 package com.base.library.rxRetrofit.http.api
 
-import com.base.library.rxRetrofit.RxRetrofitApp
 import com.base.library.rxRetrofit.common.retry.RetryConfig
 import com.base.library.rxRetrofit.http.cache.CacheConfig
 import com.base.library.rxRetrofit.http.timeout.TimeoutConfig

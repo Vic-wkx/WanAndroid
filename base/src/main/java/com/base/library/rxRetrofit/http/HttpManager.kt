@@ -23,12 +23,12 @@ import java.util.concurrent.TimeUnit
  * @author  WZG
  * Date:    2019-04-25
  */
+@Suppress("unused")
 class HttpManager {
     private var activity: AppCompatActivity? = null
     private var fragment: Fragment? = null
     private val context: Context
-        get() = activity ?: fragment?.context ?: RxRetrofitApp.application.applicationContext
-        ?: throw Throwable("context is null")
+        get() = activity ?: fragment?.context ?: RxRetrofitApp.application.applicationContext ?: throw Throwable("context is null")
 
     constructor(activity: AppCompatActivity) {
         this.activity = activity
@@ -60,40 +60,24 @@ class HttpManager {
     /**
      * 多个api请求
      */
-    fun request(
-        apis: Array<BaseApi>,
-        config: HttpListConfig = HttpListConfig(),
-        listener: HttpListListener
-    ) {
+    fun request(apis: Array<out BaseApi>, listener: HttpListListener, config: HttpListConfig = HttpListConfig()) {
         val resultMap = HashMap<BaseApi, Any>()
         val observable = with(Observable.fromArray(*apis)) {
-            if (config.order)
-                this.concatMap {
-                    requestSingleApi(it, resultMap, listener)
-                }
-            else
-                this.flatMap {
-                    requestSingleApi(it, resultMap, listener)
-                }
+            if (config.order) this.concatMap { requestSingleApi(it, resultMap, listener) }
+            else this.flatMap { requestSingleApi(it, resultMap, listener) }
         }
         observable.buffer(apis.size)
             .bindIOToMainThread()
             .subscribe(HttpListObserver(activity, fragment, context, resultMap, config, listener))
     }
 
-    private fun requestSingleApi(
-        api: BaseApi,
-        resultMap: HashMap<BaseApi, Any>,
-        listener: HttpListListener
-    ): Observable<Unit> {
+    private fun requestSingleApi(api: BaseApi, resultMap: HashMap<BaseApi, Any>, listener: HttpListListener): Observable<Unit> {
         return api.getObservable()
             /*失败后retry处理控制*/
             .retryWhen(RetryFunction(api.retry))
             /*返回数据统一判断*/
             .map(HttpResultConverter(api))
-            .map {
-                resultMap[api] = listener.onSingleNext(api, it)
-            }
+            .map { resultMap[api] = listener.onSingleNext(api, it) }
             .bindIOToMainThread()
     }
 }

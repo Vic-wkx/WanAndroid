@@ -11,7 +11,7 @@ import okhttp3.Response
  * @author  Alpinist Wang
  * Date:    2019-04-24
  */
-class OfflineCacheInterceptor(var offlineCacheTime: Int = 60) : Interceptor {
+class OfflineCacheInterceptor(private var offlineCacheTime: Int = 60) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()

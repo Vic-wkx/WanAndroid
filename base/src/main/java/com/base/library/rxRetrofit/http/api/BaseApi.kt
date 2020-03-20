@@ -56,11 +56,7 @@ abstract class BaseApi {
         get() {
             //手动创建一个OkHttpClient并设置超时时间缓存等设置
             val builder = OkHttpClient.Builder()
-                .addInterceptor(
-                    HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
-                        Log.d("RxRetrofit", it)
-                    })
-                )
+                .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Log.d("RxRetrofit", it) }))
                 .connectTimeout(timeOutConfig.connectionTime, TimeUnit.SECONDS)
                 .readTimeout(timeOutConfig.readTime, TimeUnit.SECONDS)
                 .writeTimeout(timeOutConfig.writeTime, TimeUnit.SECONDS)
@@ -68,12 +64,7 @@ abstract class BaseApi {
             if (cacheConfig.cache) {
                 builder.addNetworkInterceptor(NetCacheInterceptor(cacheConfig.onlineCacheTime))
                     .addInterceptor(OfflineCacheInterceptor(cacheConfig.offlineCacheTime))
-                    .cache(
-                        Cache(
-                            File(RxRetrofitApp.application.externalCacheDir, "httpCache"),
-                            1024 * 1024 * 50
-                        )
-                    )
+                    .cache(Cache(File(RxRetrofitApp.application.externalCacheDir, "httpCache"), 1024 * 1024 * 50))
             }
             /*创建retrofit对象*/
             return Retrofit.Builder()

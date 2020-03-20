@@ -1,27 +1,41 @@
 package com.wkxjc.wanandroid.home
 
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.rxRetrofit.http.HttpManager
+import com.base.library.rxRetrofit.http.api.BaseApi
+import com.base.library.rxRetrofit.http.httpList.HttpListListener
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.httpManager.BannerApi
+import com.wkxjc.wanandroid.home.common.api.BannerApi
+import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
-    private val httpManager by lazy { HttpManager(this) }
-    private val bannerApi by lazy { BannerApi() }
-    private val bannerListener by lazy { BannerListener() }
+    private val httpManager = HttpManager(this)
+    private val bannerApi = BannerApi()
+    private val homeData = HomeBean()
+    private val homeAdapter = HomeAdapter(homeData)
+    private val homeListListener = object : HttpListListener() {
+        override fun onNext(resultMap: HashMap<BaseApi, Any>) {
+            homeAdapter.refreshBanner(bannerApi.convert(resultMap))
+        }
+
+        override fun onError(error: Throwable) {
+            Log.d("~~~", "error:$error")
+        }
+    }
 
     override fun layoutId() = R.layout.fragment_home
 
     override fun initView() {
-        rvHome.layoutManager = LinearLayoutManager(requireContext())
-        rvHome.adapter = HomeAdapter(listOf("data"))
-        btn.setOnClickListener {
-            httpManager.request(bannerApi, bannerListener)
+        rvHome.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = homeAdapter
         }
     }
 
     override fun initData() {
+        httpManager.request(arrayOf(bannerApi), homeListListener)
     }
 }

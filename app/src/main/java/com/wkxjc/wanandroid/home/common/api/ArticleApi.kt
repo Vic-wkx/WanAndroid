@@ -1,7 +1,7 @@
 package com.wkxjc.wanandroid.home.common.api
 
+import com.alibaba.fastjson.JSON
 import com.base.library.rxRetrofit.http.api.BaseApi
-import com.google.gson.Gson
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import io.reactivex.Observable
 import java.util.*
@@ -18,6 +18,6 @@ class ArticleApi : BaseApi() {
     }
 
     fun convert(resultMap: HashMap<BaseApi, Any>): Articles {
-        return Gson().fromJson(resultMap[this] as String, Articles::class.javaObjectType)
+        return JSON.parseObject(resultMap[this] as String, Articles::class.javaObjectType)
     }
 }

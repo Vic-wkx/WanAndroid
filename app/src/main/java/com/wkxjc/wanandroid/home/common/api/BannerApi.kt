@@ -15,5 +15,4 @@ class BannerApi : BaseApi() {
     fun convert(resultMap: HashMap<BaseApi, Any>): List<BannerBean> {
         return JSONArray.parseArray(resultMap[this] as String, BannerBean::class.java)
     }
-
 }

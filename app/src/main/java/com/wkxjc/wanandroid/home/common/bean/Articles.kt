@@ -2,7 +2,7 @@ package com.wkxjc.wanandroid.home.common.bean
 
 data class Articles(
     val curPage: Int = 0,
-    val data: MutableList<ArticleBean>,
+    val datas: MutableList<ArticleBean> = mutableListOf(),
     val offset: Int = 0,
     // TODO:what is this?
     val over: Boolean = false,

@@ -27,7 +27,7 @@ class HomeAdapter(private val homeBean: HomeBean) :
         return HomeViewHolder(LayoutInflater.from(context).inflate(getLayoutIdByViewType(viewType), parent, false))
     }
 
-    override fun getItemCount() = homeBean.articles.size + 2
+    override fun getItemCount() = homeBean.articles.datas.size + 2
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         when (getViewTypeByPosition(position)) {
@@ -36,8 +36,7 @@ class HomeAdapter(private val homeBean: HomeBean) :
                 banner.setAdapter(ImageAdapter(homeBean.banners.map { it.imagePath }))
             }
             ARTICLE -> {
-                Log.d("~~~",homeBean.articles.data[position - 1].title)
-                holder.itemView.tvTitle.text = homeBean.articles.data[position - 1].title
+                holder.itemView.tvTitle.text = homeBean.articles.datas[position - 1].title
             }
         }
     }

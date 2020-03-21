@@ -7,6 +7,6 @@ import io.reactivex.Observable
 class WeChatPublicAccountApi : BaseApi() {
     override fun getObservable(): Observable<String> {
         val apiService = retrofit.create(ApiService::class.java)
-        return apiService.getWeChatPublicAccount()
+        return apiService.getPublicAccount()
     }
 }

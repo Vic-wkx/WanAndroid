@@ -3,7 +3,6 @@ package com.base.library.rxRetrofit.http.observer
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -65,7 +64,6 @@ class HttpObserver(private val activity: AppCompatActivity?, private val fragmen
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
-        Log.d("~~~", "onDestroy:dispose")
         disposable?.dispose()
         super.onDestroy(owner)
     }

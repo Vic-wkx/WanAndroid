@@ -1,6 +1,5 @@
 package com.wkxjc.wanandroid.home
 
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.rxRetrofit.http.HttpManager
@@ -9,22 +8,19 @@ import com.base.library.rxRetrofit.http.httpList.HttpListListener
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.home.common.api.ArticleApi
 import com.wkxjc.wanandroid.home.common.api.BannerApi
-import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
     private val httpManager = HttpManager(this)
     private val bannerApi = BannerApi()
     private val articleApi = ArticleApi()
-    private val homeBean = HomeBean()
-    private val homeAdapter = HomeAdapter(homeBean)
+    private val homeAdapter = HomeAdapter()
     private val homeListListener = object : HttpListListener() {
         override fun onNext(resultMap: HashMap<BaseApi, Any>) {
             homeAdapter.refresh(bannerApi.convert(resultMap), articleApi.convert(resultMap))
         }
 
         override fun onError(error: Throwable) {
-            Log.d("~~~", "error:$error")
         }
     }
 

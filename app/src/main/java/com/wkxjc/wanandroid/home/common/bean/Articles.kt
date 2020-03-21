@@ -9,4 +9,9 @@ data class Articles(
     val pageCount: Int = 0,
     val size: Int = 0,
     val total: Int = 0
-)
+) {
+    fun refresh(articles: Articles) {
+        datas.clear()
+        datas.addAll(articles.datas)
+    }
+}

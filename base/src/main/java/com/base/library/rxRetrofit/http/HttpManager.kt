@@ -53,7 +53,6 @@ class HttpManager {
             /*返回数据统一判断*/
             .map(HttpResultConverter(api))
             .bindIOToMainThread()
-            .delay(5, TimeUnit.SECONDS)
             .subscribe(HttpObserver(activity, fragment, context, api, listener))
     }
 

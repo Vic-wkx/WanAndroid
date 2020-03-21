@@ -187,7 +187,15 @@ interface ApiService {
     @GET("article/list/{page}/json")
     fun getHomeArticles(@Path("page") page: Int): Observable<String>
 
-    // 微信公众号列表接口
+    // 在某个公众号中搜索历史文章
+    @GET("wxarticle/list/{id}/{page}/json")
+    fun searchPublicAccountArticle(@Query("k") key: String, @Path("id") id: Int, @Path("page") page: Int)
+
+    // 查看某个公众号历史数据
+    @GET("wxarticle/list/{id}/{page}/json")
+    fun getPublicAccountArticles(@Path("id") id: Int, @Path("page") page: Int): Observable<String>
+
+    // 获取公众号列表
     @GET("wxarticle/chapters/json")
-    fun getWeChatPublicAccount(): Observable<String>
+    fun getPublicAccount(): Observable<String>
 }

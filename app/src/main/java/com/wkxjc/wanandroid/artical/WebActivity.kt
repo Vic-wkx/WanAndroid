@@ -5,14 +5,14 @@ import android.widget.LinearLayout
 import com.base.library.project.BaseActivity
 import com.just.agentweb.AgentWeb
 import com.wkxjc.wanandroid.R
-import kotlinx.android.synthetic.main.activity_article.*
+import kotlinx.android.synthetic.main.activity_web.*
 
 
-class ArticleActivity : BaseActivity() {
+class WebActivity : BaseActivity() {
 
     private lateinit var agentWeb: AgentWeb
 
-    override fun layoutId() = R.layout.activity_article
+    override fun layoutId() = R.layout.activity_web
 
     override fun initView() {
         agentWeb = AgentWeb.with(this)
@@ -20,7 +20,7 @@ class ArticleActivity : BaseActivity() {
             .useDefaultIndicator()
             .createAgentWeb()
             .ready()
-            .go(intent.extras?.getString("link"))
+            .go(intent.extras?.getString("link")?.replace("http://", "https://"))
     }
 
     override fun initData() {

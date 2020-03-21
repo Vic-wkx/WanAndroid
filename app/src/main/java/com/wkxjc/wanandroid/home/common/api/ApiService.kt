@@ -177,7 +177,7 @@ interface ApiService {
 
     // 常用网站
     @GET("friend/json")
-    fun getFriendWebsites()
+    fun getCommonWebsites(): Observable<String>
 
     // 首页 banner
     @GET("banner/json")

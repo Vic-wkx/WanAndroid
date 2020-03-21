@@ -5,11 +5,22 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:text="公众号"
-        android:padding="10dp"
-        android:id="@+id/tvPublicAccount"
+        android:id="@+id/tvPublicAccounts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="公众号"
+        app:layout_constraintEnd_toStartOf="@id/tvCommonWebsites"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCommonWebsites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="常用网站"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvPublicAccounts"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,16 +2,17 @@ package com.wkxjc.wanandroid.home
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.banner.ImageAdapter
+import com.base.library.project.BaseViewHolder
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.artical.ArticleActivity
+import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import com.wkxjc.wanandroid.home.common.bean.Banners
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
-import com.wkxjc.wanandroid.home.publicAccount.PublicAccountActivity
+import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
+import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountActivity
 import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.item_banner.view.*
@@ -26,31 +27,34 @@ const val HEADER_COUNT = 2
 const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
-class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<BaseViewHolder>() {
     private lateinit var context: Context
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         context = parent.context
-        return HomeViewHolder(LayoutInflater.from(context).inflate(getLayoutIdByViewType(viewType), parent, false))
+        return BaseViewHolder(LayoutInflater.from(context).inflate(getLayoutIdByViewType(viewType), parent, false))
     }
 
     override fun getItemCount() = homeBean.articles.datas.size + HEADER_FOOTER_COUNT
 
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (getViewTypeByPosition(position)) {
             BANNER -> {
                 val banner: Banner<String, ImageAdapter> = holder.itemView.banner as Banner<String, ImageAdapter>
                 banner.setAdapter(ImageAdapter(homeBean.banners.data.map { it.imagePath }))
             }
             SHORTCUT -> {
-                holder.itemView.tvPublicAccount.setOnClickListener {
+                holder.itemView.tvPublicAccounts.setOnClickListener {
                     context.startActivity<PublicAccountActivity>()
+                }
+                holder.itemView.tvCommonWebsites.setOnClickListener {
+                    context.startActivity<CommonWebsitesActivity>()
                 }
             }
             ARTICLE -> {
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]
                 holder.itemView.tvTitle.text = bean.title
                 holder.itemView.setOnClickListener {
-                    context.startActivity<ArticleActivity>("link" to bean.link)
+                    context.startActivity<WebActivity>("link" to bean.link)
                 }
             }
         }
@@ -82,7 +86,5 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
         homeBean.refresh(banners, articles)
         notifyDataSetChanged()
     }
-
-    class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 }

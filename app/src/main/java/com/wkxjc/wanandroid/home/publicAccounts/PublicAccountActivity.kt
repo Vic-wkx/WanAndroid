@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.home.publicAccount
+package com.wkxjc.wanandroid.home.publicAccounts
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity

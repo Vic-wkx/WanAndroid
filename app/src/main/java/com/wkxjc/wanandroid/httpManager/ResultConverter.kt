@@ -2,7 +2,6 @@ package com.wkxjc.wanandroid.httpManager
 
 import android.util.Log
 import com.alibaba.fastjson.JSON
-import com.alibaba.fastjson.JSONObject
 import com.base.library.rxRetrofit.http.converter.DefaultResultConverter
 
 class ResultConverter : DefaultResultConverter() {

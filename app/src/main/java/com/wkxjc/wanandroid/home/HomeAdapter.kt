@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.base.library.banner.ImageAdapter
 import com.base.library.project.BaseViewHolder
 import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import com.wkxjc.wanandroid.home.common.bean.Banners
@@ -54,7 +55,7 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]
                 holder.itemView.tvTitle.text = bean.title
                 holder.itemView.setOnClickListener {
-                    context.startActivity<WebActivity>("link" to bean.link)
+                    context.startActivity<WebActivity>(LINK to bean.link)
                 }
             }
         }

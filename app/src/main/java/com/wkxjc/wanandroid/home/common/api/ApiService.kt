@@ -161,11 +161,11 @@ interface ApiService {
 
     // 知识体系下的文章
     @GET("article/list/{page}/json")
-    fun getArticlesByCategoryId(@Path("page") page: Int, @Query("cid") cid: Int)
+    fun getArticlesByCategoryId(@Path("page") page: Int, @Query("cid") cid: Int): Observable<String>
 
     // 体系数据
     @GET("tree/json")
-    fun getTree()
+    fun getKnowledgeTree(): Observable<String>
 
     // 置顶文章
     @GET("article/top/json")

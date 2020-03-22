@@ -9,9 +9,4 @@ data class KnowledgeTreeBean(
     val parentChapterId: Int = 0,
     val userControlSetTop: Boolean = false,
     val visible: Int = 0
-) {
-    fun refresh(knowledgeTree: KnowledgeTreeBean) {
-        children.clear()
-        children.addAll(knowledgeTree.children)
-    }
-}
+)

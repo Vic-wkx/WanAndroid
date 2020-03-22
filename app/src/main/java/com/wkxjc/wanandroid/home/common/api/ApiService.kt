@@ -153,7 +153,7 @@ interface ApiService {
 
     // 导航数据
     @GET("navi/json")
-    fun getNavigation()
+    fun getNavigation(): Observable<String>
 
     // 根据作者昵称搜索文章
     @GET("article/list/{page}/json")

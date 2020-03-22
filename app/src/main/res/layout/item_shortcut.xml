@@ -30,7 +30,19 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="知识体系"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvNavigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPublicAccounts" />
+
+    <TextView
+        android:id="@+id/tvNavigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="导航"
+        app:layout_constraintBottom_toBottomOf="@id/tvKnowledgeTree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvKnowledgeTree"
+        app:layout_constraintTop_toTopOf="@+id/tvKnowledgeTree" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

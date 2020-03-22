@@ -14,6 +14,7 @@ import com.wkxjc.wanandroid.home.common.bean.Banners
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
 import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
+import com.wkxjc.wanandroid.home.navigation.NavigationActivity
 import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountActivity
 import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.item_article.view.*
@@ -53,6 +54,9 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 }
                 holder.itemView.tvKnowledgeTree.setOnClickListener {
                     context.startActivity<KnowledgeTreeActivity>()
+                }
+                holder.itemView.tvNavigation.setOnClickListener {
+                    context.startActivity<NavigationActivity>()
                 }
             }
             ARTICLE -> {

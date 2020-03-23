@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".home.knowledge.knowledgeTreeArticles.KnowledgeTreeArticlesActivity"></activity>
+        <activity android:name=".me.login.LoginActivity"></activity>
+        <activity android:name=".home.knowledge.knowledgeTreeArticles.KnowledgeTreeArticlesActivity" />
         <activity android:name=".home.knowledge.KnowledgeTreeActivity" />
         <activity android:name=".home.commonWebSites.CommonWebsitesActivity" />
         <activity android:name=".home.publicAccounts.PublicAccountArticles.PublicAccountArticlesActivity" />

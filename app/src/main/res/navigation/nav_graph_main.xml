@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/meFragment"
-        android:name="com.wkxjc.wanandroid.MeFragment">
+        android:name="com.wkxjc.wanandroid.me.MeFragment">
         <action
             android:id="@+id/toHome"
             app:destination="@id/homeFragment" />

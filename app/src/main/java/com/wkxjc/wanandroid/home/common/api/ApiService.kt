@@ -141,7 +141,7 @@ interface ApiService {
     // 登录
     @POST("user/login")
     @FormUrlEncoded
-    fun login(@Field("username") userName: String, @Field("password") password: String)
+    fun login(@Field("username") userName: String, @Field("password") password: String): Observable<String>
 
     // 项目列表数据
     @GET("project/list/{page}/json")

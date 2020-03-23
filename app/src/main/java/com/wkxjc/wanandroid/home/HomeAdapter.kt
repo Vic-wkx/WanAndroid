@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
 import com.wkxjc.wanandroid.home.navigation.NavigationActivity
 import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountActivity
 import com.youth.banner.Banner
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.item_banner.view.*
 import kotlinx.android.synthetic.main.item_shortcut.view.*
@@ -43,7 +45,16 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
         when (getViewTypeByPosition(position)) {
             BANNER -> {
                 val banner: Banner<String, ImageAdapter> = holder.itemView.banner as Banner<String, ImageAdapter>
-                banner.setAdapter(ImageAdapter(homeBean.banners.data.map { it.imagePath }))
+                banner.adapter = ImageAdapter(homeBean.banners.data.map { it.imagePath })
+                banner.setOnBannerListener(object : OnBannerListener<String> {
+                    override fun onBannerChanged(position: Int) {
+                    }
+
+                    override fun OnBannerClick(data: String?, position: Int) {
+                        Log.d("~~~", data)
+                        context.startActivity<WebActivity>(LINK to homeBean.banners.data[position])
+                    }
+                })
             }
             SHORTCUT -> {
                 holder.itemView.tvPublicAccounts.setOnClickListener {

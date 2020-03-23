@@ -1,23 +1,22 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.base.library.banner.ImageAdapter
 import com.base.library.project.BaseViewHolder
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
+import com.wkxjc.wanandroid.banner.ImageAdapter
 import com.wkxjc.wanandroid.home.common.bean.Articles
+import com.wkxjc.wanandroid.home.common.bean.BannerBean
 import com.wkxjc.wanandroid.home.common.bean.Banners
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
 import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
 import com.wkxjc.wanandroid.home.navigation.NavigationActivity
 import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountActivity
-import com.youth.banner.Banner
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.item_banner.view.*
@@ -44,15 +43,13 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (getViewTypeByPosition(position)) {
             BANNER -> {
-                val banner: Banner<String, ImageAdapter> = holder.itemView.banner as Banner<String, ImageAdapter>
-                banner.adapter = ImageAdapter(homeBean.banners.data.map { it.imagePath })
-                banner.setOnBannerListener(object : OnBannerListener<String> {
+                holder.itemView.banner.adapter = ImageAdapter(homeBean.banners.data)
+                holder.itemView.banner.setOnBannerListener(object : OnBannerListener<BannerBean> {
                     override fun onBannerChanged(position: Int) {
                     }
 
-                    override fun OnBannerClick(data: String?, position: Int) {
-                        Log.d("~~~", data)
-                        context.startActivity<WebActivity>(LINK to homeBean.banners.data[position])
+                    override fun OnBannerClick(data: BannerBean, position: Int) {
+                        context.startActivity<WebActivity>(LINK to data.url)
                     }
                 })
             }

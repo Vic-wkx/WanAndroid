@@ -8,10 +8,6 @@ class LoginApi : BaseApi() {
     var username = ""
     var password = ""
 
-    init {
-
-    }
-
     override fun getObservable(): Observable<String> {
         val apiService = retrofit.create(ApiService::class.java)
         return apiService.login(username, password)

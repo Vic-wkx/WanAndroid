@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.base.library.project.BaseActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
+import com.wkxjc.wanandroid.BuildConfig
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.me.common.api.LoginApi
 import kotlinx.android.synthetic.main.activity_login.*
@@ -27,6 +28,13 @@ class LoginActivity : BaseActivity() {
 
     override fun initView() {
         btnLogin.setOnClickListener {
+            if(BuildConfig.DEBUG){
+                httpManager.request(loginApi.apply {
+                    username = "alpinistwang"
+                    password = "123456"
+                }, listener)
+                return@setOnClickListener
+            }
             if (inputNotValid()) return@setOnClickListener
             loginApi.username = etUserName.text.toString()
             loginApi.password = etPassword.text.toString()

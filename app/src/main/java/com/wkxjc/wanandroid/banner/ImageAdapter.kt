@@ -1,14 +1,15 @@
-package com.base.library.banner
+package com.wkxjc.wanandroid.banner
 
 import android.content.Context
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.base.library.banner.ImageAdapter.BannerViewHolder
 import com.bumptech.glide.Glide
+import com.wkxjc.wanandroid.banner.ImageAdapter.BannerViewHolder
+import com.wkxjc.wanandroid.home.common.bean.BannerBean
 import com.youth.banner.adapter.BannerAdapter
 
-class ImageAdapter(data: List<String>) : BannerAdapter<String, BannerViewHolder>(data) {
+class ImageAdapter(data: List<BannerBean>) : BannerAdapter<BannerBean, BannerViewHolder>(data) {
     private lateinit var context: Context
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
         context = parent.context
@@ -18,10 +19,8 @@ class ImageAdapter(data: List<String>) : BannerAdapter<String, BannerViewHolder>
         return BannerViewHolder(imageView)
     }
 
-    override fun onBindView(holder: BannerViewHolder, data: String, position: Int, size: Int) {
-        Glide.with(context).load(data).into(holder.imageView)
-        holder.itemView.setOnClickListener {
-        }
+    override fun onBindView(holder: BannerViewHolder, data: BannerBean, position: Int, size: Int) {
+        Glide.with(context).load(data.imagePath).into(holder.imageView)
     }
 
     class BannerViewHolder(val imageView: ImageView) : RecyclerView.ViewHolder(imageView)

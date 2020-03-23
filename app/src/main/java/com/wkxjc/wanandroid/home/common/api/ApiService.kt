@@ -138,7 +138,7 @@ interface ApiService {
     @FormUrlEncoded
     fun register(@Field("username") userName: String, @Field("password") password: String, @Field("repassword") rePassword: String)
 
-    // 登录
+    // 登录 Fixme 登陆接口的 POST 参数是拼接在 url 后面的，而不是用的 json，导致无法使用 @Body
     @POST("user/login")
     @FormUrlEncoded
     fun login(@Field("username") userName: String, @Field("password") password: String): Observable<String>

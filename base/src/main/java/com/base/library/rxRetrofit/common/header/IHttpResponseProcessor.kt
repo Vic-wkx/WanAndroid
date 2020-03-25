@@ -1,5 +1,6 @@
 package com.base.library.rxRetrofit.common.header
 
+import okhttp3.Request
 import okhttp3.Response
 
 /**
@@ -13,5 +14,5 @@ interface IHttpResponseProcessor {
     /**
      * 处理Http响应码
      */
-    fun handleResponse(response: Response): Response
+    fun handleResponse(request: Request, response: Response): Response
 }

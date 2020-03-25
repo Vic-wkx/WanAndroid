@@ -54,7 +54,7 @@ interface ApiService {
         @Path("page") page: Int,
         @Query("status") status: Int, @Query("type") type: Int,
         @Query("priority") priority: Int, @Query("orderby") orderBy: Int
-    )
+    ): Observable<String>
 
     // 仅更新完成状态TODO
     @POST("lg/todo/done/{id}/json")

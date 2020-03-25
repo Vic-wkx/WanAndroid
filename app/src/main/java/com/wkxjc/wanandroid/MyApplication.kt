@@ -3,6 +3,7 @@ package com.wkxjc.wanandroid
 import android.app.Application
 import com.base.library.rxRetrofit.RxRetrofitApp
 import com.wkxjc.wanandroid.httpManager.ApiConfig
+import com.wkxjc.wanandroid.httpManager.HttpResponseProcessor
 import com.wkxjc.wanandroid.httpManager.ResultConverter
 
 class MyApplication : Application() {
@@ -12,6 +13,7 @@ class MyApplication : Application() {
             application = this@MyApplication
             apiConfig = ApiConfig()
             resultConverter = ResultConverter()
+            httpResponseProcessor = HttpResponseProcessor()
         }
     }
 }

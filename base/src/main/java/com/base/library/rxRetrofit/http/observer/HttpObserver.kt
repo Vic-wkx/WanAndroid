@@ -37,10 +37,10 @@ class HttpObserver(private val activity: AppCompatActivity?, private val fragmen
 
     private fun showLoadingIfNeed() {
         // 如果使用的系统application的Context，不允许弹窗
-        if (!api.showLoading || context == RxRetrofitApp.application.applicationContext) return
+        if (!api.apiConfig.showLoading || context == RxRetrofitApp.application.applicationContext) return
         if (loading == null) {
             // TODO 换成接口的形式：onLoading、onCancel，让使用者在 onLoading 回调时显示 ProgressBar，onCancel 时取消
-            loading = ProgressDialog.show(context, null, "Loading", false, api.loadingCancelable) {
+            loading = ProgressDialog.show(context, null, "Loading", false, api.apiConfig.loadingCancelable) {
                 disposable?.dispose()
                 listener.onError(Throwable("request cancel"))
             }

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity() {
 
-    private val httpManager = HttpManager()
+    private val httpManager = HttpManager(this)
     private val loginApi = LoginApi()
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {

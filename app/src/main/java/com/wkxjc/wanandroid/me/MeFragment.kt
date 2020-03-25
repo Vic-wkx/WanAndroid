@@ -12,7 +12,7 @@ import org.jetbrains.anko.support.v4.startActivity
 
 class MeFragment : BaseFragment() {
 
-    private val httpManager = HttpManager()
+    private val httpManager = HttpManager(this)
     private val todoApi = TodoApi()
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {

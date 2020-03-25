@@ -9,7 +9,7 @@ import com.base.library.BuildConfig
  * @author  Alpinist Wang
  * Date:    2019-04-25
  */
-data class CacheConfig(
+data class CacheConfig (
     // 是否需要缓存处理，默认 DEBUG 时关闭缓存，其他情况下开启缓存
     var cache: Boolean = !BuildConfig.DEBUG,
     // 有网的时候的缓存过期时间

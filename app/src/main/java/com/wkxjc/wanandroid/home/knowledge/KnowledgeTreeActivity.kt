@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_knowledge_tree.*
 import org.jetbrains.anko.startActivity
 
 class KnowledgeTreeActivity : BaseActivity() {
-    private val httpManager = HttpManager()
+    private val httpManager = HttpManager(this)
     private val knowledgeTreeApi = KnowledgeTreeApi()
     private val knowledgeTreeAdapter = KnowledgeTreeExpandableAdapter()
     private val listener = object : HttpListener() {

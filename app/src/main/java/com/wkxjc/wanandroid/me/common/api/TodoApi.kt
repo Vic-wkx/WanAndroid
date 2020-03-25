@@ -15,7 +15,7 @@ class TodoApi : BaseApi() {
     var orderBy = 0
 
     init {
-        headers = Headers.headersOf("Cookie", SPUtils.getInstance().getString("Cookie"))
+        apiConfig.headers = Headers.headersOf("Cookie", SPUtils.getInstance().getString("Cookie"))
         Log.d("~~~","")
     }
 

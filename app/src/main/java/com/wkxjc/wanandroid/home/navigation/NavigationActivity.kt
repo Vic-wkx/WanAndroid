@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_navigation.*
 import org.jetbrains.anko.startActivity
 
 class NavigationActivity : BaseActivity() {
-    private val httpManager = HttpManager()
+    private val httpManager = HttpManager(this)
     private val navigationApi = NavigationApi()
     private val navigationExpandableAdapter = NavigationExpandableAdapter()
     private val listener = object : HttpListener() {

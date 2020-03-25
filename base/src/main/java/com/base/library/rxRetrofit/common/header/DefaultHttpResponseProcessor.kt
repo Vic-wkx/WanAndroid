@@ -13,7 +13,7 @@ import okhttp3.Response
 open class DefaultHttpResponseProcessor : IHttpResponseProcessor {
     override fun handleResponse(request: Request, response: Response): Response {
         // 在这里可以处理http返回的错误码：response.code()，这里的错误码不同于BaseResult中的errorCode
-        if (response.code >= 400) throw Throwable("Http response code = ${response.code}, request: ${request.url}")
+        // 例如：if (response.code >= 400) throw Throwable("Http response code = ${response.code}, request: ${request.url}")
         return response
     }
 }

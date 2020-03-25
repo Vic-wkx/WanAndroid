@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_knowledge_tree_articles.*
 const val CATEGORY_ID = "categoryId"
 
 class KnowledgeTreeArticlesActivity : BaseActivity() {
-    private val httpManager = HttpManager()
+    private val httpManager = HttpManager(this)
     private val knowledgeTreeArticleApi by lazy { KnowledgeTreeArticleApi(intent.extras!!.getInt(CATEGORY_ID)) }
     private val knowledgeTreeArticlesAdapter = KnowledgeTreeArticlesAdapter()
     private val listener = object : HttpListener() {

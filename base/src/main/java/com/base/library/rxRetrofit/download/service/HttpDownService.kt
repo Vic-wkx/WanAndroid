@@ -9,7 +9,7 @@ import retrofit2.http.Url
 
 /**
  * Description:
- * Rxtrofit断点续传下载Service类
+ * Rxtrofit 断点续传下载 Service 类
  *
  * @author  WZG
  * Date:    2019-04-26

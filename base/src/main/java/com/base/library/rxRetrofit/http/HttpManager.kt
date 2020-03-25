@@ -14,7 +14,6 @@ import com.base.library.rxRetrofit.http.httpList.HttpListObserver
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.base.library.rxRetrofit.http.observer.HttpObserver
 import io.reactivex.Observable
-import java.util.concurrent.TimeUnit
 
 /**
  * Description:
@@ -49,7 +48,7 @@ class HttpManager {
     fun request(api: BaseApi, listener: HttpListener) {
         api.getObservable()
             /*失败后retry处理控制*/
-            .retryWhen(RetryFunction(api.retry))
+            .retryWhen(RetryFunction(api.apiConfig.retry))
             /*返回数据统一判断*/
             .map(HttpResultConverter(api))
             .bindIOToMainThread()
@@ -73,7 +72,7 @@ class HttpManager {
     private fun requestSingleApi(api: BaseApi, resultMap: HashMap<BaseApi, Any>, listener: HttpListListener): Observable<Unit> {
         return api.getObservable()
             /*失败后retry处理控制*/
-            .retryWhen(RetryFunction(api.retry))
+            .retryWhen(RetryFunction(api.apiConfig.retry))
             /*返回数据统一判断*/
             .map(HttpResultConverter(api))
             .map { resultMap[api] = listener.onSingleNext(api, it) }

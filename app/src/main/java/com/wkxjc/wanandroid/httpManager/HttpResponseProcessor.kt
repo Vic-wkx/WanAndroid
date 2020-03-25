@@ -1,21 +1,13 @@
 package com.wkxjc.wanandroid.httpManager
 
-import android.util.Log
-import com.base.library.rxRetrofit.common.header.DefaultHttpResponseProcessor
-import com.base.library.rxRetrofit.common.utils.SPUtils
-import okhttp3.Cookie
+import com.base.library.rxRetrofit.common.header.IHttpResponseProcessor
 import okhttp3.Request
 import okhttp3.Response
 
-class HttpResponseProcessor : DefaultHttpResponseProcessor() {
+open class HttpResponseProcessor : IHttpResponseProcessor {
     override fun handleResponse(request: Request, response: Response): Response {
-        // 获取头部的 Cookie
-        val cookies: List<Cookie> = Cookie.parseAll(request.url, response.headers)
-        if (request.url.toString().contains("user/login") && cookies.isNotEmpty()) {
-            // 去掉 List 转 String 的中括号
-            Log.d("~~~", cookies.toString().substring(1, cookies.toString().length - 2))
-            SPUtils.getInstance().put("Cookie", cookies.toString().substring(1, cookies.toString().length - 2))
-        }
-        return super.handleResponse(request, response)
+        // 在这里可以处理http返回的错误码：response.code()，这里的错误码不同于BaseResult中的errorCode
+        if (response.code >= 400) throw Throwable("Http response code = ${response.code}, request: ${request.url}")
+        return response
     }
 }

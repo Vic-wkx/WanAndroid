@@ -23,7 +23,7 @@ class HeadInterceptor(private val api: BaseApi?, private val headers: Headers?) 
         val request = requestBuilder.method(original.method, original.body)
             .build()
         val response = chain.proceed(request)
-        return if (RxRetrofitApp.apiConfig.ignoreResponseProcessor || api?.ignoreResponseProcessor == true) response
-        else RxRetrofitApp.httpResponseProcessor.handleResponse(request, response)
+        if (RxRetrofitApp.apiConfig.ignoreResponseProcessor || api?.apiConfig?.ignoreResponseProcessor == true) return response
+        return RxRetrofitApp.apiConfig.httpResponseProcessor.handleResponse(request, response)
     }
 }

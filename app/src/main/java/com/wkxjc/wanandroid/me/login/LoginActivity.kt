@@ -1,14 +1,15 @@
 package com.wkxjc.wanandroid.me.login
 
 import android.util.Log
-import android.widget.Toast
 import com.base.library.project.BaseActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.BuildConfig
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.me.common.api.LoginApi
+import com.wkxjc.wanandroid.me.login.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class LoginActivity : BaseActivity() {
 
@@ -17,10 +18,13 @@ class LoginActivity : BaseActivity() {
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             Log.d("~~~", "result: $result")
+            toast("login success")
+            finish()
         }
 
         override fun onError(error: Throwable) {
             Log.d("~~~", "error:$error")
+            btnLogin.isEnabled = true
         }
     }
 
@@ -28,27 +32,24 @@ class LoginActivity : BaseActivity() {
 
     override fun initView() {
         btnLogin.setOnClickListener {
-            if(BuildConfig.DEBUG){
-                httpManager.request(loginApi.apply {
-                    username = "alpinistwang"
-                    password = "123456"
-                }, listener)
-                return@setOnClickListener
-            }
             if (inputNotValid()) return@setOnClickListener
-            loginApi.username = etUserName.text.toString()
-            loginApi.password = etPassword.text.toString()
+            it.isEnabled = false
+            loginApi.username = etLoginUserName.text.toString()
+            loginApi.password = etLoginPassword.text.toString()
             httpManager.request(loginApi, listener)
+        }
+        btnGoToRegister.setOnClickListener {
+            startActivity<RegisterActivity>()
         }
     }
 
     private fun inputNotValid(): Boolean {
-        if (etUserName.text.isEmpty()) {
-            Toast.makeText(this, "User name cannot be empty!", Toast.LENGTH_SHORT).show()
+        if (etLoginUserName.text.isEmpty()) {
+            toast("User name cannot be empty!")
             return true
         }
-        if (etPassword.text.isEmpty()) {
-            Toast.makeText(this, "Password cannot be empty!", Toast.LENGTH_SHORT).show()
+        if (etLoginPassword.text.isEmpty()) {
+            toast("Password cannot be empty!")
             return true
         }
         return false

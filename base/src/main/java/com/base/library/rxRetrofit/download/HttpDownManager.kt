@@ -1,8 +1,7 @@
 package com.base.library.rxRetrofit.download
 
-import android.annotation.SuppressLint
 import com.base.library.rxRetrofit.common.extension.bindIOToMainThread
-import com.base.library.rxRetrofit.common.header.HeadInterceptor
+import com.base.library.rxRetrofit.common.header.DownHeadInterceptor
 import com.base.library.rxRetrofit.common.retry.RetryFunction
 import com.base.library.rxRetrofit.common.utils.DownRecordUtils
 import com.base.library.rxRetrofit.common.utils.FileDownloadUtils
@@ -26,7 +25,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
  * @author  Alpinist Wang
  * Date:    2019-04-26
  */
-@SuppressLint("CheckResult")
+@Suppress("CheckResult", "unused")
 object HttpDownManager {
 
     // 下载监听器列表
@@ -40,7 +39,7 @@ object HttpDownManager {
         if (isDownloading(config)) return
         // 创建retrofit对象
         val builder = OkHttpClient.Builder()
-            .addInterceptor(HeadInterceptor(null, config.headers))
+            .addInterceptor(DownHeadInterceptor(config.headers))
         val retrofit = Retrofit.Builder()
             .client(builder.build())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

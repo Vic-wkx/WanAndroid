@@ -1,9 +1,11 @@
 package com.wkxjc.wanandroid.me.common.api
 
 import android.util.Log
+import com.alibaba.fastjson.JSON
 import com.base.library.rxRetrofit.common.utils.SPUtils
 import com.base.library.rxRetrofit.http.api.BaseApi
 import com.wkxjc.wanandroid.home.common.api.ApiService
+import com.wkxjc.wanandroid.me.common.bean.Todos
 import io.reactivex.Observable
 import okhttp3.Headers
 
@@ -14,13 +16,14 @@ class TodoApi : BaseApi() {
     var priority = 0
     var orderBy = 0
 
-    init {
-        apiConfig.headers = Headers.headersOf("Cookie", SPUtils.getInstance().getString("Cookie"))
-        Log.d("~~~","")
-    }
-
     override fun getObservable(): Observable<String> {
+        apiConfig.headers = Headers.headersOf(COOKIE_HEADER_KEY, SPUtils.getInstance(LOGIN_INFO).getString(COOKIE_SP_KEY))
         val apiService = retrofit.create(ApiService::class.java)
         return apiService.getTodoList(page, status, type, priority, orderBy)
+    }
+
+    fun convert(result: String): Todos {
+        Log.d("~~~",result)
+        return JSON.parseObject(result, Todos::class.javaObjectType)
     }
 }

@@ -21,4 +21,10 @@
         android:text="我的 TODO"
         app:layout_constraintTop_toBottomOf="@id/tvLogin" />
 
+    <Button
+        android:id="@+id/btnExitLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="退出登录"
+        app:layout_constraintTop_toBottomOf="@id/btnTodo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

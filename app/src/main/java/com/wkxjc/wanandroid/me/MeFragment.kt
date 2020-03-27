@@ -1,28 +1,15 @@
 package com.wkxjc.wanandroid.me
 
-import android.util.Log
 import com.base.library.project.BaseFragment
-import com.base.library.rxRetrofit.http.HttpManager
-import com.base.library.rxRetrofit.http.listener.HttpListener
+import com.base.library.rxRetrofit.common.utils.SPUtils
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.me.common.api.TodoApi
+import com.wkxjc.wanandroid.me.common.api.LOGIN_INFO
 import com.wkxjc.wanandroid.me.login.LoginActivity
+import com.wkxjc.wanandroid.me.todo.TodoActivity
 import kotlinx.android.synthetic.main.fragment_me.*
 import org.jetbrains.anko.support.v4.startActivity
 
 class MeFragment : BaseFragment() {
-
-    private val httpManager = HttpManager(this)
-    private val todoApi = TodoApi()
-    private val listener = object : HttpListener() {
-        override fun onNext(result: String) {
-            Log.d("~~~", "result: $result")
-        }
-
-        override fun onError(error: Throwable) {
-            Log.d("~~~", "error:$error")
-        }
-    }
 
     override fun layoutId() = R.layout.fragment_me
 
@@ -31,11 +18,13 @@ class MeFragment : BaseFragment() {
             startActivity<LoginActivity>()
         }
         btnTodo.setOnClickListener {
-            httpManager.request(todoApi, listener)
+            startActivity<TodoActivity>()
+        }
+        btnExitLogin.setOnClickListener {
+            SPUtils.getInstance(LOGIN_INFO).clear()
         }
     }
 
     override fun initData() {
     }
-
 }

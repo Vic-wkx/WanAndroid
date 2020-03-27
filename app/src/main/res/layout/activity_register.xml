@@ -4,34 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".me.login.LoginActivity">
+    tools:context=".me.login.register.RegisterActivity">
 
     <EditText
-        android:id="@+id/etLoginUserName"
+        android:id="@+id/etRegisterUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入账号"
+        android:hint="请输入用户名"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etLoginPassword"
+        android:id="@+id/etRegisterPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="请输入密码"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/etLoginUserName" />
+        app:layout_constraintTop_toBottomOf="@id/etRegisterUserName" />
 
-    <Button
-        android:id="@+id/btnLogin"
+    <EditText
+        android:id="@+id/etRegisterConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="登录"
-        app:layout_constraintTop_toBottomOf="@id/etLoginPassword" />
+        android:hint="请再次输入密码确认"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/etRegisterPassword" />
 
     <Button
-        android:id="@+id/btnGoToRegister"
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="去注册"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+        android:text="注册"
+        app:layout_constraintTop_toBottomOf="@id/etRegisterConfirmPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.wkxjc.wanandroid.home
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseViewHolder
@@ -9,10 +10,7 @@ import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.banner.ImageAdapter
-import com.wkxjc.wanandroid.home.common.bean.Articles
-import com.wkxjc.wanandroid.home.common.bean.BannerBean
-import com.wkxjc.wanandroid.home.common.bean.Banners
-import com.wkxjc.wanandroid.home.common.bean.HomeBean
+import com.wkxjc.wanandroid.home.common.bean.*
 import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
 import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
 import com.wkxjc.wanandroid.home.navigation.NavigationActivity
@@ -33,6 +31,12 @@ const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
 class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<BaseViewHolder>() {
     private lateinit var context: Context
+    private var listener: OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onItemClick(view: View, bean: ArticleBean)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         context = parent.context
         return BaseViewHolder(LayoutInflater.from(context).inflate(getLayoutIdByViewType(viewType), parent, false))
@@ -71,7 +75,10 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]
                 holder.itemView.tvTitle.text = bean.title
                 holder.itemView.setOnClickListener {
-                    context.startActivity<WebActivity>(LINK to bean.link)
+                    listener?.onItemClick(it, bean)
+                }
+                holder.itemView.tvCollect.setOnClickListener {
+                    listener?.onItemClick(it, bean)
                 }
             }
         }
@@ -79,6 +86,10 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
 
     override fun getItemViewType(position: Int): Int {
         return getViewTypeByPosition(position)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
     }
 
     private fun getViewTypeByPosition(position: Int): Int {

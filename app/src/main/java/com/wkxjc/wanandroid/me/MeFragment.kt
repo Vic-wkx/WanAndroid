@@ -3,6 +3,7 @@ package com.wkxjc.wanandroid.me
 import com.base.library.project.BaseFragment
 import com.base.library.rxRetrofit.common.utils.SPUtils
 import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.me.collection.CollectionActivity
 import com.wkxjc.wanandroid.me.common.api.LOGIN_INFO
 import com.wkxjc.wanandroid.me.login.LoginActivity
 import com.wkxjc.wanandroid.me.todo.TodoActivity
@@ -17,8 +18,11 @@ class MeFragment : BaseFragment() {
         tvLogin.setOnClickListener {
             startActivity<LoginActivity>()
         }
-        btnTodo.setOnClickListener {
+        btnMyTodo.setOnClickListener {
             startActivity<TodoActivity>()
+        }
+        btnMyCollection.setOnClickListener {
+            startActivity<CollectionActivity>()
         }
         btnExitLogin.setOnClickListener {
             SPUtils.getInstance(LOGIN_INFO).clear()

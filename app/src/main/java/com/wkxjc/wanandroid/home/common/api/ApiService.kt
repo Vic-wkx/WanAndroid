@@ -123,11 +123,11 @@ interface ApiService {
 
     // 收藏站内文章
     @POST("lg/collect/{articleId}/json")
-    fun collectArticleInside(@Path("articleId") articleId: Int)
+    fun collectArticleInside(@Path("articleId") articleId: Int): Observable<String>
 
     // 收藏文章列表
     @GET("lg/collect/list/{page}/json")
-    fun getCollectArticles(@Path("page") page: Int)
+    fun getCollectArticles(@Path("page") page: Int): Observable<String>
 
     // 退出
     @GET("user/logout/json")

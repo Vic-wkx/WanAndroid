@@ -1,16 +1,16 @@
 package com.wkxjc.wanandroid.home.common.bean
 
-data class Articles(
+data class Collections(
     val curPage: Int = 0,
-    val datas: MutableList<ArticleBean> = mutableListOf(),
+    val datas: MutableList<CollectionBean> = mutableListOf(),
     val offset: Int = 0,
     val over: Boolean = false,
     val pageCount: Int = 0,
     val size: Int = 0,
     val total: Int = 0
 ) {
-    fun refresh(articles: Articles) {
+    fun refresh(collections: Collections) {
         datas.clear()
-        datas.addAll(articles.datas)
+        datas.addAll(collections.datas)
     }
 }

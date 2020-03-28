@@ -8,7 +8,7 @@ import okhttp3.Request
 import okhttp3.Response
 
 const val COOKIE_HEADER_KEY = "Cookie"
-const val COOKIE_SP_KEY = "Cookie"
+const val COOKIE = "Cookie"
 const val LOGIN_INFO = "login_info"
 
 class LoginHttpResponseProcessor : IHttpResponseProcessor {
@@ -17,7 +17,7 @@ class LoginHttpResponseProcessor : IHttpResponseProcessor {
         val cookies: List<Cookie> = Cookie.parseAll(request.url, response.headers)
         if (cookies.isNotEmpty()) {
             // 去掉 List 转 String 的中括号
-            SPUtils.getInstance(LOGIN_INFO).put(COOKIE_SP_KEY, cookies.toString().substring(1, cookies.toString().length - 2))
+            SPUtils.getInstance(LOGIN_INFO).put(COOKIE, cookies.toString().substring(1, cookies.toString().length - 2))
         }
         return RxRetrofitApp.apiConfig.httpResponseProcessor.handleResponse(request, response)
     }

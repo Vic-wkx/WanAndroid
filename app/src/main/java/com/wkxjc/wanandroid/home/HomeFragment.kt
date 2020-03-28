@@ -48,7 +48,7 @@ class HomeFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = homeAdapter
         }
-        homeAdapter.setOnItemClickListener(object : HomeAdapter.OnItemClickListener {
+        homeAdapter.onItemClickListener = object : HomeAdapter.OnItemClickListener {
             override fun onItemClick(view: View, bean: ArticleBean) {
                 when (view.id) {
                     R.id.tvCollect -> httpManager.request(collectApi.apply {
@@ -57,7 +57,7 @@ class HomeFragment : BaseFragment() {
                     else -> startActivity<WebActivity>(LINK to bean.link)
                 }
             }
-        })
+        }
     }
 
     override fun initData() {

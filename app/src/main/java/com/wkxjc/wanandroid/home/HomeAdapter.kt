@@ -31,7 +31,7 @@ const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
 class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<BaseViewHolder>() {
     private lateinit var context: Context
-    private var listener: OnItemClickListener? = null
+    lateinit var onItemClickListener: OnItemClickListener
 
     interface OnItemClickListener {
         fun onItemClick(view: View, bean: ArticleBean)
@@ -75,10 +75,10 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]
                 holder.itemView.tvTitle.text = bean.title
                 holder.itemView.setOnClickListener {
-                    listener?.onItemClick(it, bean)
+                    onItemClickListener.onItemClick(it, bean)
                 }
                 holder.itemView.tvCollect.setOnClickListener {
-                    listener?.onItemClick(it, bean)
+                    onItemClickListener.onItemClick(it, bean)
                 }
             }
         }
@@ -86,10 +86,6 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
 
     override fun getItemViewType(position: Int): Int {
         return getViewTypeByPosition(position)
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
     }
 
     private fun getViewTypeByPosition(position: Int): Int {

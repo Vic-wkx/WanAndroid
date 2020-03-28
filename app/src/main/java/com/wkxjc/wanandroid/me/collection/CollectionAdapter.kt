@@ -2,18 +2,23 @@ package com.wkxjc.wanandroid.me.collection
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseViewHolder
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.artical.LINK
-import com.wkxjc.wanandroid.artical.WebActivity
+import com.wkxjc.wanandroid.home.common.bean.CollectionBean
 import com.wkxjc.wanandroid.home.common.bean.Collections
 import kotlinx.android.synthetic.main.item_collection.view.*
-import org.jetbrains.anko.startActivity
 
 class CollectionAdapter(private val collections: Collections = Collections()) : RecyclerView.Adapter<BaseViewHolder>() {
     private lateinit var context: Context
+    lateinit var onItemClickListener: OnItemClickListener
+
+    interface OnItemClickListener {
+        fun onItemClick(view: View, bean: CollectionBean)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         context = parent.context
         val view = LayoutInflater.from(context).inflate(R.layout.item_collection, parent, false)
@@ -26,11 +31,14 @@ class CollectionAdapter(private val collections: Collections = Collections()) : 
         val bean = collections.datas[position]
         holder.itemView.tvCollectionTitle.text = bean.title
         holder.itemView.setOnClickListener {
-            context.startActivity<WebActivity>(LINK to bean.link)
+            onItemClickListener.onItemClick(it, bean)
+        }
+        holder.itemView.tvCancelCollect.setOnClickListener {
+            onItemClickListener.onItemClick(it, bean)
         }
     }
 
-    fun refresh(collections: Collections){
+    fun refresh(collections: Collections) {
         this.collections.refresh(collections)
         notifyDataSetChanged()
     }

@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.httpManager
+package com.wkxjc.wanandroid.common.httpManager
 
 import com.alibaba.fastjson.JSON
 import com.base.library.rxRetrofit.http.converter.IResultConverter

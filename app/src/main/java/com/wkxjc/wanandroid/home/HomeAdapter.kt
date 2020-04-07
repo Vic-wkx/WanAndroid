@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseViewHolder
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.artical.LINK
-import com.wkxjc.wanandroid.artical.WebActivity
-import com.wkxjc.wanandroid.banner.ImageAdapter
+import com.wkxjc.wanandroid.common.artical.LINK
+import com.wkxjc.wanandroid.common.artical.WebActivity
+import com.wkxjc.wanandroid.common.banner.ImageAdapter
 import com.wkxjc.wanandroid.home.common.bean.*
 import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
 import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity

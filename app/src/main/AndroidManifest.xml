@@ -20,7 +20,7 @@
         <activity android:name=".home.commonWebSites.CommonWebsitesActivity" />
         <activity android:name=".home.publicAccounts.PublicAccountArticles.PublicAccountArticlesActivity" />
         <activity android:name=".home.publicAccounts.PublicAccountActivity" />
-        <activity android:name=".artical.WebActivity" />
+        <activity android:name="com.wkxjc.wanandroid.common.artical.WebActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

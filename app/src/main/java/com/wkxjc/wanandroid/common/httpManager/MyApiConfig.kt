@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.httpManager
+package com.wkxjc.wanandroid.common.httpManager
 
 import com.base.library.rxRetrofit.common.header.IHttpResponseProcessor
 import com.base.library.rxRetrofit.http.api.ApiConfig

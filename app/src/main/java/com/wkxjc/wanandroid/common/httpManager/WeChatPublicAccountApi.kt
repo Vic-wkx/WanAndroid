@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.httpManager
+package com.wkxjc.wanandroid.common.httpManager
 
 import com.base.library.rxRetrofit.http.api.BaseApi
 import com.wkxjc.wanandroid.home.common.api.ApiService

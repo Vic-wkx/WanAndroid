@@ -13,4 +13,8 @@ data class Articles(
         datas.clear()
         datas.addAll(articles.datas)
     }
+
+    fun addMore(articles: Articles) {
+        datas.addAll(articles.datas)
+    }
 }

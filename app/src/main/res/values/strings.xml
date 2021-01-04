@@ -6,4 +6,5 @@
     <string name="my_todo">我的 TODO</string>
     <string name="my_collection">我的收藏</string>
     <string name="login_out">退出登录</string>
+    <string name="collected">已收藏</string>
 </resources>

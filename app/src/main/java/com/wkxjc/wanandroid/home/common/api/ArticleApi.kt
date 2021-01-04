@@ -13,6 +13,10 @@ class ArticleApi : BaseApi() {
         return apiService.getHomeArticles(page)
     }
 
+    fun resetPage() {
+        page = 0
+    }
+
     fun nextPage() {
         page++
     }
@@ -20,4 +24,9 @@ class ArticleApi : BaseApi() {
     fun convert(resultMap: HashMap<BaseApi, Any>): Articles {
         return JSON.parseObject(resultMap[this] as String, Articles::class.javaObjectType)
     }
+
+    fun convert(result: String): Articles {
+        return JSON.parseObject(result, Articles::class.javaObjectType)
+    }
+
 }

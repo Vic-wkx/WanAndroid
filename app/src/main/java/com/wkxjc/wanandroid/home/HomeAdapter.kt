@@ -78,6 +78,8 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                     onItemClickListener.onItemClick(it, bean)
                 }
                 holder.itemView.tvCollect.setOnClickListener {
+                    holder.itemView.tvCollect.isEnabled = false
+                    holder.itemView.tvCollect.text = context.getString(R.string.collected)
                     onItemClickListener.onItemClick(it, bean)
                 }
             }
@@ -108,6 +110,11 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
 
     fun refresh(banners: Banners, articles: Articles) {
         homeBean.refresh(banners, articles)
+        notifyDataSetChanged()
+    }
+
+    fun addMore(articles: Articles) {
+        homeBean.addMore(articles)
         notifyDataSetChanged()
     }
 

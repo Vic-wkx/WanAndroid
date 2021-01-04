@@ -3,6 +3,7 @@ package com.wkxjc.wanandroid.home
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseFragment
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.api.BaseApi
@@ -35,10 +36,21 @@ class HomeFragment : BaseFragment() {
     private val homeListListener = object : HttpListListener() {
         override fun onNext(resultMap: HashMap<BaseApi, Any>) {
             homeAdapter.refresh(bannerApi.convert(resultMap), articleApi.convert(resultMap))
+            refreshHome.isRefreshing = false
         }
 
         override fun onError(error: Throwable) {
         }
+    }
+
+    private val loadMoreListener = object : HttpListener() {
+        override fun onNext(result: String) {
+            homeAdapter.addMore(articleApi.convert(result))
+        }
+
+        override fun onError(error: Throwable) {
+        }
+
     }
 
     override fun layoutId() = R.layout.fragment_home
@@ -58,9 +70,27 @@ class HomeFragment : BaseFragment() {
                 }
             }
         }
+        refreshHome.setOnRefreshListener {
+            initData()
+        }
+        rvHome.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if ((rvHome.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == homeAdapter.itemCount - 1) {
+                    // load more
+                    loadMore()
+                }
+            }
+        })
+    }
+
+    fun loadMore() {
+        articleApi.nextPage()
+        httpManager.request(articleApi, loadMoreListener)
     }
 
     override fun initData() {
+        articleApi.resetPage()
         httpManager.request(arrayOf(bannerApi, articleApi), homeListListener)
     }
 }

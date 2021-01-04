@@ -34,6 +34,8 @@ class CollectionAdapter(private val collections: Collections = Collections()) : 
             onItemClickListener.onItemClick(it, bean)
         }
         holder.itemView.tvCancelCollect.setOnClickListener {
+            collections.remove(holder.adapterPosition)
+            notifyItemRemoved(holder.adapterPosition)
             onItemClickListener.onItemClick(it, bean)
         }
     }

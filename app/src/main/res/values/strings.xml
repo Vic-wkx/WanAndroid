@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">WanAndroid</string>
+    <string name="home">Home</string>
+    <string name="me">Me</string>
+    <string name="login">登录</string>
+    <string name="my_todo">我的 TODO</string>
+    <string name="my_collection">我的收藏</string>
+    <string name="login_out">退出登录</string>
 </resources>

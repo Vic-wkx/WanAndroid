@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".me.collection.CollectionActivity"></activity>
+        <activity android:name=".me.user.UserActivity"></activity>
+        <activity android:name=".me.collection.CollectionActivity" />
         <activity android:name=".me.todo.TodoActivity" />
         <activity android:name=".me.login.register.RegisterActivity" />
         <activity android:name=".home.navigation.NavigationActivity" />
@@ -20,7 +21,7 @@
         <activity android:name=".home.commonWebSites.CommonWebsitesActivity" />
         <activity android:name=".home.publicAccounts.PublicAccountArticles.PublicAccountArticlesActivity" />
         <activity android:name=".home.publicAccounts.PublicAccountActivity" />
-        <activity android:name="com.wkxjc.wanandroid.common.artical.WebActivity" />
+        <activity android:name=".common.artical.WebActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

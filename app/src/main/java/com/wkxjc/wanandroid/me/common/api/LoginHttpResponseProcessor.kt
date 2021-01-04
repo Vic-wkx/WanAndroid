@@ -10,6 +10,9 @@ import okhttp3.Response
 const val COOKIE_HEADER_KEY = "Cookie"
 const val COOKIE = "Cookie"
 const val LOGIN_INFO = "login_info"
+const val IS_LOGIN = "IS_LOGIN"
+const val USER_NAME = "USER_NAME"
+const val PASSWORD = "PASSWORD"
 
 class LoginHttpResponseProcessor : IHttpResponseProcessor {
     override fun handleResponse(request: Request, response: Response): Response {
@@ -21,5 +24,4 @@ class LoginHttpResponseProcessor : IHttpResponseProcessor {
         }
         return RxRetrofitApp.apiConfig.httpResponseProcessor.handleResponse(request, response)
     }
-
 }

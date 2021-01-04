@@ -7,6 +7,12 @@ import io.reactivex.Observable
 import java.util.*
 
 class ArticleApi : BaseApi() {
+
+    init {
+        // close cache so that article collection state can be updated
+        apiConfig.cacheConfig.cache = false
+    }
+
     var page = 0
     override fun getObservable(): Observable<String> {
         val apiService = retrofit.create(ApiService::class.java)

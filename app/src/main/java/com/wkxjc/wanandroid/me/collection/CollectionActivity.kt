@@ -30,6 +30,7 @@ class CollectionActivity : BaseActivity() {
     }
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
+            Log.d("~~~", "result:$result")
             collectionAdapter.refresh(collectionApi.convert(result))
         }
 

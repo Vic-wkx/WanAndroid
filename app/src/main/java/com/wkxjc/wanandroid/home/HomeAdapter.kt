@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,10 +78,15 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 holder.itemView.setOnClickListener {
                     onItemClickListener.onItemClick(it, bean)
                 }
-                holder.itemView.tvCollect.setOnClickListener {
-                    holder.itemView.tvCollect.isEnabled = false
-                    holder.itemView.tvCollect.text = context.getString(R.string.collected)
-                    onItemClickListener.onItemClick(it, bean)
+                // FIXME: 1/4/2021 collect is always false! Maybe a back-end error
+                Log.d("~~~", "${homeBean.articles.datas.size},${position},${bean.collect}")
+                holder.itemView.tvCollect.text = context.getString(if (bean.collect) R.string.collected else R.string.collect)
+                if (!bean.collect) {
+                    holder.itemView.tvCollect.setOnClickListener {
+                        holder.itemView.tvCollect.isEnabled = false
+                        holder.itemView.tvCollect.text = context.getString(R.string.collected)
+                        onItemClickListener.onItemClick(it, bean)
+                    }
                 }
             }
         }

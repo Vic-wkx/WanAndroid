@@ -1,5 +1,6 @@
 package com.wkxjc.wanandroid.common.httpManager
 
+import android.util.Log
 import com.alibaba.fastjson.JSON
 import com.base.library.rxRetrofit.http.converter.IResultConverter
 
@@ -9,6 +10,7 @@ open class ResultConverter : IResultConverter {
         if (result.errorCode != 0) {
             throw IllegalArgumentException("errorCode: ${result.errorCode}, errorMessage: ${result.errorMsg}")
         }
+        Log.d("~~~", "result:${result.data}")
         return result.data ?: ""
     }
 }

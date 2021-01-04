@@ -19,7 +19,6 @@ class LoginActivity : BaseActivity() {
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             val loginBean = loginApi.convert(result)
-            Log.d("~~~", "result: $result")
             toast("login success")
             User.loginOn(loginBean.publicName)
             finish()

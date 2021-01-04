@@ -22,7 +22,6 @@ class CollectionActivity : BaseActivity() {
     private val collectionAdapter = CollectionAdapter()
     private val cancelCollectionListener = object : HttpListener() {
         override fun onNext(result: String) {
-            Log.d("~~~", "result: $result")
         }
 
         override fun onError(error: Throwable) {
@@ -30,7 +29,6 @@ class CollectionActivity : BaseActivity() {
     }
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
-            Log.d("~~~", "result:$result")
             collectionAdapter.refresh(collectionApi.convert(result))
         }
 

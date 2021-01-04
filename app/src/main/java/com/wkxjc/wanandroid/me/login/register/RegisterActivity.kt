@@ -14,7 +14,6 @@ class RegisterActivity : BaseActivity() {
     private val registerApi = RegisterApi()
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
-            Log.d("~~~", "result: $result")
             toast("注册成功")
             finish()
         }

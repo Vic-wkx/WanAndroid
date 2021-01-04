@@ -27,7 +27,6 @@ class HomeFragment : BaseFragment() {
     private val homeAdapter = HomeAdapter()
     private val collectListener = object : HttpListener() {
         override fun onNext(result: String) {
-            Log.d("~~~", "result: $result")
         }
 
         override fun onError(error: Throwable) {

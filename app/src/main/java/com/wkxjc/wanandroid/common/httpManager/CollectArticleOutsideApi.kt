@@ -1,3 +1,0 @@
-package com.wkxjc.wanandroid.common.httpManager
-
-class CollectArticleOutsideApi

@@ -15,7 +15,6 @@ class MainActivity : BaseActivity() {
     override fun layoutId() = R.layout.activity_main
 
     override fun initView() {
-
         FragmentUtils.add(supportFragmentManager, R.id.container, homeFragment, meFragment)
         FragmentUtils.show(supportFragmentManager, homeFragment)
         bottomMenu.setOnNavigationItemSelectedListener {

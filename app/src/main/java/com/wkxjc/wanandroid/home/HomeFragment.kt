@@ -87,7 +87,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        // data should be loaded in onResume, since collect state maybe changed
+        // data should be loaded in onResume, since collect/login state maybe changed
         loadData()
     }
 

@@ -15,4 +15,5 @@
     <string name="change_language">修改语言</string>
     <string name="chinese" translatable="false">中文</string>
     <string name="english" translatable="false">English</string>
+    <string name="load_more">加载更多…</string>
 </resources>

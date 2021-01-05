@@ -2,6 +2,7 @@ package com.base.library.project.utils
 
 import android.content.Context
 import android.content.Intent
+import android.os.LocaleList
 import com.base.library.R
 import com.base.library.rxRetrofit.common.utils.SPUtils
 import org.jetbrains.anko.toast
@@ -15,7 +16,7 @@ object LanguageUtils {
     private val language: String
         // get the newest value
         get() = SPUtils.getInstance().getString(LANGUAGE, CHINESE)
-    val currentLocale: Locale
+    private val currentLocale: Locale
         get() = if (language == CHINESE) Locale.CHINA else Locale.US
 
     fun changeLanguage(context: Context, language: String) {
@@ -30,6 +31,12 @@ object LanguageUtils {
     private fun restart(context: Context) {
         context.startActivity(context.packageManager.getLaunchIntentForPackage(context.packageName)?.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
+    }
+
+    fun getContextWithLanguage(newBase: Context?): Context? {
+        return newBase?.createConfigurationContext(newBase.resources.configuration.apply {
+            setLocales(LocaleList(currentLocale))
         })
     }
 }

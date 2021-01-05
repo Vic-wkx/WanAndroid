@@ -7,6 +7,7 @@ import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.me.common.api.LOGIN_INFO
 import com.wkxjc.wanandroid.me.common.api.PASSWORD
 import com.wkxjc.wanandroid.me.common.api.USER_NAME
+import com.wkxjc.wanandroid.me.language.LanguageActivity
 import com.wkxjc.wanandroid.me.user.User
 import com.wkxjc.wanandroid.me.login.LoginActivity
 import com.wkxjc.wanandroid.me.user.UserActivity
@@ -23,6 +24,9 @@ class MeFragment : BaseFragment() {
         }
         btnLogin.setOnClickListener {
             startActivity<LoginActivity>()
+        }
+        btnChangeLanguage.setOnClickListener {
+            startActivity<LanguageActivity>()
         }
     }
 

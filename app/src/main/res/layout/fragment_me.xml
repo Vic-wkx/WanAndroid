@@ -10,11 +10,11 @@
         android:id="@+id/tvUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="8dp"
         android:visibility="gone"
-        tools:visibility="visible"
-        tools:text="User Name" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="User Name"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -23,5 +23,12 @@
         android:text="@string/login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvUser" />
+
+    <Button
+        android:id="@+id/btnChangeLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/change_language"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

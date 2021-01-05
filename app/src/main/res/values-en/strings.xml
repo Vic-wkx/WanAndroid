@@ -13,4 +13,6 @@
     <string name="knowledge_tree">Knowledge Tree</string>
     <string name="navigation">Navigation</string>
     <string name="login">Login</string>
+    <string name="change_language">Change Language</string>
+    <string name="no_need_change_language_hint">It\'s using English now.</string>
 </resources>

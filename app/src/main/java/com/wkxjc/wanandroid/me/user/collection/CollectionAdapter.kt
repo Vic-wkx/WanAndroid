@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.me.collection
+package com.wkxjc.wanandroid.me.user.collection
 
 import android.content.Context
 import android.view.LayoutInflater

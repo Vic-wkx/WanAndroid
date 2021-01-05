@@ -1,6 +1,5 @@
-package com.wkxjc.wanandroid.me.collection
+package com.wkxjc.wanandroid.me.user.collection
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity

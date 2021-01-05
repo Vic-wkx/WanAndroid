@@ -12,4 +12,7 @@
     <string name="home">主页</string>
     <string name="me">个人中心</string>
     <string name="app_name">玩安卓</string>
+    <string name="change_language">修改语言</string>
+    <string name="chinese" translatable="false">中文</string>
+    <string name="english" translatable="false">English</string>
 </resources>

@@ -15,9 +15,10 @@ abstract class BaseActivity : AppCompatActivity(), IBase {
     }
 
     override fun attachBaseContext(newBase: Context?) {
-        val delegatedContext = newBase?.createConfigurationContext(newBase.resources.configuration.apply {
+        // set language
+        val contextWithLanguage = newBase?.createConfigurationContext(newBase.resources.configuration.apply {
             setLocales(LocaleList(LanguageUtils.currentLocale))
         })
-        super.attachBaseContext(delegatedContext)
+        super.attachBaseContext(contextWithLanguage)
     }
 }

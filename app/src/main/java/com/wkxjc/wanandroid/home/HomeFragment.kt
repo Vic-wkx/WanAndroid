@@ -1,6 +1,5 @@
 package com.wkxjc.wanandroid.home
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -70,7 +69,7 @@ class HomeFragment : BaseFragment() {
             }
         }
         refreshHome.setOnRefreshListener {
-            initData()
+            loadData()
         }
         rvHome.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -83,13 +82,23 @@ class HomeFragment : BaseFragment() {
         })
     }
 
-    fun loadMore() {
-        articleApi.nextPage()
-        httpManager.request(articleApi, loadMoreListener)
+    override fun initData() {
     }
 
-    override fun initData() {
+    override fun onResume() {
+        super.onResume()
+        // data should be loaded in onResume, since collect state maybe changed
+        loadData()
+    }
+
+    private fun loadData() {
+        refreshHome.isRefreshing = true
         articleApi.resetPage()
         httpManager.request(arrayOf(bannerApi, articleApi), homeListListener)
+    }
+
+    private fun loadMore() {
+        articleApi.nextPage()
+        httpManager.request(articleApi, loadMoreListener)
     }
 }

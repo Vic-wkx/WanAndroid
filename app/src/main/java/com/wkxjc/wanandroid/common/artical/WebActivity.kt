@@ -21,7 +21,7 @@ class WebActivity : BaseActivity() {
             .useDefaultIndicator()
             .createAgentWeb()
             .ready()
-            .go(intent.extras?.getString(LINK)?.replace("http://", "https://"))
+            .go(intent.extras?.getString(LINK))
     }
 
     override fun initData() {

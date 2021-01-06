@@ -32,5 +32,4 @@ class MainActivity : BaseActivity() {
 
     override fun initData() {}
 
-    override fun onSupportNavigateUp() = findNavController(R.id.container).navigateUp()
 }

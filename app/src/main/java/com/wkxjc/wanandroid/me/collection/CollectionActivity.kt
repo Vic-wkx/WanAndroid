@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
+import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
@@ -13,7 +14,7 @@ import com.wkxjc.wanandroid.home.common.bean.CollectionBean
 import com.wkxjc.wanandroid.me.common.api.CancelCollectionApi
 import com.wkxjc.wanandroid.me.common.api.CollectionApi
 import kotlinx.android.synthetic.main.activity_collection.*
-import org.jetbrains.anko.startActivity
+
 
 class CollectionActivity : BaseActivity() {
     private val httpManager = HttpManager(this)
@@ -50,7 +51,7 @@ class CollectionActivity : BaseActivity() {
                         articleId = bean.id
                         originId = bean.originId
                     }, cancelCollectionListener)
-                    else -> startActivity<WebActivity>(LINK to bean.link)
+                    else -> myStartActivity<WebActivity>(LINK to bean.link)
                 }
             }
         }

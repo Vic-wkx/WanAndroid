@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseViewHolder
+import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.home.common.bean.PublicAccountBean
 import com.wkxjc.wanandroid.home.common.bean.PublicAccounts
 import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountArticles.PublicAccountArticlesActivity
 import kotlinx.android.synthetic.main.item_public_account.view.*
-import org.jetbrains.anko.startActivity
+
 
 class PublicAccountAdapter(private val publicAccounts: PublicAccounts = PublicAccounts()) : RecyclerView.Adapter<BaseViewHolder>() {
 
@@ -27,7 +28,7 @@ class PublicAccountAdapter(private val publicAccounts: PublicAccounts = PublicAc
         val bean = publicAccounts.data[position]
         holder.itemView.tvPublicAccountName.text = bean.name
         holder.itemView.setOnClickListener {
-            context.startActivity<PublicAccountArticlesActivity>("id" to bean.id)
+            context.myStartActivity<PublicAccountArticlesActivity>("id" to bean.id)
         }
     }
 

@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseViewHolder
+import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.home.common.bean.CommonWebsites
 import kotlinx.android.synthetic.main.item_website.view.*
-import org.jetbrains.anko.startActivity
 
 class CommonWebsitesAdapter(private val websites: CommonWebsites = CommonWebsites()) : RecyclerView.Adapter<BaseViewHolder>() {
     private lateinit var context: Context
@@ -27,7 +27,7 @@ class CommonWebsitesAdapter(private val websites: CommonWebsites = CommonWebsite
         val bean = websites.data[position]
         holder.itemView.tvCommonWebsite.text = bean.name
         holder.itemView.setOnClickListener {
-            context.startActivity<WebActivity>(LINK to bean.link)
+            context.myStartActivity<WebActivity>(LINK to bean.link)
         }
     }
 

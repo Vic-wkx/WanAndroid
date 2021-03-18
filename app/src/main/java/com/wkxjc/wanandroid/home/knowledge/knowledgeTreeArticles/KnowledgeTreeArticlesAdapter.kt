@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseViewHolder
+import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import kotlinx.android.synthetic.main.item_knowledge_tree_article.view.*
-import org.jetbrains.anko.startActivity
 
 class KnowledgeTreeArticlesAdapter(private val articles: Articles = Articles()) : RecyclerView.Adapter<BaseViewHolder>() {
 
@@ -28,7 +28,7 @@ class KnowledgeTreeArticlesAdapter(private val articles: Articles = Articles()) 
         val bean = articles.datas[position]
         holder.itemView.tvKnowledgeTreeArticleTitle.text = bean.title
         holder.itemView.setOnClickListener {
-            context.startActivity<WebActivity>(LINK to bean.link)
+            context.myStartActivity<WebActivity>(LINK to bean.link)
         }
     }
 

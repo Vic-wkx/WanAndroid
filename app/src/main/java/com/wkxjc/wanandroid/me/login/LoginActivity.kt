@@ -2,14 +2,15 @@ package com.wkxjc.wanandroid.me.login
 
 import android.util.Log
 import com.base.library.project.BaseActivity
+import com.base.library.project.myStartActivity
+import com.base.library.project.toast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.me.common.api.LoginApi
 import com.wkxjc.wanandroid.me.login.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
+
 
 class LoginActivity : BaseActivity() {
 
@@ -39,7 +40,7 @@ class LoginActivity : BaseActivity() {
             httpManager.request(loginApi, listener)
         }
         btnGoToRegister.setOnClickListener {
-            startActivity<RegisterActivity>()
+            myStartActivity<RegisterActivity>()
         }
     }
 

@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
+import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.api.BaseApi
 import com.base.library.rxRetrofit.http.httpList.HttpListListener
@@ -16,7 +17,6 @@ import com.wkxjc.wanandroid.home.common.api.BannerApi
 import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.jetbrains.anko.support.v4.startActivity
 
 class HomeFragment : BaseFragment() {
     private val httpManager = HttpManager(this)
@@ -54,7 +54,7 @@ class HomeFragment : BaseFragment() {
                     R.id.tvCollect -> httpManager.request(collectApi.apply {
                         articleId = bean.id
                     }, collectListener)
-                    else -> startActivity<WebActivity>(LINK to bean.link)
+                    else -> myStartActivity<WebActivity>(LINK to bean.link)
                 }
             }
         }

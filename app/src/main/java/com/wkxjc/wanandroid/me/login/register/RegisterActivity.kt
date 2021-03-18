@@ -2,12 +2,12 @@ package com.wkxjc.wanandroid.me.login.register
 
 import android.util.Log
 import com.base.library.project.BaseActivity
+import com.base.library.project.toast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.me.common.api.RegisterApi
 import kotlinx.android.synthetic.main.activity_register.*
-import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseActivity() {
     private val httpManager = HttpManager(this)

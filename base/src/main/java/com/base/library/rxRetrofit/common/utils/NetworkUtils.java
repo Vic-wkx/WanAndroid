@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.format.Formatter;
 
@@ -50,7 +51,7 @@ public final class NetworkUtils {
      */
     public static void openWirelessSettings() {
         RxRetrofitApp.getApplication().startActivity(
-                new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS)
+                new Intent(Settings.ACTION_WIRELESS_SETTINGS)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         );
     }

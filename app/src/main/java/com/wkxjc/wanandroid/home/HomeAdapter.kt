@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseViewHolder
+import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
@@ -19,7 +20,6 @@ import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.item_article.view.*
 import kotlinx.android.synthetic.main.item_banner.view.*
 import kotlinx.android.synthetic.main.item_shortcut.view.*
-import org.jetbrains.anko.startActivity
 
 const val BANNER = 1
 const val SHORTCUT = 2
@@ -49,26 +49,23 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
             BANNER -> {
                 holder.itemView.banner.adapter = ImageAdapter(homeBean.banners.data)
                 holder.itemView.banner.setOnBannerListener(object : OnBannerListener<BannerBean> {
-                    override fun onBannerChanged(position: Int) {
-                    }
-
-                    override fun OnBannerClick(data: BannerBean, position: Int) {
-                        context.startActivity<WebActivity>(LINK to data.url)
+                    override fun OnBannerClick(data: BannerBean?, position: Int) {
+                        context.myStartActivity<WebActivity>(LINK to data?.url)
                     }
                 })
             }
             SHORTCUT -> {
                 holder.itemView.tvPublicAccounts.setOnClickListener {
-                    context.startActivity<PublicAccountActivity>()
+                    context.myStartActivity<PublicAccountActivity>()
                 }
                 holder.itemView.tvCommonWebsites.setOnClickListener {
-                    context.startActivity<CommonWebsitesActivity>()
+                    context.myStartActivity<CommonWebsitesActivity>()
                 }
                 holder.itemView.tvKnowledgeTree.setOnClickListener {
-                    context.startActivity<KnowledgeTreeActivity>()
+                    context.myStartActivity<KnowledgeTreeActivity>()
                 }
                 holder.itemView.tvNavigation.setOnClickListener {
-                    context.startActivity<NavigationActivity>()
+                    context.myStartActivity<NavigationActivity>()
                 }
             }
             ARTICLE -> {

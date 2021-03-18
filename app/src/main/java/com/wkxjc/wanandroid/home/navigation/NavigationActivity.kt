@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.home.navigation
 
 import com.base.library.project.BaseActivity
+import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
@@ -8,7 +9,6 @@ import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.home.common.api.NavigationApi
 import kotlinx.android.synthetic.main.activity_navigation.*
-import org.jetbrains.anko.startActivity
 
 class NavigationActivity : BaseActivity() {
     private val httpManager = HttpManager(this)
@@ -28,7 +28,7 @@ class NavigationActivity : BaseActivity() {
     override fun initView() {
         elvNavigation.setAdapter(navigationExpandableAdapter)
         elvNavigation.setOnChildClickListener { expandableListView, view, groupPosition, childPosition, childId ->
-            startActivity<WebActivity>(LINK to navigationExpandableAdapter.getChild(groupPosition, childPosition).link)
+            myStartActivity<WebActivity>(LINK to navigationExpandableAdapter.getChild(groupPosition, childPosition).link)
             true
         }
     }

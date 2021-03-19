@@ -13,4 +13,8 @@ data class Collections(
         datas.clear()
         datas.addAll(collections.datas)
     }
+
+    fun remove(position: Int) {
+        datas.removeAt(position)
+    }
 }

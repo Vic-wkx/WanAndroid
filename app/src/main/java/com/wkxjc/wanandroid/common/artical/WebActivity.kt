@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.artical
+package com.wkxjc.wanandroid.common.artical
 
 import android.view.ViewGroup.LayoutParams
 import android.widget.LinearLayout
@@ -23,7 +23,7 @@ class WebActivity : BaseActivity() {
             .useDefaultIndicator()
             .createAgentWeb()
             .ready()
-            .go(intent.extras?.getString(LINK)?.replace("http://", "https://"))
+            .go(intent.extras?.getString(LINK))
     }
 
     override fun initData() {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wan Android</string>
+    <string name="home">Home</string>
+    <string name="me">Me</string>
+    <string name="my_todo">My TODO</string>
+    <string name="my_collection">My Collection</string>
+    <string name="login_out">Login Out</string>
+    <string name="collected">Collected</string>
+    <string name="collect">Collect</string>
+    <string name="public_accounts">Public Accounts</string>
+    <string name="common_websites">Common Websites</string>
+    <string name="knowledge_tree">Knowledge Tree</string>
+    <string name="navigation">Navigation</string>
+    <string name="login">Login</string>
+    <string name="change_language">Change Language</string>
+    <string name="load_more">Load More…</string>
+</resources>

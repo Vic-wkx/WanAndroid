@@ -13,7 +13,7 @@ import android.text.format.Formatter;
 
 import androidx.annotation.RequiresPermission;
 
-import com.base.library.rxRetrofit.RxRetrofitApp;
+import com.base.library.BaseApp;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;
@@ -50,8 +50,8 @@ public final class NetworkUtils {
      * Open the settings of wireless.
      */
     public static void openWirelessSettings() {
-        RxRetrofitApp.getApplication().startActivity(
-                new Intent(Settings.ACTION_WIRELESS_SETTINGS)
+        BaseApp.application.startActivity(
+                new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         );
     }
@@ -77,7 +77,7 @@ public final class NetworkUtils {
     public static boolean getMobileDataEnabled() {
         try {
             TelephonyManager tm =
-                    (TelephonyManager) RxRetrofitApp.getApplication().getSystemService(Context.TELEPHONY_SERVICE);
+                    (TelephonyManager) BaseApp.application.getSystemService(Context.TELEPHONY_SERVICE);
             if (tm == null) return false;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 return tm.isDataEnabled();
@@ -105,7 +105,7 @@ public final class NetworkUtils {
     public static void setMobileDataEnabled(final boolean enabled) {
         try {
             TelephonyManager tm =
-                    (TelephonyManager) RxRetrofitApp.getApplication().getSystemService(Context.TELEPHONY_SERVICE);
+                    (TelephonyManager) BaseApp.application.getSystemService(Context.TELEPHONY_SERVICE);
             if (tm == null) return;
             Method setMobileDataEnabledMethod =
                     tm.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
@@ -157,7 +157,7 @@ public final class NetworkUtils {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static boolean getWifiEnabled() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager manager = (WifiManager) RxRetrofitApp.getApplication().getSystemService(WIFI_SERVICE);
+        WifiManager manager = (WifiManager) BaseApp.application.getSystemService(WIFI_SERVICE);
         if (manager == null) return false;
         return manager.isWifiEnabled();
     }
@@ -172,7 +172,7 @@ public final class NetworkUtils {
     @RequiresPermission(CHANGE_WIFI_STATE)
     public static void setWifiEnabled(final boolean enabled) {
         @SuppressLint("WifiManagerLeak")
-        WifiManager manager = (WifiManager) RxRetrofitApp.getApplication().getSystemService(WIFI_SERVICE);
+        WifiManager manager = (WifiManager) BaseApp.application.getSystemService(WIFI_SERVICE);
         if (manager == null) return;
         if (enabled == manager.isWifiEnabled()) return;
         manager.setWifiEnabled(enabled);
@@ -188,7 +188,7 @@ public final class NetworkUtils {
     @RequiresPermission(ACCESS_NETWORK_STATE)
     public static boolean isWifiConnected() {
         ConnectivityManager cm =
-                (ConnectivityManager) RxRetrofitApp.getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) BaseApp.application.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null) return false;
         NetworkInfo ni = cm.getActiveNetworkInfo();
         return ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI;
@@ -201,7 +201,7 @@ public final class NetworkUtils {
      */
     public static String getNetworkOperatorName() {
         TelephonyManager tm =
-                (TelephonyManager) RxRetrofitApp.getApplication().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) BaseApp.application.getSystemService(Context.TELEPHONY_SERVICE);
         if (tm == null) return "";
         return tm.getNetworkOperatorName();
     }
@@ -282,7 +282,7 @@ public final class NetworkUtils {
     @RequiresPermission(ACCESS_NETWORK_STATE)
     private static NetworkInfo getActiveNetworkInfo() {
         ConnectivityManager cm =
-                (ConnectivityManager) RxRetrofitApp.getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) BaseApp.application.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null) return null;
         return cm.getActiveNetworkInfo();
     }
@@ -384,7 +384,7 @@ public final class NetworkUtils {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static String getIpAddressByWifi() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wm = (WifiManager) RxRetrofitApp.getApplication().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) BaseApp.application.getSystemService(Context.WIFI_SERVICE);
         if (wm == null) return "";
         return Formatter.formatIpAddress(wm.getDhcpInfo().ipAddress);
     }
@@ -397,7 +397,7 @@ public final class NetworkUtils {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static String getGatewayByWifi() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wm = (WifiManager) RxRetrofitApp.getApplication().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) BaseApp.application.getSystemService(Context.WIFI_SERVICE);
         if (wm == null) return "";
         return Formatter.formatIpAddress(wm.getDhcpInfo().gateway);
     }
@@ -410,7 +410,7 @@ public final class NetworkUtils {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static String getNetMaskByWifi() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wm = (WifiManager) RxRetrofitApp.getApplication().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) BaseApp.application.getSystemService(Context.WIFI_SERVICE);
         if (wm == null) return "";
         return Formatter.formatIpAddress(wm.getDhcpInfo().netmask);
     }
@@ -423,7 +423,7 @@ public final class NetworkUtils {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static String getServerAddressByWifi() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wm = (WifiManager) RxRetrofitApp.getApplication().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) BaseApp.application.getSystemService(Context.WIFI_SERVICE);
         if (wm == null) return "";
         return Formatter.formatIpAddress(wm.getDhcpInfo().serverAddress);
     }

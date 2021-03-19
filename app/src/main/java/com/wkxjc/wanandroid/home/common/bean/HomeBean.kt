@@ -8,4 +8,8 @@ data class HomeBean(
         this.banners.refresh(banners)
         this.articles.refresh(articles)
     }
+
+    fun addMore(articles: Articles) {
+        this.articles.addMore(articles)
+    }
 }

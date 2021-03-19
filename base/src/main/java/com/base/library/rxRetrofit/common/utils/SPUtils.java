@@ -3,9 +3,11 @@ package com.base.library.rxRetrofit.common.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import androidx.annotation.NonNull;
 import androidx.collection.SimpleArrayMap;
-import com.base.library.rxRetrofit.RxRetrofitApp;
+
+import com.base.library.BaseApp;
 
 import java.util.Collections;
 import java.util.Map;
@@ -72,11 +74,11 @@ public final class SPUtils {
     }
 
     private SPUtils(final String spName) {
-        sp = RxRetrofitApp.getApplication().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        sp = BaseApp.application.getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 
     private SPUtils(final String spName, final int mode) {
-        sp = RxRetrofitApp.getApplication().getSharedPreferences(spName, mode);
+        sp = BaseApp.application.getSharedPreferences(spName, mode);
     }
 
     /**

@@ -1,6 +1,5 @@
-package com.wkxjc.wanandroid.me.collection
+package com.wkxjc.wanandroid.me.user.collection
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
@@ -8,9 +7,9 @@ import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.artical.LINK
-import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.ActivityCollectionBinding
+import com.wkxjc.wanandroid.common.artical.LINK
+import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.home.common.bean.CollectionBean
 import com.wkxjc.wanandroid.me.common.api.CancelCollectionApi
 import com.wkxjc.wanandroid.me.common.api.CollectionApi

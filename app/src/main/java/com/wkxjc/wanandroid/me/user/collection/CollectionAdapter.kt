@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.me.collection
+package com.wkxjc.wanandroid.me.user.collection
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -35,6 +35,8 @@ class CollectionAdapter(private val collections: Collections = Collections()) : 
             onItemClickListener.onItemClick(it, bean)
         }
         holder.binding.tvCancelCollect.setOnClickListener {
+            collections.remove(holder.adapterPosition)
+            notifyItemRemoved(holder.adapterPosition)
             onItemClickListener.onItemClick(it, bean)
         }
     }

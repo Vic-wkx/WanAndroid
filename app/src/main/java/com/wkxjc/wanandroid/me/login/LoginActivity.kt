@@ -7,6 +7,8 @@ import com.base.library.project.toast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.databinding.ActivityLoginBinding
+import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.me.user.User
 import com.wkxjc.wanandroid.me.common.api.LoginApi
 import com.wkxjc.wanandroid.me.login.register.RegisterActivity
 
@@ -19,8 +21,9 @@ class LoginActivity : BaseActivity() {
     private val loginApi = LoginApi()
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
-            Log.d("~~~", "result: $result")
+            val loginBean = loginApi.convert(result)
             toast("login success")
+            User.loginOn(loginBean.publicName)
             finish()
         }
 

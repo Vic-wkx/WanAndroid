@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.httpManager
+package com.wkxjc.wanandroid.common.httpManager
 
 data class BaseResult(
     val data: String?,

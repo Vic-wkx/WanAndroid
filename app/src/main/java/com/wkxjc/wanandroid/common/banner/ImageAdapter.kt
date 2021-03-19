@@ -1,11 +1,11 @@
-package com.wkxjc.wanandroid.banner
+package com.wkxjc.wanandroid.common.banner
 
 import android.content.Context
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.wkxjc.wanandroid.banner.ImageAdapter.BannerViewHolder
+import com.wkxjc.wanandroid.common.banner.ImageAdapter.BannerViewHolder
 import com.wkxjc.wanandroid.home.common.bean.BannerBean
 import com.youth.banner.adapter.BannerAdapter
 

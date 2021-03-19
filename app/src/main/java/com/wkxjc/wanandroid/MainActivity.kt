@@ -13,12 +13,26 @@ class MainActivity : BaseActivity() {
 
     override fun createBinding() = binding.root
 
+    private val homeFragment by lazy { HomeFragment() }
+    private val meFragment by lazy { MeFragment() }
+
+    override fun layoutId() = R.layout.activity_main
+
     override fun initView() {
-        val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment? ?: return
-        binding.bottomMenu.setupWithNavController(host.navController)
+        FragmentUtils.add(supportFragmentManager, R.id.container, homeFragment, meFragment)
+        FragmentUtils.show(supportFragmentManager, homeFragment)
+        binding.bottomMenu.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.homeFragment -> {
+                    FragmentUtils.show(supportFragmentManager, homeFragment)
+                }
+                R.id.meFragment -> {
+                    FragmentUtils.show(supportFragmentManager, meFragment)
+                }
+            }
+            true
+        }
     }
 
     override fun initData() {}
-
-    override fun onSupportNavigateUp() = findNavController(R.id.navHostFragment).navigateUp()
 }

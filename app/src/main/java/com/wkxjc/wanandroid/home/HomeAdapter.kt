@@ -1,18 +1,22 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
-import com.wkxjc.wanandroid.artical.LINK
-import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.banner.ImageAdapter
 import com.wkxjc.wanandroid.databinding.ItemArticleBinding
 import com.wkxjc.wanandroid.databinding.ItemBannerBinding
 import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
 import com.wkxjc.wanandroid.databinding.ItemShortcutBinding
+import com.base.library.project.BaseViewHolder
+import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.common.artical.LINK
+import com.wkxjc.wanandroid.common.artical.WebActivity
+import com.wkxjc.wanandroid.common.banner.ImageAdapter
 import com.wkxjc.wanandroid.home.common.bean.*
 import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
 import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
@@ -84,8 +88,14 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 holder.binding.root.setOnClickListener {
                     onItemClickListener.onItemClick(it, bean)
                 }
+                holder.binding.tvCollect.text = context.getString(if (bean.collect) R.string.collected else R.string.collect)
+                holder.binding.tvCollect.isEnabled = !bean.collect
                 holder.binding.tvCollect.setOnClickListener {
-                    onItemClickListener.onItemClick(it, bean)
+                    if (!bean.collect) {
+                        holder.itemView.tvCollect.isEnabled = false
+                        holder.itemView.tvCollect.text = context.getString(R.string.collected)
+                        onItemClickListener.onItemClick(it, bean)
+                    }
                 }
             }
         }
@@ -106,6 +116,11 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
 
     fun refresh(banners: Banners, articles: Articles) {
         homeBean.refresh(banners, articles)
+        notifyDataSetChanged()
+    }
+
+    fun addMore(articles: Articles) {
+        homeBean.addMore(articles)
         notifyDataSetChanged()
     }
 

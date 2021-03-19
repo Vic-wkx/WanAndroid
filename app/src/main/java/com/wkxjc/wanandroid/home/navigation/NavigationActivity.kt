@@ -4,9 +4,9 @@ import com.base.library.project.BaseActivity
 import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.artical.LINK
-import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.ActivityNavigationBinding
+import com.wkxjc.wanandroid.common.artical.LINK
+import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.home.common.api.NavigationApi
 
 

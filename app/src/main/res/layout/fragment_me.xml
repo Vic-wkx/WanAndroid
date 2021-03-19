@@ -6,32 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".me.MeFragment">
 
-    <Button
-        android:id="@+id/tvLogin"
+    <TextView
+        android:id="@+id/tvUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="登录"
+        android:layout_margin="8dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="User Name"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvUser" />
 
     <Button
-        android:id="@+id/btnMyTodo"
+        android:id="@+id/btnChangeLanguage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我的 TODO"
-        app:layout_constraintTop_toBottomOf="@id/tvLogin" />
+        android:text="@string/change_language"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
 
-    <Button
-        android:id="@+id/btnMyCollection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="我的收藏"
-        app:layout_constraintTop_toBottomOf="@id/btnMyTodo" />
-
-    <Button
-        android:id="@+id/btnExitLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="退出登录"
-        app:layout_constraintTop_toBottomOf="@id/btnMyCollection" />
 </androidx.constraintlayout.widget.ConstraintLayout>

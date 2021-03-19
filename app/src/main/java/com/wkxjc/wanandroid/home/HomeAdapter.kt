@@ -1,22 +1,19 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
-import com.wkxjc.wanandroid.banner.ImageAdapter
-import com.wkxjc.wanandroid.databinding.ItemArticleBinding
-import com.wkxjc.wanandroid.databinding.ItemBannerBinding
-import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
-import com.wkxjc.wanandroid.databinding.ItemShortcutBinding
-import com.base.library.project.BaseViewHolder
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.common.banner.ImageAdapter
+import com.wkxjc.wanandroid.databinding.ItemArticleBinding
+import com.wkxjc.wanandroid.databinding.ItemBannerBinding
+import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
+import com.wkxjc.wanandroid.databinding.ItemShortcutBinding
 import com.wkxjc.wanandroid.home.common.bean.*
 import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
 import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
@@ -92,8 +89,8 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 holder.binding.tvCollect.isEnabled = !bean.collect
                 holder.binding.tvCollect.setOnClickListener {
                     if (!bean.collect) {
-                        holder.itemView.tvCollect.isEnabled = false
-                        holder.itemView.tvCollect.text = context.getString(R.string.collected)
+                        holder.binding.tvCollect.isEnabled = false
+                        holder.binding.tvCollect.text = context.getString(R.string.collected)
                         onItemClickListener.onItemClick(it, bean)
                     }
                 }

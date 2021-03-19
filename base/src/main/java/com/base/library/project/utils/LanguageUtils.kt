@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.LocaleList
 import com.base.library.R
+import com.base.library.project.toast
 import com.base.library.rxRetrofit.common.utils.SPUtils
-import org.jetbrains.anko.toast
 import java.util.*
 
 const val LANGUAGE = "LANGUAGE"

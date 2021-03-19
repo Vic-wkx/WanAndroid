@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
-import com.wkxjc.wanandroid.databinding.ItemKnowledgeTreeArticleBinding
-import com.base.library.project.BaseViewHolder
-import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.ItemKnowledgeTreeArticleBinding
 import com.wkxjc.wanandroid.home.common.bean.Articles
 
 

@@ -1,23 +1,22 @@
 package com.wkxjc.wanandroid.me.user
 
 import com.base.library.project.BaseActivity
-import com.wkxjc.wanandroid.R
+import com.base.library.project.myStartActivity
+import com.wkxjc.wanandroid.databinding.ActivityUserBinding
 import com.wkxjc.wanandroid.me.user.collection.CollectionActivity
 import com.wkxjc.wanandroid.me.user.todo.TodoActivity
-import kotlinx.android.synthetic.main.activity_user.*
-import org.jetbrains.anko.startActivity
 
 class UserActivity : BaseActivity() {
-    override fun layoutId() = R.layout.activity_user
-
+    private val binding by lazy { ActivityUserBinding.inflate(layoutInflater) }
+    override fun createBinding() = binding.root
     override fun initView() {
-        btnMyTodo.setOnClickListener {
-            startActivity<TodoActivity>()
+        binding.btnMyTodo.setOnClickListener {
+            myStartActivity<TodoActivity>()
         }
-        btnMyCollection.setOnClickListener {
-            startActivity<CollectionActivity>()
+        binding.btnMyCollection.setOnClickListener {
+            myStartActivity<CollectionActivity>()
         }
-        btnExitLogin.setOnClickListener {
+        binding.btnExitLogin.setOnClickListener {
             User.loginOut()
             finish()
         }

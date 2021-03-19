@@ -13,9 +13,9 @@ import com.base.library.rxRetrofit.http.api.BaseApi
 import com.base.library.rxRetrofit.http.httpList.HttpListListener
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.databinding.FragmentHomeBinding
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.FragmentHomeBinding
 import com.wkxjc.wanandroid.home.common.api.ArticleApi
 import com.wkxjc.wanandroid.home.common.api.BannerApi
 import com.wkxjc.wanandroid.home.common.api.CollectApi
@@ -88,7 +88,7 @@ class HomeFragment : BaseFragment() {
         binding.rvHome.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if ((rvHome.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == homeAdapter.itemCount - 1) {
+                if ((binding.rvHome.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == homeAdapter.itemCount - 1) {
                     // load more
                     loadMore()
                 }
@@ -106,7 +106,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadData() {
-        refreshHome.isRefreshing = true
+        binding.refreshHome.isRefreshing = true
         articleApi.resetPage()
         httpManager.request(arrayOf(bannerApi, articleApi), homeListListener)
     }

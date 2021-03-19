@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">玩安卓</string>
     <string name="login">登录</string>
     <string name="my_todo">我的 TODO</string>
     <string name="my_collection">我的收藏</string>
@@ -11,7 +12,6 @@
     <string name="navigation">导航</string>
     <string name="home">主页</string>
     <string name="me">个人中心</string>
-    <string name="app_name">玩安卓</string>
     <string name="change_language">修改语言</string>
     <string name="chinese" translatable="false">中文</string>
     <string name="english" translatable="false">English</string>

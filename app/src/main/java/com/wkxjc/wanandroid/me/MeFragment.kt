@@ -1,21 +1,14 @@
 package com.wkxjc.wanandroid.me
 
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.view.View
+import android.view.ViewGroup
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
-import com.base.library.rxRetrofit.common.utils.SPUtils
 import com.wkxjc.wanandroid.databinding.FragmentMeBinding
-import com.wkxjc.wanandroid.me.collection.CollectionActivity
-import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.me.common.api.LOGIN_INFO
-import com.wkxjc.wanandroid.me.common.api.PASSWORD
-import com.wkxjc.wanandroid.me.common.api.USER_NAME
 import com.wkxjc.wanandroid.me.language.LanguageActivity
-import com.wkxjc.wanandroid.me.user.User
 import com.wkxjc.wanandroid.me.login.LoginActivity
-import com.wkxjc.wanandroid.me.todo.TodoActivity
+import com.wkxjc.wanandroid.me.user.User
 import com.wkxjc.wanandroid.me.user.UserActivity
 
 class MeFragment : BaseFragment() {
@@ -33,13 +26,13 @@ class MeFragment : BaseFragment() {
 
     override fun initView() {
         binding.tvUser.setOnClickListener {
-            startActivity<UserActivity>()
+            myStartActivity<UserActivity>()
         }
         binding.btnLogin.setOnClickListener {
-            startActivity<LoginActivity>()
+            myStartActivity<LoginActivity>()
         }
         binding.btnChangeLanguage.setOnClickListener {
-            startActivity<LanguageActivity>()
+            myStartActivity<LanguageActivity>()
         }
     }
 

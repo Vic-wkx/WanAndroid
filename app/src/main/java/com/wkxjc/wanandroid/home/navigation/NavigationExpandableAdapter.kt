@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.databinding.ItemNavigationChildBinding
+import com.wkxjc.wanandroid.databinding.ItemNavigationGroupBinding
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.NavigationBean
 import com.wkxjc.wanandroid.home.common.bean.Navigations
-import kotlinx.android.synthetic.main.item_navigation_child.view.*
-import kotlinx.android.synthetic.main.item_navigation_group.view.*
+
 
 class NavigationExpandableAdapter(private val navigations: Navigations = Navigations()) : BaseExpandableListAdapter() {
 
@@ -18,15 +18,15 @@ class NavigationExpandableAdapter(private val navigations: Navigations = Navigat
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup): View {
         context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.item_navigation_group, parent, false)
-        view.tvNavigationGroupTitle.text = getGroup(groupPosition).name
-        return view
+        val binding = ItemNavigationGroupBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding.tvNavigationGroupTitle.text = getGroup(groupPosition).name
+        return binding.root
     }
 
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_navigation_child, parent, false)
-        view.tvNavigationChildTitle.text = getChild(groupPosition, childPosition).title
-        return view
+        val binding = ItemNavigationChildBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding.tvNavigationChildTitle.text = getChild(groupPosition, childPosition).title
+        return binding.root
     }
 
     fun refresh(navigations: Navigations) {

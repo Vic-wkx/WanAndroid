@@ -4,16 +4,18 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.base.library.project.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.wkxjc.wanandroid.databinding.ActivityMainBinding
+
 
 class MainActivity : BaseActivity() {
 
-    override fun layoutId() = R.layout.activity_main
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    override fun createBinding() = binding.root
 
     override fun initView() {
-        val host: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.navHostFragment) as NavHostFragment? ?: return
-        bottomMenu.setupWithNavController(host.navController)
+        val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment? ?: return
+        binding.bottomMenu.setupWithNavController(host.navController)
     }
 
     override fun initData() {}

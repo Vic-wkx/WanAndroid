@@ -4,12 +4,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.databinding.ActivityPublicAccountArticlesBinding
 import com.wkxjc.wanandroid.home.common.api.PublicAccountArticleApi
-import kotlinx.android.synthetic.main.activity_public_account_articles.*
+
 
 class PublicAccountArticlesActivity : BaseActivity() {
 
+    private val binding by lazy { ActivityPublicAccountArticlesBinding.inflate(layoutInflater) }
+
+    override fun createBinding() = binding.root
     private val httpManager = HttpManager(this)
     private val publicAccountArticleApi by lazy { PublicAccountArticleApi(intent.extras!!.getInt("id")) }
     private val publicAccountArticlesAdapter = PublicAccountArticlesAdapter()
@@ -22,11 +25,9 @@ class PublicAccountArticlesActivity : BaseActivity() {
         }
     }
 
-    override fun layoutId() = R.layout.activity_public_account_articles
-
     override fun initView() {
-        rvPublicAccountArticles.layoutManager = LinearLayoutManager(this)
-        rvPublicAccountArticles.adapter = publicAccountArticlesAdapter
+        binding.rvPublicAccountArticles.layoutManager = LinearLayoutManager(this)
+        binding.rvPublicAccountArticles.adapter = publicAccountArticlesAdapter
     }
 
     override fun initData() {

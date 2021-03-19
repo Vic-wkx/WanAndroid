@@ -5,21 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.base.library.project.BaseViewHolder
+
 import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.banner.ImageAdapter
+import com.wkxjc.wanandroid.databinding.ItemArticleBinding
+import com.wkxjc.wanandroid.databinding.ItemBannerBinding
+import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
+import com.wkxjc.wanandroid.databinding.ItemShortcutBinding
 import com.wkxjc.wanandroid.home.common.bean.*
 import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
 import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
 import com.wkxjc.wanandroid.home.navigation.NavigationActivity
 import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountActivity
 import com.youth.banner.listener.OnBannerListener
-import kotlinx.android.synthetic.main.item_article.view.*
-import kotlinx.android.synthetic.main.item_banner.view.*
-import kotlinx.android.synthetic.main.item_shortcut.view.*
+
 
 const val BANNER = 1
 const val SHORTCUT = 2
@@ -29,7 +31,7 @@ const val HEADER_COUNT = 2
 const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
-class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<BaseViewHolder>() {
+class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     lateinit var onItemClickListener: OnItemClickListener
 
@@ -37,44 +39,54 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
         fun onItemClick(view: View, bean: ArticleBean)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
-        return BaseViewHolder(LayoutInflater.from(context).inflate(getLayoutIdByViewType(viewType), parent, false))
+        return when (viewType) {
+            BANNER -> BannerViewHolder(ItemBannerBinding.inflate(LayoutInflater.from(context), parent, false))
+            SHORTCUT -> ShortcutViewHolder(ItemShortcutBinding.inflate(LayoutInflater.from(context), parent, false))
+            LOAD_MORE -> LoadMoreViewHolder(ItemLoadMoreBinding.inflate(LayoutInflater.from(context), parent, false))
+            else -> ArticleViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(context), parent, false))
+        }
     }
+
+    inner class BannerViewHolder(val binding: ItemBannerBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ShortcutViewHolder(val binding: ItemShortcutBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class LoadMoreViewHolder(val binding: ItemLoadMoreBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ArticleViewHolder(val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun getItemCount() = homeBean.articles.datas.size + HEADER_FOOTER_COUNT
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        when (getViewTypeByPosition(position)) {
-            BANNER -> {
-                holder.itemView.banner.adapter = ImageAdapter(homeBean.banners.data)
-                holder.itemView.banner.setOnBannerListener(object : OnBannerListener<BannerBean> {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is BannerViewHolder -> {
+                holder.binding.banner.adapter = ImageAdapter(homeBean.banners.data)
+                holder.binding.banner.setOnBannerListener(object : OnBannerListener<BannerBean> {
                     override fun OnBannerClick(data: BannerBean?, position: Int) {
                         context.myStartActivity<WebActivity>(LINK to data?.url)
                     }
                 })
             }
-            SHORTCUT -> {
-                holder.itemView.tvPublicAccounts.setOnClickListener {
+            is ShortcutViewHolder -> {
+                holder.binding.tvPublicAccounts.setOnClickListener {
                     context.myStartActivity<PublicAccountActivity>()
                 }
-                holder.itemView.tvCommonWebsites.setOnClickListener {
+                holder.binding.tvCommonWebsites.setOnClickListener {
                     context.myStartActivity<CommonWebsitesActivity>()
                 }
-                holder.itemView.tvKnowledgeTree.setOnClickListener {
+                holder.binding.tvKnowledgeTree.setOnClickListener {
                     context.myStartActivity<KnowledgeTreeActivity>()
                 }
-                holder.itemView.tvNavigation.setOnClickListener {
+                holder.binding.tvNavigation.setOnClickListener {
                     context.myStartActivity<NavigationActivity>()
                 }
             }
-            ARTICLE -> {
+            is ArticleViewHolder -> {
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]
-                holder.itemView.tvTitle.text = bean.title
-                holder.itemView.setOnClickListener {
+                holder.binding.tvTitle.text = bean.title
+                holder.binding.root.setOnClickListener {
                     onItemClickListener.onItemClick(it, bean)
                 }
-                holder.itemView.tvCollect.setOnClickListener {
+                holder.binding.tvCollect.setOnClickListener {
                     onItemClickListener.onItemClick(it, bean)
                 }
             }

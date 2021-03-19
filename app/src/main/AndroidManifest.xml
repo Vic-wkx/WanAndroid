@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".me.collection.CollectionActivity"></activity>
+        <activity android:name=".me.collection.CollectionActivity" />
         <activity android:name=".me.todo.TodoActivity" />
         <activity android:name=".me.login.register.RegisterActivity" />
         <activity android:name=".home.navigation.NavigationActivity" />

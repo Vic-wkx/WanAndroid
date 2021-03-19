@@ -10,13 +10,16 @@ import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.ActivityCollectionBinding
 import com.wkxjc.wanandroid.home.common.bean.CollectionBean
 import com.wkxjc.wanandroid.me.common.api.CancelCollectionApi
 import com.wkxjc.wanandroid.me.common.api.CollectionApi
-import kotlinx.android.synthetic.main.activity_collection.*
 
 
 class CollectionActivity : BaseActivity() {
+    private val binding by lazy { ActivityCollectionBinding.inflate(layoutInflater) }
+
+    override fun createBinding() = binding.root
     private val httpManager = HttpManager(this)
     private val collectionApi = CollectionApi()
     private val cancelCollectionApi = CancelCollectionApi()
@@ -39,11 +42,9 @@ class CollectionActivity : BaseActivity() {
 
     }
 
-    override fun layoutId() = R.layout.activity_collection
-
     override fun initView() {
-        rvCollections.layoutManager = LinearLayoutManager(this)
-        rvCollections.adapter = collectionAdapter
+        binding.rvCollections.layoutManager = LinearLayoutManager(this)
+        binding.rvCollections.adapter = collectionAdapter
         collectionAdapter.onItemClickListener = object : CollectionAdapter.OnItemClickListener {
             override fun onItemClick(view: View, bean: CollectionBean) {
                 when (view.id) {

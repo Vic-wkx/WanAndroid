@@ -5,15 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.trello.rxlifecycle3.components.RxFragment
 
 abstract class BaseFragment : Fragment(), IBase {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(layoutId(), container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return createBinding(inflater, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -21,4 +16,13 @@ abstract class BaseFragment : Fragment(), IBase {
         initData()
         super.onViewCreated(view, savedInstanceState)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        releaseBinding()
+    }
+
+    abstract fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View
+
+    abstract fun releaseBinding()
 }

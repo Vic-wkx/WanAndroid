@@ -1,30 +1,42 @@
 package com.wkxjc.wanandroid.me
 
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.common.utils.SPUtils
-import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.databinding.FragmentMeBinding
 import com.wkxjc.wanandroid.me.collection.CollectionActivity
 import com.wkxjc.wanandroid.me.common.api.LOGIN_INFO
 import com.wkxjc.wanandroid.me.login.LoginActivity
 import com.wkxjc.wanandroid.me.todo.TodoActivity
-import kotlinx.android.synthetic.main.fragment_me.*
+
 
 class MeFragment : BaseFragment() {
 
-    override fun layoutId() = R.layout.fragment_me
+    private var _binding: FragmentMeBinding? = null
+    private val binding get() = _binding!!
+    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        _binding = FragmentMeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun releaseBinding() {
+        _binding = null
+    }
 
     override fun initView() {
-        tvLogin.setOnClickListener {
+        binding.tvLogin.setOnClickListener {
             myStartActivity<LoginActivity>()
         }
-        btnMyTodo.setOnClickListener {
+        binding.btnMyTodo.setOnClickListener {
             myStartActivity<TodoActivity>()
         }
-        btnMyCollection.setOnClickListener {
+        binding.btnMyCollection.setOnClickListener {
             myStartActivity<CollectionActivity>()
         }
-        btnExitLogin.setOnClickListener {
+        binding.btnExitLogin.setOnClickListener {
             SPUtils.getInstance(LOGIN_INFO).clear()
         }
     }

@@ -4,29 +4,30 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.base.library.project.BaseViewHolder
 import com.base.library.project.myStartActivity
-import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.ItemWebsiteBinding
 import com.wkxjc.wanandroid.home.common.bean.CommonWebsites
-import kotlinx.android.synthetic.main.item_website.view.*
 
-class CommonWebsitesAdapter(private val websites: CommonWebsites = CommonWebsites()) : RecyclerView.Adapter<BaseViewHolder>() {
+
+class CommonWebsitesAdapter(private val websites: CommonWebsites = CommonWebsites()) : RecyclerView.Adapter<CommonWebsitesAdapter.CommonWebsitesViewHolder>() {
     private lateinit var context: Context
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+    inner class CommonWebsitesViewHolder(val binding: ItemWebsiteBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonWebsitesAdapter.CommonWebsitesViewHolder {
         context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.item_website, parent, false)
-        return BaseViewHolder(view)
+        val binding = ItemWebsiteBinding.inflate(LayoutInflater.from(context), parent, false)
+        return CommonWebsitesViewHolder(binding)
     }
 
     override fun getItemCount() = websites.data.size
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CommonWebsitesAdapter.CommonWebsitesViewHolder, position: Int) {
         val bean = websites.data[position]
-        holder.itemView.tvCommonWebsite.text = bean.name
-        holder.itemView.setOnClickListener {
+        holder.binding.tvCommonWebsite.text = bean.name
+        holder.binding.root.setOnClickListener {
             context.myStartActivity<WebActivity>(LINK to bean.link)
         }
     }

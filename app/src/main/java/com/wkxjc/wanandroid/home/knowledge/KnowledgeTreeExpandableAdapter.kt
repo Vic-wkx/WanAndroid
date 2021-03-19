@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.databinding.ItemKnowledgeTreeChildBinding
+import com.wkxjc.wanandroid.databinding.ItemKnowledgeTreeGroupBinding
 import com.wkxjc.wanandroid.home.common.bean.Children
 import com.wkxjc.wanandroid.home.common.bean.KnowledgeTreeBean
 import com.wkxjc.wanandroid.home.common.bean.KnowledgeTrees
-import kotlinx.android.synthetic.main.item_knowledge_tree_child.view.*
-import kotlinx.android.synthetic.main.item_knowledge_tree_group.view.*
+
 
 class KnowledgeTreeExpandableAdapter(private val knowledgeTrees: KnowledgeTrees = KnowledgeTrees()) : BaseExpandableListAdapter() {
 
@@ -18,15 +18,15 @@ class KnowledgeTreeExpandableAdapter(private val knowledgeTrees: KnowledgeTrees 
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup): View {
         context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.item_knowledge_tree_group, parent, false)
-        view.tvKnowledgeTreeGroupTitle.text = getGroup(groupPosition).name
-        return view
+        val binding = ItemKnowledgeTreeGroupBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding.tvKnowledgeTreeGroupTitle.text = getGroup(groupPosition).name
+        return binding.root
     }
 
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_knowledge_tree_child, parent, false)
-        view.tvKnowledgeTreeChildTitle.text = getChild(groupPosition, childPosition).name
-        return view
+        val binding = ItemKnowledgeTreeChildBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding.tvKnowledgeTreeChildTitle.text = getChild(groupPosition, childPosition).name
+        return binding.root
     }
 
     fun refresh(knowledgeTrees: KnowledgeTrees) {

@@ -4,13 +4,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.databinding.ActivityKnowledgeTreeArticlesBinding
 import com.wkxjc.wanandroid.home.common.api.KnowledgeTreeArticleApi
-import kotlinx.android.synthetic.main.activity_knowledge_tree_articles.*
+
 
 const val CATEGORY_ID = "categoryId"
 
 class KnowledgeTreeArticlesActivity : BaseActivity() {
+    private val binding by lazy { ActivityKnowledgeTreeArticlesBinding.inflate(layoutInflater) }
+
+    override fun createBinding() = binding.root
     private val httpManager = HttpManager(this)
     private val knowledgeTreeArticleApi by lazy { KnowledgeTreeArticleApi(intent.extras!!.getInt(CATEGORY_ID)) }
     private val knowledgeTreeArticlesAdapter = KnowledgeTreeArticlesAdapter()
@@ -24,11 +27,9 @@ class KnowledgeTreeArticlesActivity : BaseActivity() {
 
     }
 
-    override fun layoutId() = R.layout.activity_knowledge_tree_articles
-
     override fun initView() {
-        rvKnowledgeTreeArticles.layoutManager = LinearLayoutManager(this)
-        rvKnowledgeTreeArticles.adapter = knowledgeTreeArticlesAdapter
+        binding.rvKnowledgeTreeArticles.layoutManager = LinearLayoutManager(this)
+        binding.rvKnowledgeTreeArticles.adapter = knowledgeTreeArticlesAdapter
     }
 
     override fun initData() {

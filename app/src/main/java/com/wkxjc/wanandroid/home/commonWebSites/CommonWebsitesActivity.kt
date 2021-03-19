@@ -4,11 +4,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.databinding.ActivityCommonWebsitesBinding
 import com.wkxjc.wanandroid.home.common.api.CommonWebsitesApi
-import kotlinx.android.synthetic.main.activity_common_websites.*
+
 
 class CommonWebsitesActivity : BaseActivity() {
+    private val binding by lazy { ActivityCommonWebsitesBinding.inflate(layoutInflater) }
+
+    override fun createBinding() = binding.root
     private val httpManager = HttpManager(this)
     private val commonWebsitesApi = CommonWebsitesApi()
     private val commonWebsitesAdapter = CommonWebsitesAdapter()
@@ -22,11 +25,9 @@ class CommonWebsitesActivity : BaseActivity() {
 
     }
 
-    override fun layoutId() = R.layout.activity_common_websites
-
     override fun initView() {
-        rvCommonWebsites.layoutManager = LinearLayoutManager(this)
-        rvCommonWebsites.adapter = commonWebsitesAdapter
+        binding.rvCommonWebsites.layoutManager = LinearLayoutManager(this)
+        binding.rvCommonWebsites.adapter = commonWebsitesAdapter
     }
 
     override fun initData() {

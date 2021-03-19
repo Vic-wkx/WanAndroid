@@ -1,7 +1,9 @@
 package com.wkxjc.wanandroid.home
 
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
@@ -12,13 +14,25 @@ import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.FragmentHomeBinding
 import com.wkxjc.wanandroid.home.common.api.ArticleApi
 import com.wkxjc.wanandroid.home.common.api.BannerApi
 import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
-import kotlinx.android.synthetic.main.fragment_home.*
+
 
 class HomeFragment : BaseFragment() {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun releaseBinding() {
+        _binding = null
+    }
+
     private val httpManager = HttpManager(this)
     private val bannerApi = BannerApi()
     private val articleApi = ArticleApi()
@@ -41,10 +55,8 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    override fun layoutId() = R.layout.fragment_home
-
     override fun initView() {
-        rvHome.apply {
+        binding.rvHome.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = homeAdapter
         }

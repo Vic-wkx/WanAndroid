@@ -4,13 +4,16 @@ import com.base.library.project.BaseActivity
 import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.ActivityNavigationBinding
 import com.wkxjc.wanandroid.home.common.api.NavigationApi
-import kotlinx.android.synthetic.main.activity_navigation.*
+
 
 class NavigationActivity : BaseActivity() {
+    private val binding by lazy { ActivityNavigationBinding.inflate(layoutInflater) }
+
+    override fun createBinding() = binding.root
     private val httpManager = HttpManager(this)
     private val navigationApi = NavigationApi()
     private val navigationExpandableAdapter = NavigationExpandableAdapter()
@@ -23,11 +26,9 @@ class NavigationActivity : BaseActivity() {
         }
     }
 
-    override fun layoutId() = R.layout.activity_navigation
-
     override fun initView() {
-        elvNavigation.setAdapter(navigationExpandableAdapter)
-        elvNavigation.setOnChildClickListener { expandableListView, view, groupPosition, childPosition, childId ->
+        binding.elvNavigation.setAdapter(navigationExpandableAdapter)
+        binding.elvNavigation.setOnChildClickListener { expandableListView, view, groupPosition, childPosition, childId ->
             myStartActivity<WebActivity>(LINK to navigationExpandableAdapter.getChild(groupPosition, childPosition).link)
             true
         }

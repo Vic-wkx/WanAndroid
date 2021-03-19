@@ -4,31 +4,31 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.base.library.project.BaseViewHolder
 import com.base.library.project.myStartActivity
-import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.ItemPublicAccountArticleBinding
 import com.wkxjc.wanandroid.home.common.bean.Articles
-import kotlinx.android.synthetic.main.item_public_account_article.view.*
 
 
-class PublicAccountArticlesAdapter(private val articles: Articles = Articles()) : RecyclerView.Adapter<BaseViewHolder>() {
+class PublicAccountArticlesAdapter(private val articles: Articles = Articles()) : RecyclerView.Adapter<PublicAccountArticlesAdapter.ViewHolder>() {
 
     private lateinit var context: Context
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+    inner class ViewHolder(val binding: ItemPublicAccountArticleBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.item_public_account_article, parent, false)
-        return BaseViewHolder(view)
+        val binding = ItemPublicAccountArticleBinding.inflate(LayoutInflater.from(context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = articles.datas.size
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = articles.datas[position]
-        holder.itemView.tvPublicAccountArticleTitle.text = bean.title
-        holder.itemView.setOnClickListener {
+        holder.binding.tvPublicAccountArticleTitle.text = bean.title
+        holder.binding.root.setOnClickListener {
             context.myStartActivity<WebActivity>(LINK to bean.link)
         }
     }

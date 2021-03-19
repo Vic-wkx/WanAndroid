@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-
 import com.base.library.project.myStartActivity
-import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.artical.LINK
 import com.wkxjc.wanandroid.artical.WebActivity
 import com.wkxjc.wanandroid.banner.ImageAdapter
@@ -103,15 +101,6 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
             1 -> SHORTCUT
             itemCount - 1 -> LOAD_MORE
             else -> ARTICLE
-        }
-    }
-
-    private fun getLayoutIdByViewType(viewType: Int): Int {
-        return when (viewType) {
-            BANNER -> R.layout.item_banner
-            SHORTCUT -> R.layout.item_shortcut
-            LOAD_MORE -> R.layout.item_load_more
-            else -> R.layout.item_article
         }
     }
 

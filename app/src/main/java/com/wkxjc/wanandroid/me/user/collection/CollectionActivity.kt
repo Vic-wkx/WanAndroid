@@ -12,7 +12,7 @@ import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.ActivityCollectionBinding
 import com.wkxjc.wanandroid.home.common.bean.CollectionBean
-import com.wkxjc.wanandroid.me.common.api.CancelCollectionApi
+import com.wkxjc.wanandroid.me.common.api.CollectionPageCancelCollectionApi
 import com.wkxjc.wanandroid.me.common.api.CollectionApi
 
 
@@ -22,7 +22,7 @@ class CollectionActivity : BaseActivity() {
     override fun createBinding() = binding.root
     private val httpManager = HttpManager(this)
     private val collectionApi = CollectionApi()
-    private val cancelCollectionApi = CancelCollectionApi()
+    private val cancelCollectionApi = CollectionPageCancelCollectionApi()
     private val collectionAdapter = CollectionAdapter()
     private val cancelCollectionListener = object : HttpListener() {
         override fun onNext(result: String) {

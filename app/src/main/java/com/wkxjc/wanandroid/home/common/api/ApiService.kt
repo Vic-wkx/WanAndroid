@@ -110,9 +110,9 @@ interface ApiService {
     @FormUrlEncoded
     fun unCollectArticle(@Path("articleId") articleId: Int, @Field("originId") originId: Int): Observable<String>
 
-//    // 取消收藏
-//    @POST("lg/uncollect_originId/{articleId}/json")
-//    fun unCollectArticle(@Path("articleId") articleId: Int): Observable<String>
+    // 首页文章列表页面取消收藏
+    @POST("lg/uncollect_originId/{articleId}/json")
+    fun unCollectArticle(@Path("articleId") articleId: Int): Observable<String>
 
     // 收藏站外文章
     @POST("lg/collect/add/json")

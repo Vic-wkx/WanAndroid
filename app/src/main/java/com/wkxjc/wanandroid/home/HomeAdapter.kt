@@ -20,6 +20,10 @@ import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
 import com.wkxjc.wanandroid.home.navigation.NavigationActivity
 import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountActivity
 import com.youth.banner.listener.OnBannerListener
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 const val BANNER = 1
@@ -32,11 +36,7 @@ const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
 class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
-    lateinit var onItemClickListener: OnItemClickListener
-
-    interface OnItemClickListener {
-        fun onItemClick(view: View, bean: ArticleBean)
-    }
+    lateinit var onItemClickListener: (view: View, bean: ArticleBean) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
@@ -82,17 +82,27 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
             is ArticleViewHolder -> {
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]
                 holder.binding.tvTitle.text = bean.title
-                holder.binding.root.setOnClickListener {
-                    onItemClickListener.onItemClick(it, bean)
+                if (bean.shareUser.isNotBlank()) {
+                    holder.binding.tvAuthor.text = String.format(context.getString(R.string.sharer_is), bean.shareUser)
+                } else {
+                    holder.binding.tvAuthor.text = String.format(context.getString(R.string.author_is), if (bean.author.isNotBlank()) bean.author else context.getString(R.string.unknown))
                 }
-                holder.binding.tvCollect.text = context.getString(if (bean.collect) R.string.collected else R.string.collect)
-                holder.binding.tvCollect.isEnabled = !bean.collect
-                holder.binding.tvCollect.setOnClickListener {
-                    if (!bean.collect) {
-                        holder.binding.tvCollect.isEnabled = false
-                        holder.binding.tvCollect.text = context.getString(R.string.collected)
-                        onItemClickListener.onItemClick(it, bean)
-                    }
+                holder.binding.tvTime.text = String.format(
+                    context.getString(R.string.time_is), DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(
+                        ZonedDateTime.ofInstant(
+                            Date(bean.publishTime).toInstant(),
+                            ZoneId.systemDefault()
+                        )
+                    )
+                )
+                holder.binding.root.setOnClickListener {
+                    onItemClickListener.invoke(it, bean)
+                }
+                holder.binding.ivCollect.setImageResource(if (bean.collect) R.drawable.ic_collected else R.drawable.ic_collect)
+                holder.binding.ivCollect.setOnClickListener {
+                    onItemClickListener.invoke(it, bean)
+                    bean.collect = !bean.collect
+                    notifyItemChanged(position)
                 }
             }
         }

@@ -20,6 +20,7 @@ import com.wkxjc.wanandroid.home.common.api.ArticleApi
 import com.wkxjc.wanandroid.home.common.api.BannerApi
 import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
+import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
 
 
 class HomeFragment : BaseFragment() {
@@ -38,8 +39,17 @@ class HomeFragment : BaseFragment() {
     private val bannerApi = BannerApi()
     private val articleApi = ArticleApi()
     private val collectApi = CollectApi()
+    private val homePageCancelCollectionApi = HomePageCancelCollectionApi()
     private val homeAdapter = HomeAdapter()
     private val collectListener = object : HttpListener() {
+        override fun onNext(result: String) {
+            Log.d("~~~", "result: $result")
+        }
+
+        override fun onError(error: Throwable) {
+        }
+    }
+    private val homePageCancelCollectionListener = object : HttpListener() {
         override fun onNext(result: String) {
             Log.d("~~~", "result: $result")
         }
@@ -72,16 +82,7 @@ class HomeFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = homeAdapter
         }
-        homeAdapter.onItemClickListener = object : HomeAdapter.OnItemClickListener {
-            override fun onItemClick(view: View, bean: ArticleBean) {
-                when (view.id) {
-                    R.id.tvCollect -> httpManager.request(collectApi.apply {
-                        articleId = bean.id
-                    }, collectListener)
-                    else -> myStartActivity<WebActivity>(LINK to bean.link)
-                }
-            }
-        }
+        homeAdapter.onItemClickListener = ::onItemClick
         binding.refreshHome.setOnRefreshListener {
             loadData()
         }
@@ -94,6 +95,21 @@ class HomeFragment : BaseFragment() {
                 }
             }
         })
+    }
+
+    private fun onItemClick(view: View, bean: ArticleBean) {
+        when (view.id) {
+            R.id.ivCollect -> if (bean.collect) {
+                httpManager.request(homePageCancelCollectionApi.apply {
+                    articleId = bean.id
+                }, homePageCancelCollectionListener)
+            } else {
+                httpManager.request(collectApi.apply {
+                    articleId = bean.id
+                }, collectListener)
+            }
+            else -> myStartActivity<WebActivity>(LINK to bean.link)
+        }
     }
 
     override fun initData() {

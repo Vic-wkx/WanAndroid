@@ -6,7 +6,7 @@ import com.wkxjc.wanandroid.home.common.api.ApiService
 import io.reactivex.Observable
 import okhttp3.Headers
 
-class CancelCollectionApi : BaseApi() {
+class CollectionPageCancelCollectionApi : BaseApi() {
     var articleId = 0
     var originId = 0
 

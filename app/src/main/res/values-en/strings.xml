@@ -15,4 +15,8 @@
     <string name="login">Login</string>
     <string name="change_language">Change Language</string>
     <string name="load_more">Load More…</string>
+    <string name="author_is">Author: %s</string>
+    <string name="sharer_is">Sharer: %s</string>
+    <string name="unknown">Unknown</string>
+    <string name="time_is">Time: %s</string>
 </resources>

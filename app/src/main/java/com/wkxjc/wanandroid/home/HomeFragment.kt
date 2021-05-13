@@ -1,9 +1,11 @@
 package com.wkxjc.wanandroid.home
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
@@ -21,7 +23,9 @@ import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
 
+
 class HomeFragment : BaseFragment() {
+    private val viewModel by viewModels<HomeViewModel>()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
@@ -38,7 +42,7 @@ class HomeFragment : BaseFragment() {
     private val articleApi = ArticleApi()
     private val collectApi = CollectApi()
     private val homePageCancelCollectionApi = HomePageCancelCollectionApi()
-    private val homeAdapter = HomeAdapter()
+    private val homeAdapter by lazy { HomeAdapter(viewModel.homeBean.value!!) }
     private val collectListener = object : HttpListener() {
         override fun onNext(result: String) {
             Log.d("~~~", "result: $result")
@@ -57,8 +61,8 @@ class HomeFragment : BaseFragment() {
     }
     private val homeListListener = object : HttpListListener() {
         override fun onNext(resultMap: HashMap<BaseApi, Any>) {
-            homeAdapter.refresh(bannerApi.convert(resultMap), articleApi.convert(resultMap))
-            binding.refreshHome.isRefreshing = false
+            viewModel.refresh(bannerApi.convert(resultMap), articleApi.convert(resultMap))
+            viewModel.isRefreshing.value = false
         }
 
         override fun onError(error: Throwable) {
@@ -77,6 +81,12 @@ class HomeFragment : BaseFragment() {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("~~~~", "onCreate")
+        loadData()
+    }
+
     override fun initView() {
         binding.rvHome.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -86,6 +96,12 @@ class HomeFragment : BaseFragment() {
         homeAdapter.loadMore = ::loadMore
         binding.refreshHome.setOnRefreshListener {
             loadData()
+        }
+        viewModel.isRefreshing.observe(this) {
+            binding.refreshHome.isRefreshing = it
+        }
+        viewModel.homeBean.observe(this) {
+            homeAdapter.refresh(it.banners, it.articles)
         }
     }
 
@@ -107,14 +123,8 @@ class HomeFragment : BaseFragment() {
     override fun initData() {
     }
 
-    override fun onResume() {
-        super.onResume()
-        // data should be loaded in onResume, since collect/login state maybe changed
-        loadData()
-    }
-
     private fun loadData() {
-        binding.refreshHome.isRefreshing = true
+        viewModel.isRefreshing.value = true
         articleApi.resetPage()
         httpManager.request(arrayOf(bannerApi, articleApi), homeListListener)
     }

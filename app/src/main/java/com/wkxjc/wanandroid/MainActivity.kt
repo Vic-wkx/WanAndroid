@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
     private val meFragment by lazy { MeFragment() }
 
     override fun initView() {
-        FragmentUtils.add(supportFragmentManager, R.id.container, homeFragment, publicAccountsFragment,navigationFragment, knowledgeTreeFragment, meFragment)
+        FragmentUtils.add(supportFragmentManager, R.id.container, homeFragment, publicAccountsFragment, navigationFragment, knowledgeTreeFragment, meFragment)
         FragmentUtils.show(supportFragmentManager, homeFragment)
         binding.bottomMenu.setOnNavigationItemSelectedListener {
             when (it.itemId) {

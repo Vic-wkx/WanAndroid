@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.home.knowledge.knowledgeTreeArticles
+package com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity

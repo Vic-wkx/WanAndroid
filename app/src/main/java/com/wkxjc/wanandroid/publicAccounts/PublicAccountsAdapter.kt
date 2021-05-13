@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.home.publicAccounts
+package com.wkxjc.wanandroid.publicAccounts
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,15 +8,15 @@ import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.databinding.ItemPublicAccountBinding
 import com.wkxjc.wanandroid.home.common.bean.PublicAccountBean
 import com.wkxjc.wanandroid.home.common.bean.PublicAccounts
-import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountArticles.PublicAccountArticlesActivity
+import com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles.PublicAccountsArticlesActivity
 
 
-class PublicAccountAdapter(private val publicAccounts: PublicAccounts = PublicAccounts()) : RecyclerView.Adapter<PublicAccountAdapter.PublicAccountViewHolder>() {
+class PublicAccountsAdapter(private val publicAccounts: PublicAccounts = PublicAccounts()) : RecyclerView.Adapter<PublicAccountsAdapter.PublicAccountViewHolder>() {
 
     inner class PublicAccountViewHolder(val binding: ItemPublicAccountBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var context: Context
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicAccountAdapter.PublicAccountViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicAccountsAdapter.PublicAccountViewHolder {
         context = parent.context
         val binding = ItemPublicAccountBinding.inflate(LayoutInflater.from(context), parent, false)
         return PublicAccountViewHolder(binding)
@@ -28,7 +28,7 @@ class PublicAccountAdapter(private val publicAccounts: PublicAccounts = PublicAc
         val bean = publicAccounts.data[position]
         holder.binding.tvPublicAccountName.text = bean.name
         holder.binding.root.setOnClickListener {
-            context.myStartActivity<PublicAccountArticlesActivity>("id" to bean.id)
+            context.myStartActivity<PublicAccountsArticlesActivity>("id" to bean.id)
         }
     }
 

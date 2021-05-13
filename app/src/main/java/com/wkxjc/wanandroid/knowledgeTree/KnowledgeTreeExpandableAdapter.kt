@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.home.knowledge
+package com.wkxjc.wanandroid.knowledgeTree
 
 import android.content.Context
 import android.view.LayoutInflater

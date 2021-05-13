@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.home.navigation
+package com.wkxjc.wanandroid.navigation
 
 import android.content.Context
 import android.view.LayoutInflater

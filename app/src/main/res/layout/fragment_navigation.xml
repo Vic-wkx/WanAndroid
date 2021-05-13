@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.knowledge.KnowledgeTreeActivity">
+    tools:context=".navigation.NavigationFragment">
 
     <ExpandableListView
-        android:id="@+id/elvKnowledgeTree"
+        android:id="@+id/elvNavigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

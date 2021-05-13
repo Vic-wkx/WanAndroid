@@ -1,17 +1,28 @@
-package com.wkxjc.wanandroid.home.commonWebSites
+package com.wkxjc.wanandroid.commonWebSites
 
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.base.library.project.BaseActivity
+import com.base.library.project.BaseFragment
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.databinding.ActivityCommonWebsitesBinding
+import com.wkxjc.wanandroid.databinding.FragmentCommonWebsitesBinding
 import com.wkxjc.wanandroid.home.common.api.CommonWebsitesApi
 
 
-class CommonWebsitesActivity : BaseActivity() {
-    private val binding by lazy { ActivityCommonWebsitesBinding.inflate(layoutInflater) }
+class CommonWebsitesFragment : BaseFragment() {
+    private var _binding: FragmentCommonWebsitesBinding? = null
+    private val binding get() = _binding!!
+    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        _binding = FragmentCommonWebsitesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-    override fun createBinding() = binding.root
+    override fun releaseBinding() {
+        _binding = null
+    }
+
     private val httpManager = HttpManager(this)
     private val commonWebsitesApi = CommonWebsitesApi()
     private val commonWebsitesAdapter = CommonWebsitesAdapter()
@@ -26,7 +37,7 @@ class CommonWebsitesActivity : BaseActivity() {
     }
 
     override fun initView() {
-        binding.rvCommonWebsites.layoutManager = LinearLayoutManager(this)
+        binding.rvCommonWebsites.layoutManager = LinearLayoutManager(context)
         binding.rvCommonWebsites.adapter = commonWebsitesAdapter
     }
 

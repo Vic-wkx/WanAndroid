@@ -13,12 +13,7 @@ import com.wkxjc.wanandroid.common.banner.ImageAdapter
 import com.wkxjc.wanandroid.databinding.ItemArticleBinding
 import com.wkxjc.wanandroid.databinding.ItemBannerBinding
 import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
-import com.wkxjc.wanandroid.databinding.ItemShortcutBinding
 import com.wkxjc.wanandroid.home.common.bean.*
-import com.wkxjc.wanandroid.home.commonWebSites.CommonWebsitesActivity
-import com.wkxjc.wanandroid.home.knowledge.KnowledgeTreeActivity
-import com.wkxjc.wanandroid.home.navigation.NavigationActivity
-import com.wkxjc.wanandroid.home.publicAccounts.PublicAccountActivity
 import com.youth.banner.listener.OnBannerListener
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -27,10 +22,9 @@ import java.util.*
 
 
 const val BANNER = 1
-const val SHORTCUT = 2
 const val ARTICLE = 0
 const val LOAD_MORE = -1
-const val HEADER_COUNT = 2
+const val HEADER_COUNT = BANNER
 const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
@@ -42,14 +36,12 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
         context = parent.context
         return when (viewType) {
             BANNER -> BannerViewHolder(ItemBannerBinding.inflate(LayoutInflater.from(context), parent, false))
-            SHORTCUT -> ShortcutViewHolder(ItemShortcutBinding.inflate(LayoutInflater.from(context), parent, false))
             LOAD_MORE -> LoadMoreViewHolder(ItemLoadMoreBinding.inflate(LayoutInflater.from(context), parent, false))
             else -> ArticleViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(context), parent, false))
         }
     }
 
     inner class BannerViewHolder(val binding: ItemBannerBinding) : RecyclerView.ViewHolder(binding.root)
-    inner class ShortcutViewHolder(val binding: ItemShortcutBinding) : RecyclerView.ViewHolder(binding.root)
     inner class LoadMoreViewHolder(val binding: ItemLoadMoreBinding) : RecyclerView.ViewHolder(binding.root)
     inner class ArticleViewHolder(val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -64,20 +56,6 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                         context.myStartActivity<WebActivity>(LINK to data?.url)
                     }
                 })
-            }
-            is ShortcutViewHolder -> {
-                holder.binding.tvPublicAccounts.setOnClickListener {
-                    context.myStartActivity<PublicAccountActivity>()
-                }
-                holder.binding.tvCommonWebsites.setOnClickListener {
-                    context.myStartActivity<CommonWebsitesActivity>()
-                }
-                holder.binding.tvKnowledgeTree.setOnClickListener {
-                    context.myStartActivity<KnowledgeTreeActivity>()
-                }
-                holder.binding.tvNavigation.setOnClickListener {
-                    context.myStartActivity<NavigationActivity>()
-                }
             }
             is ArticleViewHolder -> {
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]
@@ -115,7 +93,6 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
     private fun getViewTypeByPosition(position: Int): Int {
         return when (position) {
             0 -> BANNER
-            1 -> SHORTCUT
             itemCount - 1 -> LOAD_MORE
             else -> ARTICLE
         }

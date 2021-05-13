@@ -1,19 +1,30 @@
-package com.wkxjc.wanandroid.home.navigation
+package com.wkxjc.wanandroid.navigation
 
-import com.base.library.project.BaseActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.databinding.ActivityNavigationBinding
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.FragmentNavigationBinding
 import com.wkxjc.wanandroid.home.common.api.NavigationApi
 
 
-class NavigationActivity : BaseActivity() {
-    private val binding by lazy { ActivityNavigationBinding.inflate(layoutInflater) }
+class NavigationFragment : BaseFragment() {
+    private var _binding: FragmentNavigationBinding? = null
+    private val binding get() = _binding!!
+    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        _binding = FragmentNavigationBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-    override fun createBinding() = binding.root
+    override fun releaseBinding() {
+        _binding = null
+    }
+
     private val httpManager = HttpManager(this)
     private val navigationApi = NavigationApi()
     private val navigationExpandableAdapter = NavigationExpandableAdapter()

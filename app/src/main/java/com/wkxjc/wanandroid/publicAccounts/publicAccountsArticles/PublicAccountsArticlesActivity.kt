@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.home.publicAccounts.PublicAccountArticles
+package com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
@@ -8,14 +8,14 @@ import com.wkxjc.wanandroid.databinding.ActivityPublicAccountArticlesBinding
 import com.wkxjc.wanandroid.home.common.api.PublicAccountArticleApi
 
 
-class PublicAccountArticlesActivity : BaseActivity() {
+class PublicAccountsArticlesActivity : BaseActivity() {
 
     private val binding by lazy { ActivityPublicAccountArticlesBinding.inflate(layoutInflater) }
 
     override fun createBinding() = binding.root
     private val httpManager = HttpManager(this)
     private val publicAccountArticleApi by lazy { PublicAccountArticleApi(intent.extras!!.getInt("id")) }
-    private val publicAccountArticlesAdapter = PublicAccountArticlesAdapter()
+    private val publicAccountArticlesAdapter = PublicAccountsArticlesAdapter()
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             publicAccountArticlesAdapter.refresh(publicAccountArticleApi.convert(result))

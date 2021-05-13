@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.home.commonWebSites
+package com.wkxjc.wanandroid.commonWebSites
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.databinding.ItemWebsiteBinding
-import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.home.common.bean.CommonWebsites

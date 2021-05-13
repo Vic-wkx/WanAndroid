@@ -2,10 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
+        android:id="@+id/publicAccountsFragment"
+        android:icon="@drawable/ic_public_accounts"
+        android:title="@string/public_accounts" />
+    <item
+        android:id="@+id/navigationFragment"
+        android:icon="@drawable/ic_navigation"
+        android:title="@string/navigation" />
+    <item
+        android:id="@+id/knowledgeTreeFragment"
+        android:icon="@drawable/ic_knowledge_tree"
+        android:title="@string/knowledge_tree" />
+    <item
         android:id="@+id/meFragment"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_me"
         android:title="@string/me" />
 </menu>

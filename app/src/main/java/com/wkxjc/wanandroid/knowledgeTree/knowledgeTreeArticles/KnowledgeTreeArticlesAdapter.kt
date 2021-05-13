@@ -1,25 +1,25 @@
-package com.wkxjc.wanandroid.home.publicAccounts.PublicAccountArticles
+package com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
-import com.wkxjc.wanandroid.databinding.ItemPublicAccountArticleBinding
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
+import com.wkxjc.wanandroid.databinding.ItemKnowledgeTreeArticleBinding
 import com.wkxjc.wanandroid.home.common.bean.Articles
 
 
-class PublicAccountArticlesAdapter(private val articles: Articles = Articles()) : RecyclerView.Adapter<PublicAccountArticlesAdapter.ViewHolder>() {
+class KnowledgeTreeArticlesAdapter(private val articles: Articles = Articles()) : RecyclerView.Adapter<KnowledgeTreeArticlesAdapter.ViewHolder>() {
 
     private lateinit var context: Context
 
-    inner class ViewHolder(val binding: ItemPublicAccountArticleBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemKnowledgeTreeArticleBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        val binding = ItemPublicAccountArticleBinding.inflate(LayoutInflater.from(context), parent, false)
+        val binding = ItemKnowledgeTreeArticleBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -27,7 +27,7 @@ class PublicAccountArticlesAdapter(private val articles: Articles = Articles()) 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = articles.datas[position]
-        holder.binding.tvPublicAccountArticleTitle.text = bean.title
+        holder.binding.tvKnowledgeTreeArticleTitle.text = bean.title
         holder.binding.root.setOnClickListener {
             context.myStartActivity<WebActivity>(LINK to bean.link)
         }
@@ -37,5 +37,4 @@ class PublicAccountArticlesAdapter(private val articles: Articles = Articles()) 
         this.articles.refresh(articles)
         notifyDataSetChanged()
     }
-
 }

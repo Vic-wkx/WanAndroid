@@ -17,9 +17,12 @@
         <activity android:name=".me.login.register.RegisterActivity" />
         <activity android:name=".me.login.LoginActivity" />
         <activity android:name=".knowledgeTree.knowledgeTreeArticles.KnowledgeTreeArticlesActivity" />
-        <activity android:name="com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles.PublicAccountsArticlesActivity" />
+        <activity android:name=".publicAccounts.publicAccountsArticles.PublicAccountsArticlesActivity" />
         <activity android:name=".common.artical.WebActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

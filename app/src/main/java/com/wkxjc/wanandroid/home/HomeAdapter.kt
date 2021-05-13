@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,10 +28,14 @@ const val LOAD_MORE = -1
 const val HEADER_COUNT = BANNER
 const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
+// preload more articles for better user experience
+const val PRE_LOAD = 10
 
 class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     lateinit var onItemClickListener: (view: View, bean: ArticleBean) -> Unit
+    lateinit var loadMore: () -> Unit
+    var isLoadingMore = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
@@ -82,6 +87,14 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                     bean.collect = !bean.collect
                     notifyItemChanged(position)
                 }
+                if (position - HEADER_COUNT > homeBean.articles.datas.size - 1 - PRE_LOAD && !isLoadingMore) {
+                    isLoadingMore = true
+                    loadMore.invoke()
+                }
+            }
+            is LoadMoreViewHolder -> {
+                Log.d("~~~", "homeBean.articles.datas.isEmpty(): ${homeBean.articles.datas.isEmpty()}")
+                holder.binding.root.visibility = if (homeBean.articles.datas.isEmpty()) View.GONE else View.VISIBLE
             }
         }
     }

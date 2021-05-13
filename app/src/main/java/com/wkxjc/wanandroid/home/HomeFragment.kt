@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
@@ -21,7 +20,6 @@ import com.wkxjc.wanandroid.home.common.api.BannerApi
 import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
-
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -70,9 +68,11 @@ class HomeFragment : BaseFragment() {
     private val loadMoreListener = object : HttpListener() {
         override fun onNext(result: String) {
             homeAdapter.addMore(articleApi.convert(result))
+            homeAdapter.isLoadingMore = false
         }
 
         override fun onError(error: Throwable) {
+            homeAdapter.isLoadingMore = false
         }
 
     }
@@ -83,18 +83,10 @@ class HomeFragment : BaseFragment() {
             adapter = homeAdapter
         }
         homeAdapter.onItemClickListener = ::onItemClick
+        homeAdapter.loadMore = ::loadMore
         binding.refreshHome.setOnRefreshListener {
             loadData()
         }
-        binding.rvHome.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if ((binding.rvHome.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == homeAdapter.itemCount - 1) {
-                    // load more
-                    loadMore()
-                }
-            }
-        })
     }
 
     private fun onItemClick(view: View, bean: ArticleBean) {

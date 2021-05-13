@@ -27,6 +27,7 @@ class PublicAccountsAdapter(private val publicAccounts: PublicAccounts = PublicA
     override fun onBindViewHolder(holder: PublicAccountViewHolder, position: Int) {
         val bean = publicAccounts.data[position]
         holder.binding.tvPublicAccountName.text = bean.name
+
         holder.binding.root.setOnClickListener {
             context.myStartActivity<PublicAccountsArticlesActivity>("id" to bean.id)
         }

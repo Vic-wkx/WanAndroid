@@ -9,11 +9,7 @@ import com.wkxjc.wanandroid.databinding.ActivityWebBinding
 
 const val LINK = "link"
 
-class WebActivity : BaseActivity() {
-
-    private val binding by lazy { ActivityWebBinding.inflate(layoutInflater) }
-
-    override fun createBinding() = binding.root
+class WebActivity : BaseActivity<ActivityWebBinding>() {
 
     private lateinit var agentWeb: AgentWeb
 

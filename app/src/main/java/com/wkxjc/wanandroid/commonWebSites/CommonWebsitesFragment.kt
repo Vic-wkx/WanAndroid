@@ -1,8 +1,5 @@
 package com.wkxjc.wanandroid.commonWebSites
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.rxRetrofit.http.HttpManager
@@ -11,17 +8,17 @@ import com.wkxjc.wanandroid.databinding.FragmentCommonWebsitesBinding
 import com.wkxjc.wanandroid.home.common.api.CommonWebsitesApi
 
 
-class CommonWebsitesFragment : BaseFragment() {
-    private var _binding: FragmentCommonWebsitesBinding? = null
-    private val binding get() = _binding!!
-    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        _binding = FragmentCommonWebsitesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun releaseView() {
-        _binding = null
-    }
+class CommonWebsitesFragment : BaseFragment<FragmentCommonWebsitesBinding>() {
+//    private var _binding: FragmentCommonWebsitesBinding? = null
+//    private val binding get() = _binding!!
+//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+//        _binding = FragmentCommonWebsitesBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun releaseView() {
+//        _binding = null
+//    }
 
     private val httpManager = HttpManager(this)
     private val commonWebsitesApi = CommonWebsitesApi()

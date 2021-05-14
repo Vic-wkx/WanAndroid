@@ -13,17 +13,17 @@ import com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles.CATEGORY_ID
 import com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles.KnowledgeTreeArticlesActivity
 
 
-class KnowledgeTreeFragment : BaseFragment() {
-    private var _binding: FragmentKnowledgeTreeBinding? = null
-    private val binding get() = _binding!!
-    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        _binding = FragmentKnowledgeTreeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun releaseView() {
-        _binding = null
-    }
+class KnowledgeTreeFragment : BaseFragment<FragmentKnowledgeTreeBinding>() {
+//    private var _binding: FragmentKnowledgeTreeBinding? = null
+//    private val binding get() = _binding!!
+//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+//        _binding = FragmentKnowledgeTreeBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun releaseView() {
+//        _binding = null
+//    }
 
     private val httpManager = HttpManager(this)
     private val knowledgeTreeApi = KnowledgeTreeApi()

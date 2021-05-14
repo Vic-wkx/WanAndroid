@@ -10,10 +10,7 @@ import com.wkxjc.wanandroid.home.common.api.KnowledgeTreeArticleApi
 
 const val CATEGORY_ID = "categoryId"
 
-class KnowledgeTreeArticlesActivity : BaseActivity() {
-    private val binding by lazy { ActivityKnowledgeTreeArticlesBinding.inflate(layoutInflater) }
-
-    override fun createBinding() = binding.root
+class KnowledgeTreeArticlesActivity : BaseActivity<ActivityKnowledgeTreeArticlesBinding>() {
     private val httpManager = HttpManager(this)
     private val knowledgeTreeArticleApi by lazy { KnowledgeTreeArticleApi(intent.extras!!.getInt(CATEGORY_ID)) }
     private val knowledgeTreeArticlesAdapter = KnowledgeTreeArticlesAdapter()

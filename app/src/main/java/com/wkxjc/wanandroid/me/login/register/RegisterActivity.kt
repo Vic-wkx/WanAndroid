@@ -9,10 +9,7 @@ import com.wkxjc.wanandroid.databinding.ActivityRegisterBinding
 import com.wkxjc.wanandroid.me.common.api.RegisterApi
 
 
-class RegisterActivity : BaseActivity() {
-    private val binding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
-
-    override fun createBinding() = binding.root
+class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     private val httpManager = HttpManager(this)
     private val registerApi = RegisterApi()
     private val listener = object : HttpListener() {

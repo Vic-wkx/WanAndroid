@@ -14,17 +14,17 @@ import com.lewis.widget.ui.Status
 import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsAuthorsBinding
 import com.wkxjc.wanandroid.home.common.api.PublicAccountsAuthorApi
 
-class PublicAccountsAuthorsFragment : BaseFragment() {
-    private var _binding: FragmentPublicAccountsAuthorsBinding? = null
-    private val binding get() = _binding!!
-    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        _binding = FragmentPublicAccountsAuthorsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun releaseView() {
-        _binding = null
-    }
+class PublicAccountsAuthorsFragment : BaseFragment<FragmentPublicAccountsAuthorsBinding>() {
+//    private var _binding: FragmentPublicAccountsAuthorsBinding? = null
+//    private val binding get() = _binding!!
+//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+//        _binding = FragmentPublicAccountsAuthorsBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun releaseView() {
+//        _binding = null
+//    }
 
     private val viewModel by viewModels<PublicAccountsViewModel>()
     private val httpManager = HttpManager(this)

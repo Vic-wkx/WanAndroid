@@ -7,9 +7,7 @@ import com.base.library.project.utils.LanguageUtils
 import com.wkxjc.wanandroid.databinding.ActivityLanguageBinding
 
 
-class LanguageActivity : BaseActivity() {
-    private val binding by lazy { ActivityLanguageBinding.inflate(layoutInflater) }
-    override fun createBinding() = binding.root
+class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
     override fun initView() {
         binding.btnChinese.setOnClickListener {

@@ -10,20 +10,22 @@ import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsBinding
 
 
-class PublicAccountsFragment : BaseFragment() {
+class PublicAccountsFragment : BaseFragment<FragmentPublicAccountsBinding>() {
 
-    private var _binding: FragmentPublicAccountsBinding? = null
-    private val binding get() = _binding!!
+//    private var _binding: FragmentPublicAccountsBinding? = null
+//    private val binding get() = _binding!!
+//
+//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+//        _binding = FragmentPublicAccountsBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun releaseView() {
+//        _binding = null
+//    }
+
     private val viewModel by viewModels<PublicAccountsViewModel>()
     private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
-    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        _binding = FragmentPublicAccountsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun releaseView() {
-        _binding = null
-    }
 
     override fun initView() {
         viewModel.status.observe(this) {

@@ -6,9 +6,7 @@ import com.wkxjc.wanandroid.databinding.ActivityUserBinding
 import com.wkxjc.wanandroid.me.user.collection.CollectionActivity
 import com.wkxjc.wanandroid.me.user.todo.TodoActivity
 
-class UserActivity : BaseActivity() {
-    private val binding by lazy { ActivityUserBinding.inflate(layoutInflater) }
-    override fun createBinding() = binding.root
+class UserActivity : BaseActivity<ActivityUserBinding>() {
     override fun initView() {
         binding.btnMyTodo.setOnClickListener {
             myStartActivity<TodoActivity>()

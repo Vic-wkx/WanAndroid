@@ -10,11 +10,7 @@ import com.wkxjc.wanandroid.navigation.NavigationFragment
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsFragment
 
 
-class MainActivity : BaseActivity() {
-
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
-    override fun createBinding() = binding.root
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val homeFragment by lazy { HomeFragment() }
     private val publicAccountsFragment by lazy { PublicAccountsFragment() }

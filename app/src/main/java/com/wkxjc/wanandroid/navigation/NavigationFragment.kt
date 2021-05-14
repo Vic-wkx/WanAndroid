@@ -13,17 +13,17 @@ import com.wkxjc.wanandroid.databinding.FragmentNavigationBinding
 import com.wkxjc.wanandroid.home.common.api.NavigationApi
 
 
-class NavigationFragment : BaseFragment() {
-    private var _binding: FragmentNavigationBinding? = null
-    private val binding get() = _binding!!
-    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        _binding = FragmentNavigationBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun releaseView() {
-        _binding = null
-    }
+class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
+//    private var _binding: FragmentNavigationBinding? = null
+//    private val binding get() = _binding!!
+//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+//        _binding = FragmentNavigationBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun releaseView() {
+//        _binding = null
+//    }
 
     private val httpManager = HttpManager(this)
     private val navigationApi = NavigationApi()

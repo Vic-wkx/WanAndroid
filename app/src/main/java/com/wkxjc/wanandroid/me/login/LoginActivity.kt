@@ -13,10 +13,7 @@ import com.wkxjc.wanandroid.me.common.api.LoginApi
 import com.wkxjc.wanandroid.me.login.register.RegisterActivity
 
 
-class LoginActivity : BaseActivity() {
-    private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
-
-    override fun createBinding() = binding.root
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val httpManager = HttpManager(this)
     private val loginApi = LoginApi()
     private val listener = object : HttpListener() {

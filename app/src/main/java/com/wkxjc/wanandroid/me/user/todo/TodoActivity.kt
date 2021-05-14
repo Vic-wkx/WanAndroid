@@ -7,10 +7,7 @@ import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.databinding.ActivityTodoBinding
 import com.wkxjc.wanandroid.me.common.api.TodoApi
 
-class TodoActivity : BaseActivity() {
-    private val binding by lazy { ActivityTodoBinding.inflate(layoutInflater) }
-
-    override fun createBinding() = binding.root
+class TodoActivity : BaseActivity<ActivityTodoBinding>() {
     private val httpManager = HttpManager()
     private val todoApi = TodoApi()
     private val todoAdapter = TodoAdapter()

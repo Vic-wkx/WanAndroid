@@ -28,19 +28,19 @@ import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
 
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+//    private var _binding: FragmentHomeBinding? = null
+//    private val binding get() = _binding!!
+//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+//        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun releaseView() {
+//        _binding = null
+//    }
+
     private val viewModel by viewModels<HomeViewModel>()
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun releaseView() {
-        _binding = null
-    }
-
     private val httpManager = HttpManager(this)
     private val bannerApi = BannerApi()
     private val articleApi = ArticleApi()

@@ -5,11 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
+import java.lang.reflect.ParameterizedType
 
-abstract class BaseFragment : Fragment(), IBase {
+abstract class BaseFragment<T : ViewBinding> : Fragment(), IBase {
 
+    private var _binding: T? = null
+    protected val binding get() = _binding!!
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return createBinding(inflater, container)
+        initViewBinding(container)
+        return binding.root
+    }
+
+    private fun initViewBinding(container: ViewGroup?) {
+        val superClass = javaClass.genericSuperclass as ParameterizedType
+        val actualClass = superClass.actualTypeArguments.first() as Class<*>
+        val inflateMethod = actualClass.getDeclaredMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+        _binding = inflateMethod.invoke(null, layoutInflater, container, false) as T
+    }
+
+    private fun releaseView() {
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,8 +38,4 @@ abstract class BaseFragment : Fragment(), IBase {
         super.onDestroyView()
         releaseView()
     }
-
-    abstract fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View
-
-    abstract fun releaseView()
 }

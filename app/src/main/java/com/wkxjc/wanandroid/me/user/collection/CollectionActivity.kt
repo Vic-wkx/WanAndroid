@@ -16,10 +16,7 @@ import com.wkxjc.wanandroid.me.common.api.CollectionPageCancelCollectionApi
 import com.wkxjc.wanandroid.me.common.api.CollectionApi
 
 
-class CollectionActivity : BaseActivity() {
-    private val binding by lazy { ActivityCollectionBinding.inflate(layoutInflater) }
-
-    override fun createBinding() = binding.root
+class CollectionActivity : BaseActivity<ActivityCollectionBinding>() {
     private val httpManager = HttpManager(this)
     private val collectionApi = CollectionApi()
     private val cancelCollectionApi = CollectionPageCancelCollectionApi()

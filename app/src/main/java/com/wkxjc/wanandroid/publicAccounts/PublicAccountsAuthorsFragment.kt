@@ -33,7 +33,6 @@ class PublicAccountsAuthorsFragment : BaseFragment<FragmentPublicAccountsAuthors
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             viewModel.publicAccountsAuthors.value?.refresh(publicAccountApi.convert(result))
-            Log.d("~~~", "authors updated")
         }
 
         override fun onError(error: Throwable) {

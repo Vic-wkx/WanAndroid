@@ -19,7 +19,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
         }
 
         override fun onError(error: Throwable) {
-            Log.d("~~~", "error:$error")
             binding.btnRegister.isEnabled = true
         }
     }

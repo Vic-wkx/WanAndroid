@@ -9,16 +9,6 @@ import com.wkxjc.wanandroid.home.common.api.CommonWebsitesApi
 
 
 class CommonWebsitesFragment : BaseFragment<FragmentCommonWebsitesBinding>() {
-//    private var _binding: FragmentCommonWebsitesBinding? = null
-//    private val binding get() = _binding!!
-//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-//        _binding = FragmentCommonWebsitesBinding.inflate(inflater, container, false)
-//        return binding.root
-//    }
-//
-//    override fun releaseView() {
-//        _binding = null
-//    }
 
     private val httpManager = HttpManager(this)
     private val commonWebsitesApi = CommonWebsitesApi()

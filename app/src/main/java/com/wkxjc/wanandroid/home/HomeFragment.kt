@@ -29,16 +29,6 @@ import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
-//    private var _binding: FragmentHomeBinding? = null
-//    private val binding get() = _binding!!
-//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-//        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-//        return binding.root
-//    }
-//
-//    override fun releaseView() {
-//        _binding = null
-//    }
 
     private val viewModel by viewModels<HomeViewModel>()
     private val httpManager = HttpManager(this)
@@ -95,7 +85,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("~~~~", "onCreate")
         viewModel.status.value = Status.LOADING
         loadData()
     }
@@ -114,7 +103,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             binding.refreshHome.isRefreshing = it
         }
         viewModel.homeBean.observe(this) {
-            Log.d("~~~", "updated homeBean")
             homeAdapter.refresh(it.banners, it.articles)
         }
         viewModel.status.observe(this) {

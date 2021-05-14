@@ -25,7 +25,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         }
 
         override fun onError(error: Throwable) {
-            Log.d("~~~", "error:$error")
             binding.btnLogin.isEnabled = true
         }
     }

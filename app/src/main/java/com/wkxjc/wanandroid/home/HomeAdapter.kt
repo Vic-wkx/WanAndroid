@@ -93,7 +93,6 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 }
             }
             is LoadMoreViewHolder -> {
-                Log.d("~~~", "homeBean.articles.datas.isEmpty(): ${homeBean.articles.datas.isEmpty()}")
                 holder.binding.root.visibility = if (homeBean.articles.datas.isEmpty()) View.GONE else View.VISIBLE
             }
         }

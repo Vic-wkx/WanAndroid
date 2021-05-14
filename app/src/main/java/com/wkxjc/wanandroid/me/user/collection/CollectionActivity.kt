@@ -23,7 +23,6 @@ class CollectionActivity : BaseActivity<ActivityCollectionBinding>() {
     private val collectionAdapter = CollectionAdapter()
     private val cancelCollectionListener = object : HttpListener() {
         override fun onNext(result: String) {
-            Log.d("~~~", "result: $result")
         }
 
         override fun onError(error: Throwable) {

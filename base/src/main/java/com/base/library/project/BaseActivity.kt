@@ -15,18 +15,12 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity(), IBase {
     protected lateinit var binding: T
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViewBinding()
+        binding = initViewBinding() as T
         setContentView(binding.root)
         initView()
         initData()
     }
 
-    private fun initViewBinding() {
-        val superClass = javaClass.genericSuperclass as ParameterizedType
-        val actualClass = superClass.actualTypeArguments.first() as Class<*>
-        val inflateMethod = actualClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
-        binding = inflateMethod.invoke(null, layoutInflater) as T
-    }
 
     override fun attachBaseContext(newBase: Context?) {
         // set language

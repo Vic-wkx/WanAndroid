@@ -13,17 +13,6 @@ import com.wkxjc.wanandroid.me.user.UserActivity
 
 class MeFragment : BaseFragment<FragmentMeBinding>() {
 
-//    private var _binding: FragmentMeBinding? = null
-//    private val binding get() = _binding!!
-//    override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): View {
-//        _binding = FragmentMeBinding.inflate(inflater, container, false)
-//        return binding.root
-//    }
-//
-//    override fun releaseView() {
-//        _binding = null
-//    }
-
     override fun initView() {
         binding.tvUser.setOnClickListener {
             myStartActivity<UserActivity>()

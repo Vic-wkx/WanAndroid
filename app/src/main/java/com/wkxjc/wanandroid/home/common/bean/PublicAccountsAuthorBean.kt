@@ -1,6 +1,6 @@
 package com.wkxjc.wanandroid.home.common.bean
 
-data class PublicAccountBean(
+data class PublicAccountsAuthorBean(
     val children: List<Any>,
     val courseId: Int,
     val id: Int,

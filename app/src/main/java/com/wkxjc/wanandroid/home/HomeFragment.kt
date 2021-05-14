@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.api.BaseApi
+import com.base.library.rxRetrofit.http.httpList.HttpListConfig
 import com.base.library.rxRetrofit.http.httpList.HttpListListener
 import com.base.library.rxRetrofit.http.listener.HttpListener
+import com.lewis.widget.ui.Status
+import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
@@ -41,6 +45,7 @@ class HomeFragment : BaseFragment() {
     private val bannerApi = BannerApi()
     private val articleApi = ArticleApi()
     private val collectApi = CollectApi()
+    private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
     private val homePageCancelCollectionApi = HomePageCancelCollectionApi()
     private val homeAdapter by lazy { HomeAdapter(viewModel.homeBean.value!!) }
     private val collectListener = object : HttpListener() {
@@ -61,11 +66,14 @@ class HomeFragment : BaseFragment() {
     }
     private val homeListListener = object : HttpListListener() {
         override fun onNext(resultMap: HashMap<BaseApi, Any>) {
-            viewModel.refresh(bannerApi.convert(resultMap), articleApi.convert(resultMap))
+            viewModel.homeBean.value?.refresh(bannerApi.convert(resultMap), articleApi.convert(resultMap))
             viewModel.isRefreshing.value = false
+            viewModel.status.value = Status.NORMAL
         }
 
         override fun onError(error: Throwable) {
+            viewModel.isRefreshing.value = false
+            viewModel.status.value = Status.ERROR
         }
     }
 
@@ -84,6 +92,7 @@ class HomeFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("~~~~", "onCreate")
+        viewModel.status.value = Status.LOADING
         loadData()
     }
 
@@ -102,6 +111,13 @@ class HomeFragment : BaseFragment() {
         }
         viewModel.homeBean.observe(this) {
             homeAdapter.refresh(it.banners, it.articles)
+        }
+        viewModel.status.observe(this) {
+            statusView.setStatus(it)
+        }
+        statusView.setOnRetryBtnClickListener {
+            viewModel.status.value = Status.LOADING
+            loadData()
         }
     }
 
@@ -124,9 +140,9 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadData() {
-        viewModel.isRefreshing.value = true
         articleApi.resetPage()
-        httpManager.request(arrayOf(bannerApi, articleApi), homeListListener)
+        // order the api, so that there will not be two subscriptions when retrying while no internet.
+        httpManager.request(arrayOf(bannerApi, articleApi), homeListListener, HttpListConfig(order = true))
     }
 
     private fun loadMore() {

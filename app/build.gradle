@@ -49,6 +49,7 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation 'androidx.fragment:fragment-ktx:1.2.4'
+    implementation 'com.github.wenqin-231:StatusView:v0.35'
     implementation project(':base')
     kapt 'com.github.bumptech.glide:compiler:4.10.0'
 }

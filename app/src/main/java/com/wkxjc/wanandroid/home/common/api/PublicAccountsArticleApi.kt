@@ -5,7 +5,7 @@ import com.base.library.rxRetrofit.http.api.BaseApi
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import io.reactivex.Observable
 
-class PublicAccountArticleApi(private val id: Int) : BaseApi() {
+class PublicAccountsArticleApi(private val id: Int) : BaseApi() {
     private var page = 0
 
     override fun getObservable(): Observable<String> {

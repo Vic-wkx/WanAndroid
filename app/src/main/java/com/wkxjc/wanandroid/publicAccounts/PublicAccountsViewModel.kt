@@ -8,6 +8,7 @@ import com.wkxjc.wanandroid.home.common.bean.PublicAccountsAuthors
 
 class PublicAccountsViewModel : ViewModel() {
     val status = MutableLiveData<Status>()
-    val publicAccountsAuthors = MutableLiveData<PublicAccountsAuthors>(PublicAccountsAuthors())
+    val publicAccountsAuthors = PublicAccountsAuthors()
+    val articles = Articles()
     val authorId2ArticlesMap = MutableLiveData<HashMap<Int, Articles>>()
 }

@@ -32,15 +32,15 @@ fun Context.toast(@StringRes content: Int) {
 }
 
 fun Activity.initViewBinding(): ViewBinding {
-    val superClass = javaClass.genericSuperclass as ParameterizedType
-    val actualClass = superClass.actualTypeArguments.first() as Class<*>
-    val inflateMethod = actualClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
+    val inflateMethod = getActualBindingClass(javaClass).getDeclaredMethod("inflate", LayoutInflater::class.java)
     return inflateMethod.invoke(null, layoutInflater) as ViewBinding
 }
 
 fun Fragment.initViewBinding(container: ViewGroup?): ViewBinding {
-    val superClass = javaClass.genericSuperclass as ParameterizedType
-    val actualClass = superClass.actualTypeArguments.first() as Class<*>
-    val inflateMethod = actualClass.getDeclaredMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+    val inflateMethod = getActualBindingClass(javaClass).getDeclaredMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
     return inflateMethod.invoke(null, layoutInflater, container, false) as ViewBinding
+}
+
+fun getActualBindingClass(javaClass: Class<*>): Class<*> {
+    return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments.first() as Class<*>
 }

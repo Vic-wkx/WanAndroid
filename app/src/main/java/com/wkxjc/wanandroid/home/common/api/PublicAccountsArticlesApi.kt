@@ -5,7 +5,7 @@ import com.base.library.rxRetrofit.http.api.BaseApi
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import io.reactivex.Observable
 
-class PublicAccountsArticleApi : BaseApi() {
+class PublicAccountsArticlesApi : BaseApi() {
     var id: Int = 0
     private var page = 0
 

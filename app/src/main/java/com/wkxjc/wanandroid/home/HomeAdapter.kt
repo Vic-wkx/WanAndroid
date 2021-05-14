@@ -31,7 +31,7 @@ const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 // preload more articles for better user experience
 const val PRE_LOAD = 10
 
-class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(private val homeBean: HomeBean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     lateinit var onItemClickListener: (view: View, bean: ArticleBean) -> Unit
     lateinit var loadMore: () -> Unit
@@ -116,6 +116,7 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
     }
 
     fun addMore(articles: Articles) {
+        Log.d("~~~", "add more")
         homeBean.addMore(articles)
         notifyDataSetChanged()
     }

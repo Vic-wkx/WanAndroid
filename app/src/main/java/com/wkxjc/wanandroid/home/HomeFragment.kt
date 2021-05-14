@@ -1,10 +1,7 @@
 package com.wkxjc.wanandroid.home
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val collectApi = CollectApi()
     private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
     private val homePageCancelCollectionApi = HomePageCancelCollectionApi()
-    private val homeAdapter by lazy { HomeAdapter(viewModel.homeBean.value!!) }
+    private val homeAdapter by lazy { HomeAdapter(viewModel.homeBean) }
     private val collectListener = object : HttpListener() {
         override fun onNext(result: String) {
         }
@@ -61,7 +58,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 viewModel.status.value = Status.EMPTY
             } else {
                 viewModel.status.value = Status.NORMAL
-                viewModel.homeBean.value?.refresh(banners, articles)
+                viewModel.homeBean.refresh(banners, articles)
             }
         }
 
@@ -101,9 +98,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
         viewModel.isRefreshing.observe(this) {
             binding.refreshHome.isRefreshing = it
-        }
-        viewModel.homeBean.observe(this) {
-            homeAdapter.refresh(it.banners, it.articles)
         }
         viewModel.status.observe(this) {
             statusView.setStatus(it)

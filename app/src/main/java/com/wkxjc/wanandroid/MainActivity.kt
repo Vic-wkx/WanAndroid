@@ -20,7 +20,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initView() {
         FragmentUtils.add(supportFragmentManager, R.id.container, homeFragment, publicAccountsFragment, navigationFragment, knowledgeTreeFragment, meFragment)
-        FragmentUtils.show(supportFragmentManager, homeFragment)
+        FragmentUtils.show(supportFragmentManager, publicAccountsFragment)
         binding.bottomMenu.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.homeFragment -> {

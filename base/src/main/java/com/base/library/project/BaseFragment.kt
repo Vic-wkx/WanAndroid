@@ -1,6 +1,7 @@
 package com.base.library.project
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,11 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), IBase {
         _binding = initViewBinding(container) as T
         return binding.root
     }
+
+//    override fun onHiddenChanged(hidden: Boolean) {
+//        super.onHiddenChanged(hidden)
+//        Log.d("~~~", "${getActualBindingClass(javaClass).name}: ${if(hidden) "hidden" else "show"}")
+//    }
 
     private fun releaseView() {
         _binding = null

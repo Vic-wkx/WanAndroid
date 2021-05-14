@@ -9,7 +9,7 @@ import com.wkxjc.wanandroid.home.common.bean.HomeBean
 
 class HomeViewModel : ViewModel() {
     val homeBean: MutableLiveData<HomeBean> = MutableLiveData(HomeBean())
-    val status: MutableLiveData<Status> = MutableLiveData(Status.NORMAL)
+    val status: MutableLiveData<Status> = MutableLiveData()
     var isRefreshing: MutableLiveData<Boolean> = MutableLiveData(true)
 
 }

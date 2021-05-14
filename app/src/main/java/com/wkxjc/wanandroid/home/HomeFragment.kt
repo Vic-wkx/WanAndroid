@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun releaseBinding() {
+    override fun releaseView() {
         _binding = null
     }
 
@@ -50,7 +50,6 @@ class HomeFragment : BaseFragment() {
     private val homeAdapter by lazy { HomeAdapter(viewModel.homeBean.value!!) }
     private val collectListener = object : HttpListener() {
         override fun onNext(result: String) {
-            Log.d("~~~", "result: $result")
         }
 
         override fun onError(error: Throwable) {
@@ -58,7 +57,6 @@ class HomeFragment : BaseFragment() {
     }
     private val homePageCancelCollectionListener = object : HttpListener() {
         override fun onNext(result: String) {
-            Log.d("~~~", "result: $result")
         }
 
         override fun onError(error: Throwable) {
@@ -66,9 +64,15 @@ class HomeFragment : BaseFragment() {
     }
     private val homeListListener = object : HttpListListener() {
         override fun onNext(resultMap: HashMap<BaseApi, Any>) {
-            viewModel.homeBean.value?.refresh(bannerApi.convert(resultMap), articleApi.convert(resultMap))
             viewModel.isRefreshing.value = false
-            viewModel.status.value = Status.NORMAL
+            val banners = bannerApi.convert(resultMap)
+            val articles = articleApi.convert(resultMap)
+            if (banners.data.isNullOrEmpty() && articles.datas.isNullOrEmpty()) {
+                viewModel.status.value = Status.EMPTY
+            } else {
+                viewModel.status.value = Status.NORMAL
+                viewModel.homeBean.value?.refresh(banners, articles)
+            }
         }
 
         override fun onError(error: Throwable) {
@@ -110,6 +114,7 @@ class HomeFragment : BaseFragment() {
             binding.refreshHome.isRefreshing = it
         }
         viewModel.homeBean.observe(this) {
+            Log.d("~~~", "updated homeBean")
             homeAdapter.refresh(it.banners, it.articles)
         }
         viewModel.status.observe(this) {

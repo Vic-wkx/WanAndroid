@@ -19,7 +19,7 @@ class CommonWebsitesFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun releaseBinding() {
+    override fun releaseView() {
         _binding = null
     }
 

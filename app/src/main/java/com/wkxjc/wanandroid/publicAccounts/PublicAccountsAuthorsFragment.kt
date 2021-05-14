@@ -1,5 +1,6 @@
 package com.wkxjc.wanandroid.publicAccounts
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
+import com.lewis.widget.ui.Status
 import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsAuthorsBinding
 import com.wkxjc.wanandroid.home.common.api.PublicAccountsAuthorApi
 
@@ -20,7 +22,7 @@ class PublicAccountsAuthorsFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun releaseBinding() {
+    override fun releaseView() {
         _binding = null
     }
 
@@ -31,9 +33,11 @@ class PublicAccountsAuthorsFragment : BaseFragment() {
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             viewModel.publicAccountsAuthors.value?.refresh(publicAccountApi.convert(result))
+            Log.d("~~~", "authors updated")
         }
 
         override fun onError(error: Throwable) {
+            viewModel.status.value = Status.ERROR
         }
 
     }
@@ -43,14 +47,11 @@ class PublicAccountsAuthorsFragment : BaseFragment() {
         binding.rvPublicAccountsAuthors.adapter = publicAccountsAuthorsAdapter
         viewModel.publicAccountsAuthors.observe(this) {
             publicAccountsAuthorsAdapter.refresh(it.data)
-            if (it.data.isNotEmpty()) {
-                // click the first item to show the articles
-
-            }
         }
     }
 
     override fun initData() {
+        viewModel.status.value = Status.LOADING
         httpManager.request(publicAccountApi, listener)
     }
 }

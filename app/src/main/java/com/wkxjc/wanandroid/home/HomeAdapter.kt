@@ -14,7 +14,10 @@ import com.wkxjc.wanandroid.common.banner.ImageAdapter
 import com.wkxjc.wanandroid.databinding.ItemArticleBinding
 import com.wkxjc.wanandroid.databinding.ItemBannerBinding
 import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
-import com.wkxjc.wanandroid.home.common.bean.*
+import com.wkxjc.wanandroid.home.common.bean.ArticleBean
+import com.wkxjc.wanandroid.home.common.bean.Articles
+import com.wkxjc.wanandroid.home.common.bean.BannerBean
+import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import com.youth.banner.listener.OnBannerListener
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -108,11 +111,6 @@ class HomeAdapter(private val homeBean: HomeBean) : RecyclerView.Adapter<Recycle
             itemCount - 1 -> LOAD_MORE
             else -> ARTICLE
         }
-    }
-
-    fun refresh(banners: Banners, articles: Articles) {
-        homeBean.refresh(banners, articles)
-        notifyDataSetChanged()
     }
 
     fun addMore(articles: Articles) {

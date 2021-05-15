@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.publicAccounts
+package com.wkxjc.wanandroid.publicAccounts.publicAccountsAuthors
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ class PublicAccountsAuthorsAdapter(private val publicAccountsAuthors: PublicAcco
     inner class PublicAccountViewHolder(val binding: ItemPublicAccountsAuthorBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var context: Context
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicAccountsAuthorsAdapter.PublicAccountViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicAccountViewHolder {
         context = parent.context
         val binding = ItemPublicAccountsAuthorBinding.inflate(LayoutInflater.from(context), parent, false)
         return PublicAccountViewHolder(binding)

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/publicAccountsAuthorFragment"
-        android:name="com.wkxjc.wanandroid.publicAccounts.PublicAccountsAuthorsFragment"
+        android:name="com.wkxjc.wanandroid.publicAccounts.publicAccountsAuthors.PublicAccountsAuthorsFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toStartOf="@id/publicAccountsArticlesFragment"
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/publicAccountsArticlesFragment"
-        android:name="com.wkxjc.wanandroid.publicAccounts.PublicAccountsArticlesFragment"
+        android:name="com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles.PublicAccountsArticlesFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"

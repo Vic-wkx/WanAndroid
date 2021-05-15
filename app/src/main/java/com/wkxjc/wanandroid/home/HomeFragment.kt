@@ -88,7 +88,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initView() {
         binding.rvHome.apply {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = LinearLayoutManager(context)
             adapter = homeAdapter
         }
         homeAdapter.onItemClickListener = ::onItemClick

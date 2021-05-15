@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
-import com.wkxjc.wanandroid.databinding.ItemPublicAccountArticleBinding
+import com.wkxjc.wanandroid.databinding.ItemPublicAccountsArticleBinding
 import com.wkxjc.wanandroid.home.common.bean.Articles
 
 
@@ -15,11 +15,11 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
 
     private lateinit var context: Context
 
-    inner class ViewHolder(val binding: ItemPublicAccountArticleBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemPublicAccountsArticleBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        val binding = ItemPublicAccountArticleBinding.inflate(LayoutInflater.from(context), parent, false)
+        val binding = ItemPublicAccountsArticleBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
 

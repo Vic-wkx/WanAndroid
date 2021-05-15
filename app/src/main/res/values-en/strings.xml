@@ -19,4 +19,5 @@
     <string name="sharer_is">Sharer: %s</string>
     <string name="unknown">Unknown</string>
     <string name="time_is">Time: %s</string>
+    <string name="no_more_data">No more data</string>
 </resources>

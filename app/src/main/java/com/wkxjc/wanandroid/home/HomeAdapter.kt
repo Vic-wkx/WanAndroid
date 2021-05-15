@@ -24,10 +24,10 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-const val BANNER = 1
-const val ARTICLE = 0
-const val LOAD_MORE = -1
-const val HEADER_COUNT = BANNER
+const val BANNER = 0x1
+const val ARTICLE = 0x2
+const val LOAD_MORE = 0x3
+const val HEADER_COUNT = 1
 const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
@@ -35,10 +35,11 @@ const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 const val PRE_LOAD = 10
 
 class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var context: Context
     lateinit var onItemClickListener: (view: View, bean: ArticleBean) -> Unit
     lateinit var loadMore: () -> Unit
     var isLoadingMore = false
+    private lateinit var context: Context
+    private var noMore = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
@@ -90,12 +91,13 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                     bean.collect = !bean.collect
                     notifyItemChanged(position)
                 }
-                if (position - HEADER_COUNT > homeBean.articles.datas.size - 1 - PRE_LOAD && !isLoadingMore) {
+                if (position - HEADER_COUNT >= homeBean.articles.datas.size - 1 - PRE_LOAD && !isLoadingMore) {
                     isLoadingMore = true
                     loadMore.invoke()
                 }
             }
             is LoadMoreViewHolder -> {
+                holder.binding.tvLoadMore.setText(if (noMore) R.string.no_more_data else R.string.load_more)
                 holder.binding.root.visibility = if (homeBean.articles.datas.isEmpty()) View.GONE else View.VISIBLE
             }
         }
@@ -114,13 +116,20 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
     }
 
     fun addMore(articles: Articles) {
-        homeBean.addMore(articles)
-        notifyDataSetChanged()
+        if (articles.datas.isNullOrEmpty()) {
+            noMore = true
+            notifyItemChanged(itemCount - 1)
+        } else {
+            homeBean.addMore(articles)
+            notifyDataSetChanged()
+        }
+        isLoadingMore = false
     }
 
     fun refresh(homeBean: HomeBean) {
+        isLoadingMore = false
+        noMore = false
         this.homeBean.refresh(homeBean.banners, homeBean.articles)
         notifyDataSetChanged()
     }
-
 }

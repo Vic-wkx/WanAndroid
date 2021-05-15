@@ -72,7 +72,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val loadMoreListener = object : HttpListener() {
         override fun onNext(result: String) {
             homeAdapter.addMore(articleApi.convert(result))
-            homeAdapter.isLoadingMore = false
         }
 
         override fun onError(error: Throwable) {

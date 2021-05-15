@@ -1,7 +1,7 @@
 package com.wkxjc.wanandroid.me.login.register
 
 import com.base.library.project.BaseActivity
-import com.base.library.project.toast
+import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.databinding.ActivityRegisterBinding
@@ -13,7 +13,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     private val registerApi = RegisterApi()
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
-            toast("注册成功")
+            showToast("注册成功")
             finish()
         }
 
@@ -36,15 +36,15 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
 
     private fun inputNotValid(): Boolean {
         if (binding.etRegisterUserName.text.isEmpty()) {
-            toast("User name cannot be empty!")
+            showToast("User name cannot be empty!")
             return true
         }
         if (binding.etRegisterPassword.text.isEmpty() || binding.etRegisterConfirmPassword.text.isEmpty()) {
-            toast("Password cannot be empty!")
+            showToast("Password cannot be empty!")
             return true
         }
         if (binding.etRegisterPassword.text != binding.etRegisterConfirmPassword.text) {
-            toast("两次输入的密码不一致！")
+            showToast("两次输入的密码不一致！")
         }
         return false
     }

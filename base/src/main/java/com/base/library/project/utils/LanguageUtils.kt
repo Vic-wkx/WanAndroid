@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.LocaleList
 import com.base.library.R
-import com.base.library.project.toast
+import com.base.library.project.showToast
 import com.base.library.rxRetrofit.common.utils.SPUtils
 import java.util.*
 
@@ -21,7 +21,7 @@ object LanguageUtils {
 
     fun changeLanguage(context: Context, language: String) {
         if (this.language == language) {
-            context.toast(R.string.no_need_change_language_hint)
+            context.showToast(R.string.no_need_change_language_hint)
             return
         }
         SPUtils.getInstance().put(LANGUAGE, language)

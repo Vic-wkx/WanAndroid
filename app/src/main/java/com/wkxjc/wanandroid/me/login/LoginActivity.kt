@@ -2,7 +2,7 @@ package com.wkxjc.wanandroid.me.login
 
 import com.base.library.project.BaseActivity
 import com.base.library.project.myStartActivity
-import com.base.library.project.toast
+import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.databinding.ActivityLoginBinding
@@ -17,7 +17,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             val loginBean = loginApi.convert(result)
-            toast("login success")
+            showToast("login success")
             User.loginOn(loginBean.publicName)
             finish()
         }
@@ -42,11 +42,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     private fun inputNotValid(): Boolean {
         if (binding.etLoginUserName.text.isEmpty()) {
-            toast("User name cannot be empty!")
+            showToast("User name cannot be empty!")
             return true
         }
         if (binding.etLoginPassword.text.isEmpty()) {
-            toast("Password cannot be empty!")
+            showToast("Password cannot be empty!")
             return true
         }
         return false

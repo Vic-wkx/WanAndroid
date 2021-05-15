@@ -112,6 +112,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         })
     }
 
+    override fun initData() {
+    }
+
+    private fun loadData() {
+        articleApi.resetPage()
+        // order the api, so that there will not be two subscriptions when retrying while no internet.
+        httpManager.request(arrayOf(bannerApi, articleApi), homeListListener, HttpListConfig(order = true))
+    }
+
     private fun onItemClick(view: View, bean: ArticleBean) {
         when (view.id) {
             R.id.ivCollect -> if (bean.collect) {
@@ -125,15 +134,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
             else -> myStartActivity<WebActivity>(LINK to bean.link)
         }
-    }
-
-    override fun initData() {
-    }
-
-    private fun loadData() {
-        articleApi.resetPage()
-        // order the api, so that there will not be two subscriptions when retrying while no internet.
-        httpManager.request(arrayOf(bannerApi, articleApi), homeListListener, HttpListConfig(order = true))
     }
 
     private fun loadMore() {

@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 class PublicAccountsArticlesApi : BaseApi() {
     var id: Int = 0
-    private var page = 0
+    var page = 0
 
     override fun getObservable(): Observable<String> {
         val apiService = retrofit.create(ApiService::class.java)

@@ -31,6 +31,7 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
         }
         viewModel.publicAccountsArticles.observe(this, {
             publicAccountArticlesAdapter.refresh(it)
+            binding.rvPublicAccountArticles.scrollToPosition(0)
         })
         viewModel.publicAccountsArticlesStatus.observe(this, {
             statusView.setStatus(it)

@@ -1,9 +1,11 @@
 package com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.base.library.project.getActualBindingClass
 import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
@@ -19,6 +21,7 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
+        Log.d("~~~", "actual: ${getActualBindingClass(javaClass)}")
         val binding = ItemPublicAccountsArticleBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolder(binding)
     }
@@ -27,7 +30,7 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = articles.datas[position]
-        holder.binding.tvPublicAccountArticleTitle.text = bean.title
+        holder.binding.tvTitle.text = bean.title
         holder.binding.root.setOnClickListener {
             context.myStartActivity<WebActivity>(LINK to bean.link)
         }

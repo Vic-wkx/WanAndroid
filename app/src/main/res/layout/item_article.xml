@@ -25,13 +25,9 @@
 
         <TextView
             android:id="@+id/tvTitle"
+            style="@style/tv_article_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivCollect"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,20 +35,17 @@
 
         <TextView
             android:id="@+id/tvAuthor"
+            style="@style/tv_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:ellipsize="end"
-            android:ems="10"
-            android:lines="1"
-            android:scrollHorizontally="true"
-            android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             tools:text="作者：AlpinistWangAlpinistWang" />
 
         <TextView
             android:id="@+id/tvTime"
+            style="@style/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

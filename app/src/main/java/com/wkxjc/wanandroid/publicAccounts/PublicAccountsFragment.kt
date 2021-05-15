@@ -52,7 +52,10 @@ class PublicAccountsFragment : BaseFragment<FragmentPublicAccountsBinding>() {
         })
         viewModel.currentPublicAccountsAuthorId.observe(this, {
             viewModel.publicAccountsArticlesStatus.value = Status.LOADING
-            httpManager.request(publicAccountArticlesApi.apply { id = it }, publicAccountsArticlesListener)
+            httpManager.request(publicAccountArticlesApi.apply {
+                id = it
+                page = 0
+            }, publicAccountsArticlesListener)
         })
     }
 

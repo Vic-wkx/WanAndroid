@@ -15,10 +15,10 @@ object FragmentUtils {
 
     fun show(fragmentManager: FragmentManager, fragment: Fragment) {
         fragmentManager.beginTransaction().apply {
-            show(fragment)
-            fragmentManager.fragments.filter { it != fragment }.forEach {
+            fragmentManager.fragments.forEach {
                 hide(it)
             }
+            show(fragment)
         }.commit()
     }
 }

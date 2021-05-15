@@ -14,6 +14,7 @@ class PublicAccountsAuthorsAdapter(private val publicAccountsAuthors: PublicAcco
     inner class PublicAccountViewHolder(val binding: ItemPublicAccountsAuthorBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var context: Context
+    lateinit var onItemClick: (PublicAccountsAuthorBean) -> Unit
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublicAccountViewHolder {
         context = parent.context
         val binding = ItemPublicAccountsAuthorBinding.inflate(LayoutInflater.from(context), parent, false)
@@ -26,9 +27,9 @@ class PublicAccountsAuthorsAdapter(private val publicAccountsAuthors: PublicAcco
         val bean = publicAccountsAuthors.data[position]
         holder.binding.tvPublicAccountName.text = bean.name
 
-//        holder.binding.root.setOnClickListener {
-//            context.myStartActivity<PublicAccountsArticlesActivity>("id" to bean.id)
-//        }
+        holder.binding.root.setOnClickListener {
+            onItemClick.invoke(bean)
+        }
     }
 
     fun refresh(data: List<PublicAccountsAuthorBean>) {

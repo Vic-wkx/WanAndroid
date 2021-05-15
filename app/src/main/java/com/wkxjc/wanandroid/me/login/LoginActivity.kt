@@ -1,16 +1,14 @@
 package com.wkxjc.wanandroid.me.login
 
-import android.util.Log
 import com.base.library.project.BaseActivity
 import com.base.library.project.myStartActivity
 import com.base.library.project.toast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.databinding.ActivityLoginBinding
-import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.me.user.User
 import com.wkxjc.wanandroid.me.common.api.LoginApi
 import com.wkxjc.wanandroid.me.login.register.RegisterActivity
+import com.wkxjc.wanandroid.me.user.User
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {

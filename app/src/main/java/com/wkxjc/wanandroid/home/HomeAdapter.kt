@@ -1,7 +1,6 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,10 +30,11 @@ const val LOAD_MORE = -1
 const val HEADER_COUNT = BANNER
 const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
+
 // preload more articles for better user experience
 const val PRE_LOAD = 10
 
-class HomeAdapter(private val homeBean: HomeBean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     lateinit var onItemClickListener: (view: View, bean: ArticleBean) -> Unit
     lateinit var loadMore: () -> Unit
@@ -114,8 +114,12 @@ class HomeAdapter(private val homeBean: HomeBean) : RecyclerView.Adapter<Recycle
     }
 
     fun addMore(articles: Articles) {
-        Log.d("~~~", "add more")
         homeBean.addMore(articles)
+        notifyDataSetChanged()
+    }
+
+    fun refresh(homeBean: HomeBean) {
+        this.homeBean.refresh(homeBean.banners, homeBean.articles)
         notifyDataSetChanged()
     }
 

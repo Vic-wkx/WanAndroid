@@ -1,8 +1,6 @@
 package com.wkxjc.wanandroid.me
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.databinding.FragmentMeBinding

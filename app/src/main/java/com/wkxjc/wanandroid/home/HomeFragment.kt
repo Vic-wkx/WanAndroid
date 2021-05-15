@@ -3,7 +3,7 @@ package com.wkxjc.wanandroid.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
@@ -22,6 +22,7 @@ import com.wkxjc.wanandroid.home.common.api.ArticleApi
 import com.wkxjc.wanandroid.home.common.api.BannerApi
 import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
+import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
 
 
@@ -34,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val collectApi = CollectApi()
     private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
     private val homePageCancelCollectionApi = HomePageCancelCollectionApi()
-    private val homeAdapter by lazy { HomeAdapter(viewModel.homeBean) }
+    private val homeAdapter by lazy { HomeAdapter() }
     private val collectListener = object : HttpListener() {
         override fun onNext(result: String) {
         }
@@ -58,7 +59,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 viewModel.status.value = Status.EMPTY
             } else {
                 viewModel.status.value = Status.NORMAL
-                viewModel.homeBean.refresh(banners, articles)
+                viewModel.homeBean.value = HomeBean(banners, articles)
             }
         }
 
@@ -96,16 +97,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.refreshHome.setOnRefreshListener {
             loadData()
         }
-        viewModel.isRefreshing.observe(this) {
-            binding.refreshHome.isRefreshing = it
-        }
-        viewModel.status.observe(this) {
-            statusView.setStatus(it)
-        }
         statusView.setOnRetryBtnClickListener {
             viewModel.status.value = Status.LOADING
             loadData()
         }
+        viewModel.isRefreshing.observe(this, Observer {
+            binding.refreshHome.isRefreshing = it
+        })
+        viewModel.status.observe(this, Observer {
+            statusView.setStatus(it)
+        })
+        viewModel.homeBean.observe(this, Observer {
+            homeAdapter.refresh(it)
+        })
     }
 
     private fun onItemClick(view: View, bean: ArticleBean) {

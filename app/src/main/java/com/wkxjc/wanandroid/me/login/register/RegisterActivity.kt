@@ -1,6 +1,5 @@
 package com.wkxjc.wanandroid.me.login.register
 
-import android.util.Log
 import com.base.library.project.BaseActivity
 import com.base.library.project.toast
 import com.base.library.rxRetrofit.http.HttpManager

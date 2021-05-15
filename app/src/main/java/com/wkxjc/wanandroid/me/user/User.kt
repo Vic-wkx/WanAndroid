@@ -3,7 +3,6 @@ package com.wkxjc.wanandroid.me.user
 import com.base.library.rxRetrofit.common.utils.SPUtils
 import com.wkxjc.wanandroid.me.common.api.IS_LOGIN
 import com.wkxjc.wanandroid.me.common.api.LOGIN_INFO
-import com.wkxjc.wanandroid.me.common.api.PASSWORD
 import com.wkxjc.wanandroid.me.common.api.USER_NAME
 
 object User {

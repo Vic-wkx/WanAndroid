@@ -21,4 +21,5 @@
     <string name="unknown">未知</string>
     <string name="time_is">时间：%s</string>
     <string name="no_more_data">没有更多数据了</string>
+    <string name="please_login_first">请先登录</string>
 </resources>

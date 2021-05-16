@@ -83,7 +83,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.status.value = Status.LOADING
-        loadData()
     }
 
     override fun initView() {
@@ -94,11 +93,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         homeAdapter.onItemClickListener = ::onItemClick
         homeAdapter.loadMore = ::loadMore
         binding.refreshHome.setOnRefreshListener {
-            loadData()
+            initData()
         }
         statusView.setOnRetryBtnClickListener {
             viewModel.status.value = Status.LOADING
-            loadData()
+            initData()
         }
         viewModel.isRefreshing.observe(this, Observer {
             binding.refreshHome.isRefreshing = it
@@ -112,9 +111,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initData() {
-    }
-
-    private fun loadData() {
         articleApi.resetPage()
         // order the api, so that there will not be two subscriptions when retrying while no internet.
         httpManager.request(arrayOf(bannerApi, articleApi), homeListListener, HttpListConfig(order = true))

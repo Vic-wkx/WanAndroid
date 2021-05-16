@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
+import com.base.library.project.showToast
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
@@ -17,6 +18,7 @@ import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import com.wkxjc.wanandroid.home.common.bean.BannerBean
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
+import com.wkxjc.wanandroid.me.user.User
 import com.youth.banner.listener.OnBannerListener
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -87,6 +89,10 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 }
                 holder.binding.ivCollect.setImageResource(if (bean.collect) R.drawable.ic_collected else R.drawable.ic_collect)
                 holder.binding.ivCollect.setOnClickListener {
+                    if (!User.isLogon) {
+                        context.showToast(R.string.please_login_first)
+                        return@setOnClickListener
+                    }
                     onItemClickListener.invoke(it, bean)
                     bean.collect = !bean.collect
                     notifyItemChanged(position)

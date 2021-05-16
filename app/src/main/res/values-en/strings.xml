@@ -20,4 +20,5 @@
     <string name="unknown">Unknown</string>
     <string name="time_is">Time: %s</string>
     <string name="no_more_data">No more data</string>
+    <string name="please_login_first">Please login first.</string>
 </resources>

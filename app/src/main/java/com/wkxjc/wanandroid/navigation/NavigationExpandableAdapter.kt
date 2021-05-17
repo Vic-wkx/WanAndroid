@@ -1,10 +1,12 @@
 package com.wkxjc.wanandroid.navigation
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseExpandableListAdapter
+import android.widget.TextView
+import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.ItemNavigationChildBinding
 import com.wkxjc.wanandroid.databinding.ItemNavigationGroupBinding
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
@@ -12,12 +14,9 @@ import com.wkxjc.wanandroid.home.common.bean.NavigationBean
 import com.wkxjc.wanandroid.home.common.bean.Navigations
 
 
-class NavigationExpandableAdapter(private val navigations: Navigations = Navigations()) : BaseExpandableListAdapter() {
-
-    private lateinit var context: Context
+class NavigationExpandableAdapter(private val context: Context?, private val navigations: Navigations = Navigations()) : HeaderPinnedExpandableListAdapter() {
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup): View {
-        context = parent.context
         val binding = ItemNavigationGroupBinding.inflate(LayoutInflater.from(context), parent, false)
         binding.tvNavigationGroupTitle.text = getGroup(groupPosition).name
         return binding.root
@@ -25,6 +24,8 @@ class NavigationExpandableAdapter(private val navigations: Navigations = Navigat
 
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
         val binding = ItemNavigationChildBinding.inflate(LayoutInflater.from(context), parent, false)
+        // Draw underline
+        binding.tvNavigationChildTitle.paint.flags = Paint.UNDERLINE_TEXT_FLAG
         binding.tvNavigationChildTitle.text = getChild(groupPosition, childPosition).title
         return binding.root
     }
@@ -32,6 +33,16 @@ class NavigationExpandableAdapter(private val navigations: Navigations = Navigat
     fun refresh(navigations: Navigations) {
         this.navigations.refresh(navigations)
         notifyDataSetChanged()
+    }
+
+    override fun getHeaderView(parent: ViewGroup): View {
+        val view = LayoutInflater.from(context).inflate(R.layout.item_navigation_group, parent, false)
+        return view
+    }
+
+    override fun onUpdateHeaderView(firstVisibleGroupPosition: Int, headerView: View?) {
+        val tvNavigationGroupTitle = headerView?.findViewById<TextView>(R.id.tvNavigationGroupTitle)
+        tvNavigationGroupTitle?.text = getGroup(firstVisibleGroupPosition).name
     }
 
     override fun getGroup(groupPosition: Int): NavigationBean = navigations.data[groupPosition]

@@ -6,15 +6,31 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
+    <ImageView
+        android:id="@+id/ivNavigationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_navigation_title"
+        app:layout_constraintBottom_toBottomOf="@id/tvNavigationGroupTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvNavigationGroupTitle" />
+
     <TextView
         android:id="@+id/tvNavigationGroupTitle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:paddingStart="4dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="16dp"
         android:textColor="@color/red"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivNavigationTitle"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="常用工具" />
 

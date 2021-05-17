@@ -20,9 +20,6 @@ import com.wkxjc.wanandroid.home.common.bean.BannerBean
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import com.wkxjc.wanandroid.me.user.User
 import com.youth.banner.listener.OnBannerListener
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -73,17 +70,11 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 holder.binding.tvTitle.text = bean.title
                 if (bean.shareUser.isNotBlank()) {
                     holder.binding.tvAuthor.text = String.format(context.getString(R.string.sharer_is), bean.shareUser)
+                    holder.binding.tvTime.text = String.format(context.getString(R.string.time_is), bean.niceShareDate)
                 } else {
                     holder.binding.tvAuthor.text = String.format(context.getString(R.string.author_is), if (bean.author.isNotBlank()) bean.author else context.getString(R.string.unknown))
+                    holder.binding.tvTime.text = String.format(context.getString(R.string.time_is), bean.niceDate)
                 }
-                holder.binding.tvTime.text = String.format(
-                    context.getString(R.string.time_is), DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(
-                        ZonedDateTime.ofInstant(
-                            Date(bean.publishTime).toInstant(),
-                            ZoneId.systemDefault()
-                        )
-                    )
-                )
                 holder.binding.root.setOnClickListener {
                     onItemClickListener.invoke(it, bean)
                 }

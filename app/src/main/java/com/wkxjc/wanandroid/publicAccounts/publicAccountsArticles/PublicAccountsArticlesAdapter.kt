@@ -53,7 +53,7 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
                 val bean = articles.datas[position]
                 holder.binding.tvTitle.text = bean.title
                 holder.binding.tvTime.text = String.format(
-                    context.getString(R.string.time_is), DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(
+                    context.getString(R.string.time_is), DateTimeFormatter.ofPattern("yyyy-MM-dd").format(
                         ZonedDateTime.ofInstant(
                             Date(bean.publishTime).toInstant(),
                             ZoneId.systemDefault()

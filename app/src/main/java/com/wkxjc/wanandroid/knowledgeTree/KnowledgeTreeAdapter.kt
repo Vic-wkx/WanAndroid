@@ -2,6 +2,7 @@ package com.wkxjc.wanandroid.knowledgeTree
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
@@ -38,6 +39,7 @@ class KnowledgeTreeAdapter(val displayedKnowledgeTrees: MutableList<DisplayedKno
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is GroupViewHolder -> {
+                holder.binding.lineTop.visibility = if (position == 0) View.GONE else View.VISIBLE
                 holder.binding.tvKnowledgeTreeGroupTitle.text = displayedKnowledgeTrees[position].name
             }
             is ChildViewHolder -> {

@@ -2,6 +2,7 @@ package com.wkxjc.wanandroid.navigation
 
 import android.content.Context
 import android.graphics.Paint
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import com.wkxjc.wanandroid.databinding.ItemNavigationGroupBinding
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.NavigationBean
 import com.wkxjc.wanandroid.home.common.bean.Navigations
-
 
 class NavigationExpandableAdapter(private val context: Context?, private val navigations: Navigations = Navigations()) : HeaderPinnedExpandableListAdapter() {
 
@@ -27,6 +27,9 @@ class NavigationExpandableAdapter(private val context: Context?, private val nav
         // Draw underline
         binding.tvNavigationChildTitle.paint.flags = Paint.UNDERLINE_TEXT_FLAG
         binding.tvNavigationChildTitle.text = getChild(groupPosition, childPosition).title
+        if (childPosition % 2 == 0) {
+            binding.root.background = ColorDrawable(context!!.getColor(R.color.blue_light))
+        }
         return binding.root
     }
 
@@ -35,10 +38,7 @@ class NavigationExpandableAdapter(private val context: Context?, private val nav
         notifyDataSetChanged()
     }
 
-    override fun getHeaderView(parent: ViewGroup): View {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_navigation_group, parent, false)
-        return view
-    }
+    override fun getHeaderView(parent: ViewGroup) = LayoutInflater.from(context).inflate(R.layout.item_navigation_group, parent, false)
 
     override fun onUpdateHeaderView(firstVisibleGroupPosition: Int, headerView: View?) {
         val tvNavigationGroupTitle = headerView?.findViewById<TextView>(R.id.tvNavigationGroupTitle)

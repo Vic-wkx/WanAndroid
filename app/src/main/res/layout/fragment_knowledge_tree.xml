@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".knowledgeTree.KnowledgeTreeActivity">
+    tools:context=".knowledgeTree.knowledgeTreeArticles.KnowledgeTreeArticlesActivity">
 
-    <ExpandableListView
-        android:id="@+id/elvKnowledgeTree"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvKnowledgeTree"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

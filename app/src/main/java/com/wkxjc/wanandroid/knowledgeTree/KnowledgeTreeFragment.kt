@@ -1,38 +1,48 @@
 package com.wkxjc.wanandroid.knowledgeTree
 
+import androidx.recyclerview.widget.GridLayoutManager
 import com.base.library.project.BaseFragment
-import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
+import com.lewis.widget.ui.Status
+import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.databinding.FragmentKnowledgeTreeBinding
 import com.wkxjc.wanandroid.home.common.api.KnowledgeTreeApi
-import com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles.CATEGORY_ID
-import com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles.KnowledgeTreeArticlesActivity
 
 
 class KnowledgeTreeFragment : BaseFragment<FragmentKnowledgeTreeBinding>() {
 
     private val httpManager = HttpManager(this)
     private val knowledgeTreeApi = KnowledgeTreeApi()
-    private val knowledgeTreeAdapter = KnowledgeTreeExpandableAdapter()
+    private val knowledgeTreeAdapter = KnowledgeTreeAdapter()
+    private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             knowledgeTreeAdapter.refresh(knowledgeTreeApi.convert(result))
+            statusView.setStatus(Status.NORMAL)
         }
 
         override fun onError(error: Throwable) {
+            statusView.setStatus(Status.ERROR)
         }
     }
 
     override fun initView() {
-        binding.elvKnowledgeTree.setAdapter(knowledgeTreeAdapter)
-        binding.elvKnowledgeTree.setOnChildClickListener { expandableListView, view, groupPosition, childPosition, childId ->
-            myStartActivity<KnowledgeTreeArticlesActivity>(CATEGORY_ID to knowledgeTreeAdapter.getChild(groupPosition, childPosition).id)
-            true
+        val gridLayoutManager = GridLayoutManager(context, 3)
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return knowledgeTreeAdapter.getSpanSize(position)
+            }
         }
+        statusView.setOnRetryBtnClickListener {
+            initData()
+        }
+        binding.rvKnowledgeTree.layoutManager = gridLayoutManager
+        binding.rvKnowledgeTree.adapter = knowledgeTreeAdapter
     }
 
     override fun initData() {
+        statusView.setStatus(Status.LOADING)
         httpManager.request(knowledgeTreeApi, listener)
     }
 

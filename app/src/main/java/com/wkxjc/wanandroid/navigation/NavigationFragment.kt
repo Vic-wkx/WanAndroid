@@ -22,6 +22,10 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
         override fun onNext(result: String) {
             statusView.setStatus(Status.NORMAL)
             navigationExpandableAdapter.refresh(navigationApi.convert(result))
+            // Expand all groups
+            repeat(navigationExpandableAdapter.groupCount) {
+                binding.elvNavigation.expandableListView?.expandGroup(it)
+            }
         }
 
         override fun onError(error: Throwable) {

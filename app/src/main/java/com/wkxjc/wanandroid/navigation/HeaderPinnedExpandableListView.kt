@@ -29,14 +29,6 @@ class HeaderPinnedExpandableListView(context: Context, attrs: AttributeSet) : Fr
                     val position = getGroupPosition(firstVisibleItem)
                     if (firstVisibleGroupPosition != position) {
                         headerPinnedExpandableListAdapter?.onUpdateHeaderView(position, headerView)
-                        headerView?.setOnClickListener {
-                            if (expandableListView?.isGroupExpanded(position) == true) {
-                                expandableListView?.collapseGroup(position)
-                            } else {
-                                expandableListView?.expandGroup(position)
-                            }
-                            expandableListView?.smoothScrollToPosition(position)
-                        }
                         firstVisibleGroupPosition = position
                     }
                     translateHeaderViewVertically(position)
@@ -75,6 +67,10 @@ class HeaderPinnedExpandableListView(context: Context, attrs: AttributeSet) : Fr
         expandableListView?.setAdapter(adapter)
         headerView = adapter.getHeaderView(this)
         addView(headerView)
+        // Interpret headerView clickListener.
+        headerView?.setOnClickListener(null)
+        // Interpret expandableListView Group Click Listener, so that this expandableListView cannot expand/collapse.
+        expandableListView?.setOnGroupClickListener { parent, v, groupPosition, id -> true }
         headerPinnedExpandableListAdapter = adapter
     }
 

@@ -5,12 +5,10 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
-import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
-import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsArticlesBinding
 import com.wkxjc.wanandroid.home.common.api.PublicAccountsArticlesApi
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsViewModel
@@ -44,7 +42,7 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
     }
     private val publicAccountsArticlesLoadMoreListener = object : HttpListener() {
         override fun onNext(result: String) {
-            publicAccountArticlesAdapter.addMore(publicAccountArticlesApi.convert(result))
+            publicAccountArticlesAdapter.loadMore(publicAccountArticlesApi.convert(result))
         }
 
         override fun onError(error: Throwable) {

@@ -20,7 +20,6 @@ import com.wkxjc.wanandroid.home.common.bean.BannerBean
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import com.wkxjc.wanandroid.me.user.User
 import com.youth.banner.listener.OnBannerListener
-import java.util.*
 
 
 const val BANNER = 0x1
@@ -88,7 +87,7 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                     bean.collect = !bean.collect
                     notifyItemChanged(position)
                 }
-                if (position - HEADER_COUNT >= homeBean.articles.datas.size - 1 - PRE_LOAD && !isLoadingMore) {
+                if (position - HEADER_COUNT >= homeBean.articles.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true
                     loadMore.invoke()
                 }
@@ -117,7 +116,7 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
             noMore = true
             notifyItemChanged(itemCount - 1)
         } else {
-            homeBean.addMore(articles)
+            homeBean.loadMore(articles)
             notifyDataSetChanged()
         }
         isLoadingMore = false

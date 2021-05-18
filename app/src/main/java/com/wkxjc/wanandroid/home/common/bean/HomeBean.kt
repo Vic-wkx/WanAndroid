@@ -9,7 +9,7 @@ data class HomeBean(
         this.articles.refresh(articles)
     }
 
-    fun addMore(articles: Articles) {
-        this.articles.addMore(articles)
+    fun loadMore(articles: Articles) {
+        this.articles.loadMore(articles)
     }
 }

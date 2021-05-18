@@ -76,8 +76,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         override fun onError(error: Throwable) {
             homeAdapter.isLoadingMore = false
+            statusView.setStatus(Status.ERROR)
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

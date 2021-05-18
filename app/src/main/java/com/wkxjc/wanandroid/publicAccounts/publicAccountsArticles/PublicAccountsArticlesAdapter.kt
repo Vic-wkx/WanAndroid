@@ -63,7 +63,7 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
                 holder.binding.root.setOnClickListener {
                     context.myStartActivity<WebActivity>(LINK to bean.link)
                 }
-                if (position >= articles.datas.size - 1 - PRE_LOAD && !isLoadingMore) {
+                if (position >= articles.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true
                     loadMore.invoke()
                 }
@@ -76,10 +76,6 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
     }
 
     override fun getItemViewType(position: Int): Int {
-        return getViewTypeByPosition(position)
-    }
-
-    private fun getViewTypeByPosition(position: Int): Int {
         return when (position) {
             itemCount - 1 -> LOAD_MORE
             else -> ARTICLE
@@ -93,12 +89,12 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
         notifyDataSetChanged()
     }
 
-    fun addMore(articles: Articles) {
+    fun loadMore(articles: Articles) {
         if (articles.datas.isNullOrEmpty()) {
             noMore = true
             notifyItemChanged(itemCount - 1)
         } else {
-            this.articles.addMore(articles)
+            this.articles.loadMore(articles)
             notifyDataSetChanged()
         }
         isLoadingMore = false

@@ -5,7 +5,7 @@ import com.base.library.rxRetrofit.http.api.BaseApi
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import io.reactivex.Observable
 
-class KnowledgeTreeArticleApi(private val categoryId: Int, private var page: Int = 0) : BaseApi() {
+class KnowledgeTreeArticlesApi(private val categoryId: Int, var page: Int = 0) : BaseApi() {
 
     override fun getObservable(): Observable<String> {
         val apiService = retrofit.create(ApiService::class.java)

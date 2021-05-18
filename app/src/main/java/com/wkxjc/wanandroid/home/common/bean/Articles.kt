@@ -14,7 +14,7 @@ data class Articles(
         datas.addAll(articles.datas)
     }
 
-    fun addMore(articles: Articles) {
+    fun loadMore(articles: Articles) {
         datas.addAll(articles.datas)
     }
 }

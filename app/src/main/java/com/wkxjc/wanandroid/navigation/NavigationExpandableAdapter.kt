@@ -29,6 +29,8 @@ class NavigationExpandableAdapter(private val context: Context?, private val nav
         binding.tvNavigationChildTitle.text = getChild(groupPosition, childPosition).title
         if (childPosition % 2 == 0) {
             binding.root.background = ColorDrawable(context!!.getColor(R.color.blue_light))
+        } else {
+            binding.root.background = ColorDrawable(context!!.getColor(R.color.white))
         }
         return binding.root
     }

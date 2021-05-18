@@ -1,29 +1,31 @@
-package com.wkxjc.wanandroid.me.login
+package com.wkxjc.wanandroid.me
 
-import com.base.library.project.BaseActivity
+import androidx.fragment.app.activityViewModels
+import com.base.library.project.BaseDialogFragment
 import com.base.library.project.myStartActivity
 import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
-import com.wkxjc.wanandroid.MyApplication
-import com.wkxjc.wanandroid.databinding.ActivityLoginBinding
+import com.wkxjc.wanandroid.databinding.DialogLoginBinding
 import com.wkxjc.wanandroid.me.common.api.LoginApi
 import com.wkxjc.wanandroid.me.login.register.RegisterActivity
-import com.wkxjc.wanandroid.me.NonTouristUser
 
+class LoginDialog : BaseDialogFragment<DialogLoginBinding>() {
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val httpManager = HttpManager(this)
     private val loginApi = LoginApi()
+    private val meViewModel by activityViewModels<MeViewModel>()
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             val loginBean = loginApi.convert(result)
             showToast("login success")
-            MyApplication.user.loginOn(loginBean.publicName)
-            finish()
+            meViewModel.user.value?.loginOn(loginBean.publicName)
+            meViewModel.user.value = NonTourist()
+            dismiss()
         }
 
         override fun onError(error: Throwable) {
+            showToast("login fail")
             binding.btnLogin.isEnabled = true
         }
     }
@@ -38,6 +40,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         }
         binding.btnGoToRegister.setOnClickListener {
             myStartActivity<RegisterActivity>()
+            dismiss()
         }
     }
 

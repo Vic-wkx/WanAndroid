@@ -19,14 +19,14 @@
 
             <ImageView
                 android:id="@+id/ivAvatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_margin="22dp"
                 android:contentDescription="@string/avatar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@mipmap/ic_launcher" />
+                tools:src="@drawable/ic_avatar_non_tourist_fallback" />
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -38,13 +38,11 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@id/tvUserDescription"
                 app:layout_constraintEnd_toStartOf="@id/btnLogin"
                 app:layout_constraintStart_toEndOf="@id/ivAvatar"
                 app:layout_constraintTop_toTopOf="@id/ivAvatar"
-                tools:text="游客游客游客游客游客游客游客游客游客游客游客游客游客游客"
-                tools:visibility="visible" />
+                tools:text="游客游客游客游客游客游客游客游客游客游客游客游客游客游客" />
 
             <TextView
                 android:id="@+id/tvUserDescription"

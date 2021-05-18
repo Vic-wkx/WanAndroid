@@ -3,6 +3,7 @@ package com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
@@ -11,31 +12,22 @@ import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
-import com.wkxjc.wanandroid.MyApplication
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsArticlesBinding
-import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.api.PublicAccountsArticlesApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
-import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
-import com.wkxjc.wanandroid.me.NonTouristUser
+import com.wkxjc.wanandroid.me.MeViewModel
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsViewModel
 
 class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticlesBinding>() {
-    // loadMore page++
-    // PublicAccountsFragment observe page
-    // observe api
-    // MergedLiveData
-    // articles refresh -> articles
-    // scroll flag page++ no, id change, yes
-    // id observe scroll
     private val viewModel by activityViewModels<PublicAccountsViewModel>()
     private val publicAccountArticlesAdapter by lazy { PublicAccountsArticlesAdapter() }
     private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
     private val httpManager = HttpManager(this)
     private val publicAccountArticlesApi by lazy { PublicAccountsArticlesApi() }
+    private val meViewModel by activityViewModels<MeViewModel>()
 
     private val publicAccountsArticlesListener = object : HttpListener() {
         override fun onNext(result: String) {
@@ -78,14 +70,14 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
         publicAccountArticlesAdapter.loadMore = {
             viewModel.currentPublicAccountsArticlesPage.value = viewModel.currentPublicAccountsArticlesPage.value!! + 1
         }
-        viewModel.publicAccountsArticles.observe(this, {
+        viewModel.publicAccountsArticles.observe(viewLifecycleOwner, Observer {
             publicAccountArticlesAdapter.refresh(it)
         })
-        viewModel.publicAccountsArticlesStatus.observe(this, {
+        viewModel.publicAccountsArticlesStatus.observe(viewLifecycleOwner, {
             statusView.setStatus(it)
         })
 
-        viewModel.currentPublicAccountsAuthorId.observe(this, {
+        viewModel.currentPublicAccountsAuthorId.observe(viewLifecycleOwner, {
             viewModel.publicAccountsArticlesStatus.value = Status.LOADING
             viewModel.currentPublicAccountsArticlesPage.value = 0
             httpManager.request(publicAccountArticlesApi.apply {
@@ -103,7 +95,7 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
 
     private fun onItemClick(view: View, bean: ArticleBean, position: Int) {
         when (view.id) {
-            R.id.ivCollect -> MyApplication.user.onClickCollect(httpManager, bean, publicAccountArticlesAdapter, position)
+            R.id.ivCollect -> meViewModel.user.value?.onClickCollect(httpManager, bean, publicAccountArticlesAdapter, position)
             else -> myStartActivity<WebActivity>(LINK to bean.link)
         }
     }

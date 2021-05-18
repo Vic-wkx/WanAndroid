@@ -26,4 +26,5 @@
     <string name="avatar">头像</string>
     <string name="stay_tuned">敬请期待</string>
     <string name="tourist">游客</string>
+    <string name="stay_tuned_hint">别等了，累了，不会更新了</string>
 </resources>

@@ -2,6 +2,7 @@ package com.wkxjc.wanandroid.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,6 @@ import com.base.library.rxRetrofit.http.httpList.HttpListListener
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
-import com.wkxjc.wanandroid.MyApplication
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
@@ -23,6 +23,7 @@ import com.wkxjc.wanandroid.home.common.api.ArticleApi
 import com.wkxjc.wanandroid.home.common.api.BannerApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
+import com.wkxjc.wanandroid.me.MeViewModel
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -33,6 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val articleApi = ArticleApi()
     private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
     private val homeAdapter by lazy { HomeAdapter() }
+    private val meViewModel by activityViewModels<MeViewModel>()
 
     private val homeListListener = object : HttpListListener() {
         override fun onNext(resultMap: HashMap<BaseApi, Any>) {
@@ -102,7 +104,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun onItemClick(view: View, bean: ArticleBean, position: Int) {
         when (view.id) {
-            R.id.ivCollect -> MyApplication.user.onClickCollect(httpManager, bean, homeAdapter, position)
+            R.id.ivCollect -> meViewModel.user.value?.onClickCollect(httpManager, bean, homeAdapter, position)
             else -> myStartActivity<WebActivity>(LINK to bean.link)
         }
     }

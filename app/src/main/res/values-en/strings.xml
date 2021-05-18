@@ -25,4 +25,5 @@
     <string name="avatar">Avatar</string>
     <string name="stay_tuned">Stay tuned</string>
     <string name="tourist">Tourist</string>
+    <string name="stay_tuned_hint">It\'s a big tune</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.wkxjc.wanandroid.me
 
-import android.app.Activity
 import android.content.Context
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.rxRetrofit.common.utils.SPUtils
 import com.base.library.rxRetrofit.http.HttpManager
@@ -18,9 +18,10 @@ interface User {
     val logonButtonDisplayedResId: Int
     val isLogon: Boolean
     val name: String
-    val avatar: String
+    val avatar: String?
+    val avatarFallbackResId: Int
     val description: String
-        get() = SPUtils.getInstance(LOGIN_INFO).getString(DESCRIPTION)
+        get() = SPUtils.getInstance(LOGIN_INFO).getString(DESCRIPTION).takeUnless { it.isNullOrBlank() } ?: "诶，就是玩儿～"
 
     fun loginOn(name: String) {
     }
@@ -30,7 +31,7 @@ interface User {
 
     fun onClickCollect(httpManager: HttpManager, bean: ArticleBean, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>, position: Int)
 
-    fun onClickLogon(context: Context)
+    fun onClickLogon(fragment: Fragment)
 
     fun onClickMyCollection(context: Context)
 

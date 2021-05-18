@@ -14,7 +14,6 @@
         <activity android:name=".me.user.collection.CollectionActivity" />
         <activity android:name=".me.user.todo.TodoActivity" />
         <activity android:name=".me.login.register.RegisterActivity" />
-        <activity android:name=".me.login.LoginActivity" />
         <activity android:name=".knowledgeTree.knowledgeTreeArticles.KnowledgeTreeArticlesActivity" />
         <activity android:name=".common.artical.WebActivity" />
         <activity android:name=".MainActivity" />

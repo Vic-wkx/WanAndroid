@@ -17,7 +17,7 @@
 
     <style name="tv_article_title">
         <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
+        <item name="android:maxLines">2</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
@@ -51,12 +51,9 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="iv_collect">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:contentDescription">@string/collect</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:src">@drawable/ic_collect</item>
+    <style name="tv_description">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
     </style>
 
 </resources>

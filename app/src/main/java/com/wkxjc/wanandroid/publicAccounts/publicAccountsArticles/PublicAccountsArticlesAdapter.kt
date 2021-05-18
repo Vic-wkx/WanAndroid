@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,7 +55,7 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
         when (holder) {
             is ArticleViewHolder -> {
                 val bean = articles.datas[position]
-                holder.binding.tvTitle.text = bean.title
+                holder.binding.tvTitle.text = Html.fromHtml(bean.title, Html.FROM_HTML_MODE_LEGACY)
                 holder.binding.tvTime.text = String.format(
                     context.getString(R.string.time_is), DateTimeFormatter.ofPattern("yyyy-MM-dd").format(
                         ZonedDateTime.ofInstant(

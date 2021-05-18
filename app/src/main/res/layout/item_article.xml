@@ -10,33 +10,67 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="3dp">
-
-        <ImageView
-            android:id="@+id/ivCollect"
-            style="@style/iv_collect"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:padding="4dp">
 
         <TextView
             android:id="@+id/tvTitle"
             style="@style/tv_article_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCollect"
+            app:layout_constraintEnd_toStartOf="@id/ivCollect"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivCollect"
+            tools:text="编程杂记 —— Git、ADB、Android Studio 的疑难杂症汇总。脚本就是用来解放双手的，Windows 有 VBScript，Mac 有 AppleScript！" />
+
+        <ImageView
+            android:id="@+id/ivCollect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/collect"
+            android:padding="8dp"
+            android:src="@drawable/ic_collect"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ivCollect"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="文章标题文章标题文章标题文章标题文章标题文章标题文章标题文章标题文章标题文章标题文章标题文章标题文章标题文章标题" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--1.618 is golden ratio-->
+        <ImageView
+            android:id="@+id/ivEnvelope"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:contentDescription="@string/envelope"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/tvAuthor"
+            app:layout_constraintDimensionRatio="1.618"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            style="@style/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@id/tvAuthor"
+            app:layout_constraintEnd_toStartOf="@id/ivEnvelope"
+            app:layout_constraintStart_toStartOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="工作、学习中总会遇到各种各样的问题，本篇文章笔者将亲历的一些问题记录下来，以便日后查阅。最近发现 windows 上有一个好玩的东西，叫做 VBScript，可以用来自动执行一些操作。" />
 
         <TextView
             android:id="@+id/tvAuthor"
             style="@style/tv_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintEnd_toStartOf="@id/tvTime"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintTop_toBottomOf="@id/ivEnvelope"
             tools:text="作者：AlpinistWangAlpinistWang" />
 
         <TextView
@@ -49,7 +83,5 @@
             app:layout_constraintStart_toEndOf="@id/tvAuthor"
             app:layout_constraintTop_toTopOf="@id/tvAuthor"
             tools:text="时间：2021-05-11 23:57" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

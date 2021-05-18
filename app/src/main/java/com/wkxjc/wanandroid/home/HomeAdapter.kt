@@ -1,11 +1,13 @@
 package com.wkxjc.wanandroid.home
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
+import com.bumptech.glide.Glide
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
@@ -64,7 +66,19 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
             }
             is ArticleViewHolder -> {
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]
-                holder.binding.tvTitle.text = bean.title
+                holder.binding.tvTitle.text = Html.fromHtml(bean.title, Html.FROM_HTML_MODE_LEGACY)
+                if (bean.desc.isNotEmpty()) {
+                    holder.binding.tvDescription.visibility = View.VISIBLE
+                    holder.binding.tvDescription.text = Html.fromHtml(bean.desc, Html.FROM_HTML_MODE_LEGACY)
+                } else {
+                    holder.binding.tvDescription.visibility = View.GONE
+                }
+                if (bean.envelopePic.isNotEmpty()) {
+                    holder.binding.ivEnvelope.visibility = View.VISIBLE
+                    Glide.with(context).load(bean.envelopePic).placeholder(R.drawable.ic_img_placeholder).into(holder.binding.ivEnvelope)
+                } else {
+                    holder.binding.ivEnvelope.visibility = View.GONE
+                }
                 if (bean.shareUser.isNotBlank()) {
                     holder.binding.tvAuthor.text = String.format(context.getString(R.string.sharer_is), bean.shareUser)
                     holder.binding.tvTime.text = String.format(context.getString(R.string.time_is), bean.niceShareDate)

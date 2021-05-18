@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.knowledgeTree
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,10 +41,10 @@ class KnowledgeTreeAdapter(val displayedKnowledgeTrees: MutableList<DisplayedKno
         when (holder) {
             is GroupViewHolder -> {
                 holder.binding.lineTop.visibility = if (position == 0) View.GONE else View.VISIBLE
-                holder.binding.tvKnowledgeTreeGroupTitle.text = displayedKnowledgeTrees[position].name
+                holder.binding.tvKnowledgeTreeGroupTitle.text = Html.fromHtml(displayedKnowledgeTrees[position].name, Html.FROM_HTML_MODE_LEGACY)
             }
             is ChildViewHolder -> {
-                holder.binding.btnKnowledgeTreeChildTitle.text = displayedKnowledgeTrees[position].name
+                holder.binding.btnKnowledgeTreeChildTitle.text = Html.fromHtml(displayedKnowledgeTrees[position].name, Html.FROM_HTML_MODE_LEGACY)
                 holder.binding.btnKnowledgeTreeChildTitle.setOnClickListener {
                     context.myStartActivity<KnowledgeTreeArticlesActivity>(CATEGORY_ID to displayedKnowledgeTrees[position].id)
                 }
@@ -67,6 +68,6 @@ class KnowledgeTreeAdapter(val displayedKnowledgeTrees: MutableList<DisplayedKno
     }
 
     fun getSpanSize(position: Int): Int {
-        return if (displayedKnowledgeTrees[position].type == KnowledgeTreeType.GROUP) 3 else 1
+        return if (displayedKnowledgeTrees[position].type == KnowledgeTreeType.GROUP) SPAN_COUNT else 1
     }
 }

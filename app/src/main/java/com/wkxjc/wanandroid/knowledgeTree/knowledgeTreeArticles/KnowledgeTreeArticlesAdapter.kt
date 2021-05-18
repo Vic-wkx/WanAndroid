@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +50,7 @@ class KnowledgeTreeArticlesAdapter(private val articles: Articles = Articles()) 
         when (holder) {
             is ArticleViewHolder -> {
                 val bean = articles.datas[position]
-                holder.binding.tvTitle.text = bean.title
+                holder.binding.tvTitle.text = Html.fromHtml(bean.title, Html.FROM_HTML_MODE_LEGACY)
                 if (bean.shareUser.isNotBlank()) {
                     holder.binding.tvAuthor.text = String.format(context.getString(R.string.sharer_is), bean.shareUser)
                     holder.binding.tvTime.text = String.format(context.getString(R.string.time_is), bean.niceShareDate)

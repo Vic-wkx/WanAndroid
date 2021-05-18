@@ -9,7 +9,7 @@ import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.databinding.FragmentKnowledgeTreeBinding
 import com.wkxjc.wanandroid.home.common.api.KnowledgeTreeApi
 
-
+const val SPAN_COUNT = 4
 class KnowledgeTreeFragment : BaseFragment<FragmentKnowledgeTreeBinding>() {
 
     private val httpManager = HttpManager(this)
@@ -28,7 +28,7 @@ class KnowledgeTreeFragment : BaseFragment<FragmentKnowledgeTreeBinding>() {
     }
 
     override fun initView() {
-        val gridLayoutManager = GridLayoutManager(context, 3)
+        val gridLayoutManager = GridLayoutManager(context, SPAN_COUNT)
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return knowledgeTreeAdapter.getSpanSize(position)

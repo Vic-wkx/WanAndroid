@@ -14,12 +14,10 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="2"
+        app:layout_constraintDimensionRatio="1.618"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Android Studio 相关Android Studio 相关Android Studio 相关Android Studio 相关Android Studio 相关" />
 </androidx.constraintlayout.widget.ConstraintLayout>

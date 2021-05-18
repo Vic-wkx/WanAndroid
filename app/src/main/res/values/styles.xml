@@ -12,6 +12,7 @@
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_splash</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowActionBar">false</item>
     </style>
 
     <style name="tv_article_title">
@@ -44,10 +45,18 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="style_loading_more">
+    <style name="tv_loading_more">
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="iv_collect">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:contentDescription">@string/collect</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:src">@drawable/ic_collect</item>
     </style>
 
 </resources>

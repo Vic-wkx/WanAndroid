@@ -3,14 +3,23 @@ package com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
+import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
+import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.common.artical.LINK
+import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsArticlesBinding
+import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.api.PublicAccountsArticlesApi
+import com.wkxjc.wanandroid.home.common.bean.ArticleBean
+import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
+import com.wkxjc.wanandroid.me.user.User
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsViewModel
 
 class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticlesBinding>() {
@@ -64,6 +73,7 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
             // Let LiveData refresh
             viewModel.currentPublicAccountsAuthorId.value = viewModel.currentPublicAccountsAuthorId.value
         }
+        publicAccountArticlesAdapter.onItemClickListener = ::onItemClick
         publicAccountArticlesAdapter.loadMore = {
             viewModel.currentPublicAccountsArticlesPage.value = viewModel.currentPublicAccountsArticlesPage.value!! + 1
         }
@@ -88,5 +98,17 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
                 page = it
             }, publicAccountsArticlesLoadMoreListener)
         })
+    }
+
+    private fun onItemClick(view: View, bean: ArticleBean, position: Int) {
+        when (view.id) {
+            R.id.ivCollect -> {
+                if (User.isNotLogon()) return
+                httpManager.request(if (bean.collect) HomePageCancelCollectionApi(bean.id) else CollectApi(bean.id))
+                bean.collect = !bean.collect
+                publicAccountArticlesAdapter.notifyItemChanged(position)
+            }
+            else -> myStartActivity<WebActivity>(LINK to bean.link)
+        }
     }
 }

@@ -24,6 +24,7 @@ import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
 import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
+import com.wkxjc.wanandroid.me.user.User
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -32,24 +33,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val httpManager = HttpManager(this)
     private val bannerApi = BannerApi()
     private val articleApi = ArticleApi()
-    private val collectApi = CollectApi()
     private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
-    private val homePageCancelCollectionApi = HomePageCancelCollectionApi()
     private val homeAdapter by lazy { HomeAdapter() }
-    private val collectListener = object : HttpListener() {
-        override fun onNext(result: String) {
-        }
 
-        override fun onError(error: Throwable) {
-        }
-    }
-    private val homePageCancelCollectionListener = object : HttpListener() {
-        override fun onNext(result: String) {
-        }
-
-        override fun onError(error: Throwable) {
-        }
-    }
     private val homeListListener = object : HttpListListener() {
         override fun onNext(resultMap: HashMap<BaseApi, Any>) {
             viewModel.isRefreshing.value = false
@@ -116,16 +102,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         httpManager.request(arrayOf(bannerApi, articleApi), homeListListener, HttpListConfig(order = true))
     }
 
-    private fun onItemClick(view: View, bean: ArticleBean) {
+    private fun onItemClick(view: View, bean: ArticleBean, position: Int) {
         when (view.id) {
-            R.id.ivCollect -> if (bean.collect) {
-                httpManager.request(homePageCancelCollectionApi.apply {
-                    articleId = bean.id
-                }, homePageCancelCollectionListener)
-            } else {
-                httpManager.request(collectApi.apply {
-                    articleId = bean.id
-                }, collectListener)
+            R.id.ivCollect -> {
+                if (User.isNotLogon()) return
+                httpManager.request(if (bean.collect) HomePageCancelCollectionApi(bean.id) else CollectApi(bean.id))
+                // Directly display succeed UI, maybe it's not a normal process, but I think it's more user-friendly
+                bean.collect = !bean.collect
+                homeAdapter.notifyItemChanged(position)
             }
             else -> myStartActivity<WebActivity>(LINK to bean.link)
         }

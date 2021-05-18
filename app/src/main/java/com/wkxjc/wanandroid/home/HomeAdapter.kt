@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
-import com.base.library.project.showToast
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
@@ -18,7 +17,6 @@ import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.Articles
 import com.wkxjc.wanandroid.home.common.bean.BannerBean
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
-import com.wkxjc.wanandroid.me.user.User
 import com.youth.banner.listener.OnBannerListener
 
 
@@ -33,7 +31,7 @@ const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 const val PRE_LOAD = 10
 
 class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    lateinit var onItemClickListener: (view: View, bean: ArticleBean) -> Unit
+    lateinit var onItemClickListener: (View, ArticleBean, Int) -> Unit
     lateinit var loadMore: () -> Unit
     var isLoadingMore = false
     private lateinit var context: Context
@@ -75,17 +73,11 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                     holder.binding.tvTime.text = String.format(context.getString(R.string.time_is), bean.niceDate)
                 }
                 holder.binding.root.setOnClickListener {
-                    onItemClickListener.invoke(it, bean)
+                    onItemClickListener.invoke(it, bean, position)
                 }
                 holder.binding.ivCollect.setImageResource(if (bean.collect) R.drawable.ic_collected else R.drawable.ic_collect)
                 holder.binding.ivCollect.setOnClickListener {
-                    if (!User.isLogon) {
-                        context.showToast(R.string.please_login_first)
-                        return@setOnClickListener
-                    }
-                    onItemClickListener.invoke(it, bean)
-                    bean.collect = !bean.collect
-                    notifyItemChanged(position)
+                    onItemClickListener.invoke(it, bean, position)
                 }
                 if (position - HEADER_COUNT >= homeBean.articles.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true

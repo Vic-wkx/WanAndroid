@@ -21,7 +21,7 @@ object LanguageUtils {
 
     fun changeLanguage(context: Context, language: String) {
         if (this.language == language) {
-            context.showToast(R.string.no_need_change_language_hint)
+            showToast(R.string.no_need_change_language_hint)
             return
         }
         SPUtils.getInstance().put(LANGUAGE, language)

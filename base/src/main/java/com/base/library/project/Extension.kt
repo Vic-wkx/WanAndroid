@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.base.library.BaseApp
 import java.lang.reflect.ParameterizedType
 
 inline fun <reified T : Context> Context.myStartActivity(vararg pairs: Pair<String, Any?>) =
@@ -23,12 +24,12 @@ inline fun <reified T : Context> Context.myStartActivity(vararg pairs: Pair<Stri
 
 inline fun <reified T : Context> Fragment.myStartActivity(vararg pairs: Pair<String, Any?>) = context?.myStartActivity<T>(*pairs)
 
-fun Context.showToast(content: String) {
-    Toast.makeText(this, content, Toast.LENGTH_SHORT).show()
+fun showToast(content: String) {
+    Toast.makeText(BaseApp.application, content, Toast.LENGTH_SHORT).show()
 }
 
-fun Context.showToast(@StringRes content: Int) {
-    Toast.makeText(this, content, Toast.LENGTH_SHORT).show()
+fun showToast(@StringRes content: Int) {
+    Toast.makeText(BaseApp.application, content, Toast.LENGTH_SHORT).show()
 }
 
 fun Activity.initViewBinding(): ViewBinding {

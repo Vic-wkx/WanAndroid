@@ -11,7 +11,9 @@ import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
 import com.wkxjc.wanandroid.databinding.ItemPublicAccountsArticleBinding
+import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.Articles
+import com.wkxjc.wanandroid.me.user.User
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -31,6 +33,7 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
 
     var isLoadingMore = false
     lateinit var loadMore: () -> Unit
+    lateinit var onItemClickListener: (View, ArticleBean, Int) -> Unit
     private lateinit var context: Context
     private var noMore = false
 
@@ -61,7 +64,11 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
                     )
                 )
                 holder.binding.root.setOnClickListener {
-                    context.myStartActivity<WebActivity>(LINK to bean.link)
+                    onItemClickListener.invoke(it, bean, position)
+                }
+                holder.binding.ivCollect.setImageResource(if (bean.collect) R.drawable.ic_collected else R.drawable.ic_collect)
+                holder.binding.ivCollect.setOnClickListener {
+                    onItemClickListener.invoke(it, bean, position)
                 }
                 if (position >= articles.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true

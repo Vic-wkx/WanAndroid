@@ -13,6 +13,7 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@string/navigation"
         android:src="@drawable/ic_navigation_title"
         app:layout_constraintBottom_toBottomOf="@id/tvNavigationGroupTitle"
         app:layout_constraintStart_toStartOf="parent"

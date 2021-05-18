@@ -1,13 +1,22 @@
 package com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles
 
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
+import com.base.library.project.myStartActivity
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
+import com.wkxjc.wanandroid.R
+import com.wkxjc.wanandroid.common.artical.LINK
+import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.ActivityKnowledgeTreeArticlesBinding
+import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.api.KnowledgeTreeArticlesApi
+import com.wkxjc.wanandroid.home.common.bean.ArticleBean
+import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
+import com.wkxjc.wanandroid.me.user.User
 
 
 const val CATEGORY_ID = "categoryId"
@@ -42,6 +51,7 @@ class KnowledgeTreeArticlesActivity : BaseActivity<ActivityKnowledgeTreeArticles
     override fun initView() {
         binding.rvKnowledgeTreeArticles.layoutManager = LinearLayoutManager(this)
         knowledgeTreeArticlesAdapter.loadMore = ::loadMore
+        knowledgeTreeArticlesAdapter.onItemClickListener = ::onItemClick
         binding.rvKnowledgeTreeArticles.adapter = knowledgeTreeArticlesAdapter
         statusView.setOnRetryBtnClickListener {
             initData()
@@ -53,7 +63,19 @@ class KnowledgeTreeArticlesActivity : BaseActivity<ActivityKnowledgeTreeArticles
         httpManager.request(knowledgeTreeArticlesApi, knowledgeTreeArticlesListener)
     }
 
-    fun loadMore() {
+    private fun onItemClick(view: View, bean: ArticleBean, position: Int) {
+        when (view.id) {
+            R.id.ivCollect -> {
+                if (User.isNotLogon()) return
+                httpManager.request(if (bean.collect) HomePageCancelCollectionApi(bean.id) else CollectApi(bean.id))
+                bean.collect = !bean.collect
+                knowledgeTreeArticlesAdapter.notifyItemChanged(position)
+            }
+            else -> myStartActivity<WebActivity>(LINK to bean.link)
+        }
+    }
+
+    private fun loadMore() {
         httpManager.request(knowledgeTreeArticlesApi.apply { page++ }, knowledgeTreeArticlesLoadMoreListener)
     }
 }

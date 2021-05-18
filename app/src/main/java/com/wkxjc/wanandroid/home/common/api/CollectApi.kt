@@ -8,8 +8,7 @@ import com.wkxjc.wanandroid.me.common.api.LOGIN_INFO
 import io.reactivex.Observable
 import okhttp3.Headers
 
-class CollectApi : BaseApi() {
-    var articleId = 0
+class CollectApi(var articleId: Int) : BaseApi() {
 
     override fun getObservable(): Observable<String> {
         apiConfig.headers = Headers.headersOf(COOKIE_HEADER_KEY, SPUtils.getInstance(LOGIN_INFO).getString(COOKIE))

@@ -6,8 +6,7 @@ import com.wkxjc.wanandroid.home.common.api.ApiService
 import io.reactivex.Observable
 import okhttp3.Headers
 
-class HomePageCancelCollectionApi : BaseApi() {
-    var articleId = 0
+class HomePageCancelCollectionApi(var articleId: Int) : BaseApi() {
 
     override fun getObservable(): Observable<String> {
         apiConfig.headers = Headers.headersOf(COOKIE_HEADER_KEY, SPUtils.getInstance(LOGIN_INFO).getString(COOKIE))

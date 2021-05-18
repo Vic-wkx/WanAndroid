@@ -12,6 +12,7 @@ import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.ItemKnowledgeTreeArticleBinding
 import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
 import com.wkxjc.wanandroid.databinding.ItemPublicAccountsArticleBinding
+import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.Articles
 
 const val ARTICLE = 0x1
@@ -22,8 +23,10 @@ const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
 // preload more articles for better user experience
 const val PRE_LOAD = 10
+
 class KnowledgeTreeArticlesAdapter(private val articles: Articles = Articles()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    lateinit var onItemClickListener: (View, ArticleBean, Int) -> Unit
     var isLoadingMore: Boolean = false
     lateinit var loadMore: () -> Unit
     private lateinit var context: Context
@@ -34,7 +37,7 @@ class KnowledgeTreeArticlesAdapter(private val articles: Articles = Articles()) 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
-        return when(viewType) {
+        return when (viewType) {
             LOAD_MORE -> LoadMoreViewHolder(ItemLoadMoreBinding.inflate(LayoutInflater.from(context), parent, false))
             else -> ArticleViewHolder(ItemKnowledgeTreeArticleBinding.inflate(LayoutInflater.from(context), parent, false))
         }
@@ -43,7 +46,7 @@ class KnowledgeTreeArticlesAdapter(private val articles: Articles = Articles()) 
     override fun getItemCount() = articles.datas.size + HEADER_FOOTER_COUNT
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
+        when (holder) {
             is ArticleViewHolder -> {
                 val bean = articles.datas[position]
                 holder.binding.tvTitle.text = bean.title
@@ -55,7 +58,11 @@ class KnowledgeTreeArticlesAdapter(private val articles: Articles = Articles()) 
                     holder.binding.tvTime.text = String.format(context.getString(R.string.time_is), bean.niceDate)
                 }
                 holder.binding.root.setOnClickListener {
-                    context.myStartActivity<WebActivity>(LINK to bean.link)
+                    onItemClickListener.invoke(it, bean, position)
+                }
+                holder.binding.ivCollect.setImageResource(if (bean.collect) R.drawable.ic_collected else R.drawable.ic_collect)
+                holder.binding.ivCollect.setOnClickListener {
+                    onItemClickListener.invoke(it, bean, position)
                 }
                 if (position - HEADER_COUNT >= articles.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true

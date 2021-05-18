@@ -11,6 +11,7 @@ import com.base.library.rxRetrofit.http.converter.HttpResultConverter
 import com.base.library.rxRetrofit.http.httpList.HttpListConfig
 import com.base.library.rxRetrofit.http.httpList.HttpListListener
 import com.base.library.rxRetrofit.http.httpList.HttpListObserver
+import com.base.library.rxRetrofit.http.listener.EmptyHttpListener
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.base.library.rxRetrofit.http.observer.HttpObserver
 import io.reactivex.Observable
@@ -45,7 +46,7 @@ class HttpManager {
     /**
      * 单个api请求
      */
-    fun request(api: BaseApi, listener: HttpListener) {
+    fun request(api: BaseApi, listener: HttpListener = EmptyHttpListener()) {
         api.getObservable()
             /*失败后retry处理控制*/
             .retryWhen(RetryFunction(api.apiConfig.retry))

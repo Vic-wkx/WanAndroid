@@ -6,15 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.common.artical.LINK
-import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
 import com.wkxjc.wanandroid.databinding.ItemPublicAccountsArticleBinding
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.Articles
-import com.wkxjc.wanandroid.me.user.User
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter

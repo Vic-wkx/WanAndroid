@@ -11,6 +11,7 @@ import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
+import com.wkxjc.wanandroid.MyApplication
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
@@ -19,7 +20,7 @@ import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.api.PublicAccountsArticlesApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
-import com.wkxjc.wanandroid.me.user.User
+import com.wkxjc.wanandroid.me.NonTouristUser
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsViewModel
 
 class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticlesBinding>() {
@@ -102,12 +103,7 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
 
     private fun onItemClick(view: View, bean: ArticleBean, position: Int) {
         when (view.id) {
-            R.id.ivCollect -> {
-                if (User.isNotLogon()) return
-                httpManager.request(if (bean.collect) HomePageCancelCollectionApi(bean.id) else CollectApi(bean.id))
-                bean.collect = !bean.collect
-                publicAccountArticlesAdapter.notifyItemChanged(position)
-            }
+            R.id.ivCollect -> MyApplication.user.onClickCollect(httpManager, bean, publicAccountArticlesAdapter, position)
             else -> myStartActivity<WebActivity>(LINK to bean.link)
         }
     }

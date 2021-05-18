@@ -22,4 +22,7 @@
     <string name="no_more_data">No more data</string>
     <string name="please_login_first">Please login first.</string>
     <string name="envelope">Envelope</string>
+    <string name="avatar">Avatar</string>
+    <string name="stay_tuned">Stay tuned</string>
+    <string name="tourist">Tourist</string>
 </resources>

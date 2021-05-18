@@ -14,17 +14,15 @@ import com.base.library.rxRetrofit.http.httpList.HttpListListener
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
+import com.wkxjc.wanandroid.MyApplication
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.FragmentHomeBinding
 import com.wkxjc.wanandroid.home.common.api.ArticleApi
 import com.wkxjc.wanandroid.home.common.api.BannerApi
-import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.home.common.bean.HomeBean
-import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
-import com.wkxjc.wanandroid.me.user.User
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -104,13 +102,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun onItemClick(view: View, bean: ArticleBean, position: Int) {
         when (view.id) {
-            R.id.ivCollect -> {
-                if (User.isNotLogon()) return
-                httpManager.request(if (bean.collect) HomePageCancelCollectionApi(bean.id) else CollectApi(bean.id))
-                // Directly display succeed UI, maybe it's not a normal process, but I think it's more user-friendly
-                bean.collect = !bean.collect
-                homeAdapter.notifyItemChanged(position)
-            }
+            R.id.ivCollect -> MyApplication.user.onClickCollect(httpManager, bean, homeAdapter, position)
             else -> myStartActivity<WebActivity>(LINK to bean.link)
         }
     }

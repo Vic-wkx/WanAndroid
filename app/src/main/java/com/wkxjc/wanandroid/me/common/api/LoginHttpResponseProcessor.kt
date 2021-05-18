@@ -3,16 +3,13 @@ package com.wkxjc.wanandroid.me.common.api
 import com.base.library.rxRetrofit.RxRetrofitApp
 import com.base.library.rxRetrofit.common.header.IHttpResponseProcessor
 import com.base.library.rxRetrofit.common.utils.SPUtils
+import com.wkxjc.wanandroid.me.LOGIN_INFO
 import okhttp3.Cookie
 import okhttp3.Request
 import okhttp3.Response
 
 const val COOKIE_HEADER_KEY = "Cookie"
 const val COOKIE = "Cookie"
-const val LOGIN_INFO = "login_info"
-const val IS_LOGIN = "IS_LOGIN"
-const val USER_NAME = "USER_NAME"
-const val PASSWORD = "PASSWORD"
 
 class LoginHttpResponseProcessor : IHttpResponseProcessor {
     override fun handleResponse(request: Request, response: Response): Response {

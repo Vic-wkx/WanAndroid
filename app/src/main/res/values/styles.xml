@@ -56,4 +56,9 @@
         <item name="android:maxLines">3</item>
     </style>
 
+    <style name="btn_user_center_option">
+        <item name="android:backgroundTint">@color/blue_link</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

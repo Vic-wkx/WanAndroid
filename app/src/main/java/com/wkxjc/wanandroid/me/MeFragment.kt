@@ -1,40 +1,37 @@
 package com.wkxjc.wanandroid.me
 
-import android.view.View
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
+import com.bumptech.glide.Glide
+import com.wkxjc.wanandroid.MyApplication
+import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.FragmentMeBinding
 import com.wkxjc.wanandroid.me.language.LanguageActivity
-import com.wkxjc.wanandroid.me.login.LoginActivity
-import com.wkxjc.wanandroid.me.user.User
-import com.wkxjc.wanandroid.me.user.UserActivity
 
 class MeFragment : BaseFragment<FragmentMeBinding>() {
 
     override fun initView() {
-        binding.tvUser.setOnClickListener {
-            myStartActivity<UserActivity>()
-        }
-        binding.btnLogin.setOnClickListener {
-            myStartActivity<LoginActivity>()
-        }
+
         binding.btnChangeLanguage.setOnClickListener {
             myStartActivity<LanguageActivity>()
         }
     }
 
     override fun initData() {
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (User.isLogon) {
-            binding.tvUser.text = User.name
-            binding.tvUser.visibility = View.VISIBLE
-            binding.btnLogin.visibility = View.GONE
-        } else {
-            binding.tvUser.visibility = View.GONE
-            binding.btnLogin.visibility = View.VISIBLE
+        val user = MyApplication.user
+        Glide.with(this).load(user.avatar).circleCrop().fallback(R.drawable.ic_avatar_tourist).into(binding.ivAvatar)
+        binding.tvUserName.text = user.name
+        binding.tvUserDescription.text = user.description
+        binding.btnLogin.setText(user.logonButtonDisplayedResId)
+        binding.btnLogin.setOnClickListener {
+            user.onClickLogon(context!!)
+        }
+        binding.btnMyCollection.setOnClickListener {
+            user.onClickMyCollection(context!!)
+        }
+        binding.btnMyTodo.setOnClickListener {
+            user.onClickMyTODO(context!!)
         }
     }
+
 }

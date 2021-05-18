@@ -5,6 +5,7 @@ import com.base.library.rxRetrofit.common.utils.SPUtils
 import com.base.library.rxRetrofit.http.api.BaseApi
 import com.wkxjc.wanandroid.home.common.api.ApiService
 import com.wkxjc.wanandroid.home.common.bean.Collections
+import com.wkxjc.wanandroid.me.LOGIN_INFO
 import io.reactivex.Observable
 import okhttp3.Headers
 

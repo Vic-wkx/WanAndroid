@@ -34,4 +34,8 @@
     <string name="are_you_sure_to_login_out">确定退出登陆吗？</string>
     <string name="yes">是</string>
     <string name="no">否</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="completed_todo">Completed Todo</string>
+    <string name="new_todo">New Todo</string>
 </resources>

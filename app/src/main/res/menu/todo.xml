@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/newTodo"
+        android:icon="@drawable/ic_new_todo"
+        android:showAsAction="always"
+        android:title="@string/new_todo"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+    <item
+        android:id="@+id/switchTodoStatus"
+        android:icon="@drawable/ic_completed_todo"
+        android:showAsAction="always"
+        android:title="@string/completed_todo"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+</menu>

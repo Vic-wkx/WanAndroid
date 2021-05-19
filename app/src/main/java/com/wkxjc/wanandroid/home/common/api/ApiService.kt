@@ -52,8 +52,8 @@ interface ApiService {
     @GET("lg/todo/v2/list/{page}/json")
     fun getTodoList(
         @Path("page") page: Int,
-        @Query("status") status: Int, @Query("type") type: Int,
-        @Query("priority") priority: Int, @Query("orderby") orderBy: Int
+        @Query("status") status: Int?, @Query("type") type: Int?,
+        @Query("priority") priority: Int?, @Query("orderby") orderBy: Int?
     ): Observable<String>
 
     // 仅更新完成状态TODO

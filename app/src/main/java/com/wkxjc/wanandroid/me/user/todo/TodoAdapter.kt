@@ -28,4 +28,14 @@ class TodoAdapter(private val todos: Todos = Todos()) : RecyclerView.Adapter<Tod
         this.todos.refresh(todos)
         notifyDataSetChanged()
     }
+
+    fun loadMore(todos: Todos) {
+        this.todos.loadMore(todos)
+        notifyDataSetChanged()
+    }
+
+    fun remove(position: Int) {
+        this.todos.datas.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }

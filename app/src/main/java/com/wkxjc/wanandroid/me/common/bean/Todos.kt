@@ -13,4 +13,8 @@ data class Todos(
         datas.clear()
         datas.addAll(todos.datas)
     }
+
+    fun loadMore(todos: Todos) {
+        datas.addAll(todos.datas)
+    }
 }

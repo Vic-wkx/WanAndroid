@@ -25,4 +25,8 @@ class CollectionApi : BaseApi() {
     fun convert(result: String): Collections {
         return JSON.parseObject(result, Collections::class.javaObjectType)
     }
+
+    fun nextPage() {
+        page++
+    }
 }

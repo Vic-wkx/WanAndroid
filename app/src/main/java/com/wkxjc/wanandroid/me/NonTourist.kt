@@ -10,6 +10,7 @@ import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.home.common.api.CollectApi
 import com.wkxjc.wanandroid.home.common.bean.ArticleBean
 import com.wkxjc.wanandroid.me.common.api.HomePageCancelCollectionApi
+import com.wkxjc.wanandroid.me.user.collection.CollectionActivity
 import com.wkxjc.wanandroid.me.user.todo.TodoActivity
 
 class NonTourist : User {
@@ -34,7 +35,7 @@ class NonTourist : User {
     }
 
     override fun onClickMyCollection(context: Context) {
-        context.myStartActivity<TodoActivity>()
+        context.myStartActivity<CollectionActivity>()
     }
 
     override fun onClickMyTODO(context: Context) {

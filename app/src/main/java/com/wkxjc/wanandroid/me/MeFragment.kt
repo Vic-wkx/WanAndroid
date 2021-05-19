@@ -1,5 +1,7 @@
 package com.wkxjc.wanandroid.me
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import com.base.library.project.BaseFragment
@@ -21,7 +23,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
 
     override fun initData() {
         meViewModel.user.observe(this) { user ->
-            Glide.with(this).load(user.avatar).circleCrop().fallback(user.avatarFallbackResId).into(binding.ivAvatar)
+            Glide.with(this).load(user.avatar).circleCrop().placeholder(ColorDrawable(Color.BLUE)).fallback(user.avatarFallbackResId).into(binding.ivAvatar)
             binding.tvUserName.text = user.name
             binding.tvUserDescription.text = user.description
             binding.btnLogin.setText(user.logonButtonDisplayedResId)

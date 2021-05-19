@@ -7,9 +7,10 @@ import com.wkxjc.wanandroid.me.LOGIN_INFO
 import io.reactivex.Observable
 import okhttp3.Headers
 
-class CollectionPageCancelCollectionApi : BaseApi() {
-    var articleId = 0
-    var originId = 0
+class CollectionPageCancelCollectionApi(
+    var articleId: Int,
+    var originId: Int
+) : BaseApi() {
 
     override fun getObservable(): Observable<String> {
         apiConfig.headers = Headers.headersOf(COOKIE_HEADER_KEY, SPUtils.getInstance(LOGIN_INFO).getString(COOKIE))

@@ -17,4 +17,8 @@ data class Collections(
     fun remove(position: Int) {
         datas.removeAt(position)
     }
+
+    fun loadMore(collections: Collections) {
+        datas.addAll(collections.datas)
+    }
 }

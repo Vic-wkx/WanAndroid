@@ -12,4 +12,5 @@
 	<color name="red_15">#26E64C3B</color>
 	<color name="blue_link">#3482DF</color>
 	<color name="blue_light">#F6FAFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

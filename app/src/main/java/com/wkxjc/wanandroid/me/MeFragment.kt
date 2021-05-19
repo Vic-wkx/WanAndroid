@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.me
 
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
 import com.base.library.project.showToast
@@ -13,14 +14,13 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
 
     private val meViewModel by activityViewModels<MeViewModel>()
     override fun initView() {
-
         binding.btnChangeLanguage.setOnClickListener {
             myStartActivity<LanguageActivity>()
         }
     }
 
     override fun initData() {
-        meViewModel.user.observe(this, { user ->
+        meViewModel.user.observe(this) { user ->
             Glide.with(this).load(user.avatar).circleCrop().fallback(user.avatarFallbackResId).into(binding.ivAvatar)
             binding.tvUserName.text = user.name
             binding.tvUserDescription.text = user.description
@@ -37,6 +37,6 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
             binding.btnWaiting.setOnClickListener {
                 showToast(getString(R.string.stay_tuned_hint))
             }
-        })
+        }
     }
 }

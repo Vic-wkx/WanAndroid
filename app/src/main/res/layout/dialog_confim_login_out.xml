@@ -1,28 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="350dp"
-    android:layout_height="215dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/bg_tag">
+    android:background="@drawable/bg_login_out"
+    tools:context=".me.ConfirmLoginOutDialog"
+    tools:layout_height="200dp"
+    tools:layout_width="300dp">
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/close"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvConfirmLoginOutTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="确定退出登陆吗？"
+        android:text="@string/are_you_sure_to_login_out"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/btnYes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/ivClose" />
 
     <Button
         android:id="@+id/btnYes"
         style="@style/btn_user_center_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="是"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="@string/yes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnNo"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +51,9 @@
         style="@style/btn_user_center_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="否"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="@string/no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnYes"
         app:layout_constraintTop_toTopOf="@id/btnYes" />

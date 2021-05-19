@@ -1,5 +1,7 @@
 package com.wkxjc.wanandroid.me
 
+import android.view.Gravity
+import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.base.library.project.BaseDialogFragment
 import com.base.library.project.myStartActivity
@@ -21,25 +23,35 @@ class LoginDialog : BaseDialogFragment<DialogLoginBinding>() {
             showToast("login success")
             meViewModel.user.value?.loginOn(loginBean.publicName)
             meViewModel.user.value = NonTourist()
+            binding.btnLogin.status = Status.NORMAL
             dismiss()
         }
 
         override fun onError(error: Throwable) {
             showToast("login fail")
+            binding.btnLogin.status = Status.NORMAL
             binding.btnLogin.isEnabled = true
         }
     }
+
+    override fun widthPercentage() = ViewGroup.LayoutParams.MATCH_PARENT
+    override fun heightPercentage() = ViewGroup.LayoutParams.MATCH_PARENT
+    override fun gravity() = Gravity.BOTTOM
 
     override fun initView() {
         binding.btnLogin.setOnClickListener {
             if (inputNotValid()) return@setOnClickListener
             it.isEnabled = false
+            binding.btnLogin.status = Status.LOADING
             loginApi.username = binding.etLoginUserName.text.toString()
             loginApi.password = binding.etLoginPassword.text.toString()
             httpManager.request(loginApi, listener)
         }
         binding.btnGoToRegister.setOnClickListener {
             myStartActivity<RegisterActivity>()
+            dismiss()
+        }
+        binding.ivClose.setOnClickListener {
             dismiss()
         }
     }

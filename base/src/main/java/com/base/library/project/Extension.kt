@@ -3,6 +3,7 @@ package com.base.library.project
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -45,3 +46,6 @@ fun Fragment.initViewBinding(container: ViewGroup?): ViewBinding {
 fun getActualBindingClass(javaClass: Class<*>): Class<*> {
     return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments.first() as Class<*>
 }
+
+val Int.dp: Int
+    get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()

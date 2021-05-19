@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">玩安卓</string>
-    <string name="login">登录</string>
     <string name="my_todo">我的 TODO</string>
     <string name="my_collection">我的收藏</string>
     <string name="login_out">退出登录</string>
@@ -26,5 +25,13 @@
     <string name="avatar">头像</string>
     <string name="stay_tuned">敬请期待</string>
     <string name="tourist">游客</string>
-    <string name="stay_tuned_hint">别等了，累了，不会更新了</string>
+    <string name="stay_tuned_hint">没啥好期待的</string>
+    <string name="please_input_your_account">请输入账号</string>
+    <string name="please_input_your_password">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="go_to_register">去注册</string>
+    <string name="close">关闭</string>
+    <string name="are_you_sure_to_login_out">确定退出登陆吗？</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
 </resources>

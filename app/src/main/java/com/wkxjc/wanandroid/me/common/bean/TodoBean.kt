@@ -1,18 +1,18 @@
 package com.wkxjc.wanandroid.me.common.bean
 
 data class TodoBean(
-    val completeDateStr: String,
-    val content: String,
-    val date: Long,
-    val dateStr: String,
-    val id: Int,
-    val priority: Int,
+    val completeDateStr: String? = null,
+    val content: String? = null,
+    val date: Long? = null,
+    val dateStr: String? = null,
+    val id: Int? = null,
+    val priority: Int? = null,
     val status: Int,
-    val title: String,
-    val type: Int,
-    val userId: Int
+    var title: String,
+    val type: Int? = null,
+    val userId: Int? = null
 ) {
     fun isCompleted(): Boolean {
-        return type == 1
+        return status == 1
     }
 }

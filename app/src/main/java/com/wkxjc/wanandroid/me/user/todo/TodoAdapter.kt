@@ -18,12 +18,13 @@ const val LOAD_MORE = 0x2
 const val HEADER_COUNT = 0
 const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
+
 // preload more articles for better user experience
 const val PRE_LOAD = 10
 
 class TodoAdapter(private val todos: Todos = Todos()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var onItemClickListener: (View, TodoBean, Int) -> Unit
-    lateinit var onCheckChangedListener: (Boolean, Int) -> Unit
+    lateinit var onCheckChangedListener: (Boolean, TodoBean, Int) -> Unit
     lateinit var loadMore: () -> Unit
     var isLoadingMore = false
     private var noMore = false
@@ -57,6 +58,7 @@ class TodoAdapter(private val todos: Todos = Todos()) : RecyclerView.Adapter<Rec
                     }
                     text = Html.fromHtml(bean.title, Html.FROM_HTML_MODE_LEGACY)
                 }
+                holder.binding.ivEdit.visibility = if (bean.isCompleted()) View.GONE else View.VISIBLE
                 holder.binding.ivEdit.setOnClickListener {
                     onItemClickListener.invoke(it, bean, holder.adapterPosition)
                 }
@@ -64,7 +66,9 @@ class TodoAdapter(private val todos: Todos = Todos()) : RecyclerView.Adapter<Rec
                     onItemClickListener.invoke(it, bean, holder.adapterPosition)
                 }
                 holder.binding.cbTodo.setOnCheckedChangeListener { buttonView, isChecked ->
-                    onCheckChangedListener.invoke(isChecked, holder.adapterPosition)
+                    if (buttonView.isPressed) {
+                        onCheckChangedListener.invoke(isChecked, bean, holder.adapterPosition)
+                    }
                 }
                 if (position - HEADER_COUNT >= todos.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true
@@ -106,5 +110,9 @@ class TodoAdapter(private val todos: Todos = Todos()) : RecyclerView.Adapter<Rec
     fun remove(position: Int) {
         this.todos.datas.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    fun isEmpty(): Boolean {
+        return todos.datas.isEmpty()
     }
 }

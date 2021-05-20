@@ -59,30 +59,30 @@ interface ApiService {
     // 仅更新完成状态TODO
     @POST("lg/todo/done/{id}/json")
     @FormUrlEncoded
-    fun updateTodoStatus(@Path("id") id: Int, @Field("status") status: Int)
+    fun updateTodoStatus(@Path("id") id: Int, @Field("status") status: Int): Observable<String>
 
     // 删除一个TODO
     @POST("lg/todo/delete/{id}/json")
-    fun deleteTodo(@Path("id") id: Int)
+    fun deleteTodo(@Path("id") id: Int): Observable<String>
 
     // 更新一个TODO
     @POST("lg/todo/update/{id}/json")
     @FormUrlEncoded
     fun updateTodo(
         @Path("id") id: Int, @Field("title") title: String,
-        @Field("content") content: String, @Field("date") date: String,
-        @Field("status") status: Int, @Field("type") type: Int,
-        @Field("priority") priority: Int
-    )
+        @Field("content") content: String? = null, @Field("date") date: String,
+        @Field("status") status: Int? = null, @Field("type") type: Int? = null,
+        @Field("priority") priority: Int? = null
+    ): Observable<String>
 
     // 新增一个TODO
     @POST("lg/todo/add/json")
     @FormUrlEncoded
     fun addTodo(
-        @Field("title") title: String, @Field("content") content: String,
-        @Field("date") date: String, @Field("type") type: Int,
-        @Field("priority") priority: Int
-    )
+        @Field("title") title: String, @Field("content") content: String? = null,
+        @Field("date") date: String? = null, @Field("type") type: Int? = null,
+        @Field("priority") priority: Int? = null
+    ): Observable<String>
 
     // 搜索
     @POST("article/query/{page}/json")

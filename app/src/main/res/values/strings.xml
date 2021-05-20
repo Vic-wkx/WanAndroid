@@ -38,4 +38,9 @@
     <string name="delete">Delete</string>
     <string name="completed_todo">Completed Todo</string>
     <string name="new_todo">New Todo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
+    <string name="content_cannot_be_empty">Content cannot be empty.</string>
+    <string name="are_you_sure_to_delete">确定删除吗？</string>
 </resources>

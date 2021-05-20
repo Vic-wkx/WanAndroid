@@ -14,22 +14,24 @@ enum class Status {
     NORMAL
 }
 
-class LoginButtonLayout(context: Context, attributeSet: AttributeSet) : FrameLayout(context, attributeSet) {
+class LoadingButtonLayout(context: Context, attributeSet: AttributeSet) : FrameLayout(context, attributeSet) {
 
-    val button = Button(context, attributeSet)
-    val progressBar = ProgressBar(context)
-    val text = button.getText().toString()
+    private val button = Button(context, attributeSet)
+    private val progressBar = ProgressBar(context)
+    val text = button.text.toString()
     var status = Status.NORMAL
         set(value) {
             field = value
             when (field) {
                 Status.LOADING -> {
+                    button.isEnabled = false
+                    button.text = ""
                     progressBar.visibility = View.VISIBLE
-                    button.setText("")
                 }
                 Status.NORMAL -> {
                     progressBar.visibility = View.GONE
-                    button.setText(text)
+                    button.text = text
+                    button.isEnabled = true
                 }
             }
         }

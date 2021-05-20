@@ -23,14 +23,12 @@ class LoginDialog : BaseDialogFragment<DialogLoginBinding>() {
             showToast("login success")
             meViewModel.user.value?.loginOn(loginBean.publicName)
             meViewModel.user.value = NonTourist()
-            binding.btnLogin.status = Status.NORMAL
             dismiss()
         }
 
         override fun onError(error: Throwable) {
             showToast("login fail")
             binding.btnLogin.status = Status.NORMAL
-            binding.btnLogin.isEnabled = true
         }
     }
 
@@ -41,7 +39,6 @@ class LoginDialog : BaseDialogFragment<DialogLoginBinding>() {
     override fun initView() {
         binding.btnLogin.setOnClickListener {
             if (inputNotValid()) return@setOnClickListener
-            it.isEnabled = false
             binding.btnLogin.status = Status.LOADING
             loginApi.username = binding.etLoginUserName.text.toString()
             loginApi.password = binding.etLoginPassword.text.toString()

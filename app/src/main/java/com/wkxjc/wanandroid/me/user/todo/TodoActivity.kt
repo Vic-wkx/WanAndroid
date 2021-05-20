@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
+import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
@@ -15,21 +16,24 @@ import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.ActivityTodoBinding
 import com.wkxjc.wanandroid.me.common.api.TodoApi
+import com.wkxjc.wanandroid.me.common.api.UpdateTodoCompleteStatusApi
 import com.wkxjc.wanandroid.me.common.bean.TodoBean
+import com.wkxjc.wanandroid.me.user.ConfirmDeleteTodoDialog
 
 
 class TodoActivity : BaseActivity<ActivityTodoBinding>() {
-    private val todoViewModel by viewModels<TodoViewModel>()
+    private val viewModel by viewModels<TodoViewModel>()
     private val statusView by lazy { StatusView.initInActivity(this) }
     private val httpManager = HttpManager()
-    private val todoApi = TodoApi()
+    private val getTodoApi = TodoApi()
     private val todoAdapter = TodoAdapter()
     private var isSwitchingTodoType = false
     private val todoListener = object : HttpListener() {
         override fun onNext(result: String) {
-            val todos = todoApi.convert(result)
-            todoAdapter.refresh(todos)
-            statusView.setStatus(if (todos.datas.isNotEmpty()) Status.NORMAL else Status.EMPTY)
+            val todos = getTodoApi.convert(result)
+            viewModel.todos.value = if (viewModel.todos.value == null) todos else viewModel.todos.value.apply {
+                this?.refresh(todos)
+            }
             isSwitchingTodoType = false
         }
 
@@ -39,7 +43,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
     }
     private val todoLoadMoreListener = object : HttpListener() {
         override fun onNext(result: String) {
-            todoAdapter.loadMore(todoApi.convert(result))
+            todoAdapter.loadMore(getTodoApi.convert(result))
         }
 
         override fun onError(error: Throwable) {
@@ -54,9 +58,19 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
         todoAdapter.onItemClickListener = ::onItemClick
         todoAdapter.onCheckChangedListener = ::onCheckedChanged
         binding.rvTodo.adapter = todoAdapter
-        todoViewModel.todoStatus.observe(this) {
-            todoApi.status = it
+        viewModel.todoStatus.observe(this) {
+            getTodoApi.status = it
             initData()
+        }
+        viewModel.todos.observe(this) {
+            todoAdapter.refresh(it)
+            statusView.setStatus(if (it.datas.isNotEmpty()) Status.NORMAL else Status.EMPTY)
+        }
+        viewModel.dataChanged.observe(this) {
+            if (it) {
+                viewModel.dataChanged.value = false
+                initData()
+            }
         }
         statusView.setOnRetryBtnClickListener {
             initData()
@@ -64,25 +78,34 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
     }
 
     fun loadMore() {
-        todoApi.nextPage()
-        httpManager.request(todoApi, todoLoadMoreListener)
+        getTodoApi.nextPage()
+        httpManager.request(getTodoApi, todoLoadMoreListener)
     }
 
     fun onItemClick(view: View, bean: TodoBean, position: Int) {
         when (view.id) {
             R.id.ivEdit -> {
-                // Show EditTodoDialog, updateTodoApi
+                // Show EditTodoDialog, UpdateTodoApi
+                EditTodoDialog(bean).show(supportFragmentManager, EditTodoDialog::class.java.simpleName)
             }
             R.id.ivDelete -> {
                 // DeleteTodoApi
+                ConfirmDeleteTodoDialog(bean.id!!).show(supportFragmentManager, ConfirmDeleteTodoDialog::class.java.simpleName)
             }
         }
     }
 
-    fun onCheckedChanged(isChecked: Boolean, position: Int) {
-        // first time, it will be called, please except this senario
-//        todoAdapter.remove(position)
-        // UpdateTodoCompletedStatusApi
+    fun onCheckedChanged(isChecked: Boolean, bean: TodoBean, position: Int) {
+        if (bean.isCompleted() && !isChecked) {
+            httpManager.request(UpdateTodoCompleteStatusApi(bean.id!!, 0))
+            todoAdapter.remove(position)
+        } else if (!bean.isCompleted() && isChecked) {
+            httpManager.request(UpdateTodoCompleteStatusApi(bean.id!!, 1))
+            todoAdapter.remove(position)
+        }
+        if (todoAdapter.isEmpty()) {
+            statusView.setStatus(Status.EMPTY)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -95,25 +118,30 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
             R.id.switchTodoStatus -> {
                 if (!isSwitchingTodoType) {
                     isSwitchingTodoType = true
-                    if (todoViewModel.todoStatus.value == 0) {
+                    if (viewModel.todoStatus.value == 0) {
                         item.setIcon(R.drawable.ic_todo)
-                        todoViewModel.todoStatus.value = 1
+                        viewModel.todoStatus.value = 1
                     } else {
                         item.setIcon(R.drawable.ic_completed_todo)
-                        todoViewModel.todoStatus.value = 0
+                        viewModel.todoStatus.value = 0
                     }
                 }
             }
             R.id.newTodo -> {
-                // Show EditTodoDialog, NewTodoApi
+                if (viewModel.todoStatus.value == 0) {
+                    // Show EditTodoDialog, NewTodoApi
+                    EditTodoDialog().show(supportFragmentManager, EditTodoDialog::class.java.simpleName)
+                } else {
+                    showToast("请切换到未完成页面再新建 Todo")
+                }
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun initData() {
-        todoApi.resetPage()
+        getTodoApi.resetPage()
         statusView.setStatus(Status.LOADING)
-        httpManager.request(todoApi, todoListener)
+        httpManager.request(getTodoApi, todoListener)
     }
 }

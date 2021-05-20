@@ -5,6 +5,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseActivity
 import com.base.library.rxRetrofit.http.HttpManager
@@ -16,17 +17,20 @@ import com.wkxjc.wanandroid.databinding.ActivityTodoBinding
 import com.wkxjc.wanandroid.me.common.api.TodoApi
 import com.wkxjc.wanandroid.me.common.bean.TodoBean
 
+
 class TodoActivity : BaseActivity<ActivityTodoBinding>() {
     private val todoViewModel by viewModels<TodoViewModel>()
     private val statusView by lazy { StatusView.initInActivity(this) }
     private val httpManager = HttpManager()
     private val todoApi = TodoApi()
     private val todoAdapter = TodoAdapter()
+    private var isSwitchingTodoType = false
     private val todoListener = object : HttpListener() {
         override fun onNext(result: String) {
             val todos = todoApi.convert(result)
             todoAdapter.refresh(todos)
             statusView.setStatus(if (todos.datas.isNotEmpty()) Status.NORMAL else Status.EMPTY)
+            isSwitchingTodoType = false
         }
 
         override fun onError(error: Throwable) {
@@ -46,6 +50,9 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
 
     override fun initView() {
         binding.rvTodo.layoutManager = LinearLayoutManager(this)
+        todoAdapter.loadMore = ::loadMore
+        todoAdapter.onItemClickListener = ::onItemClick
+        todoAdapter.onCheckChangedListener = ::onCheckedChanged
         binding.rvTodo.adapter = todoAdapter
         todoViewModel.todoStatus.observe(this) {
             todoApi.status = it
@@ -64,14 +71,18 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
     fun onItemClick(view: View, bean: TodoBean, position: Int) {
         when (view.id) {
             R.id.ivEdit -> {
+                // Show EditTodoDialog, updateTodoApi
             }
             R.id.ivDelete -> {
+                // DeleteTodoApi
             }
         }
     }
 
-    fun onCheckedChange(position: Int) {
-        todoAdapter.remove(position)
+    fun onCheckedChanged(isChecked: Boolean, position: Int) {
+        // first time, it will be called, please except this senario
+//        todoAdapter.remove(position)
+        // UpdateTodoCompletedStatusApi
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -82,15 +93,19 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.switchTodoStatus -> {
-                if (todoViewModel.todoStatus.value == 0) {
-                    item.setIcon(R.drawable.ic_todo)
-                    todoViewModel.todoStatus.value = 1
-                } else {
-                    item.setIcon(R.drawable.ic_completed_todo)
-                    todoViewModel.todoStatus.value = 0
+                if (!isSwitchingTodoType) {
+                    isSwitchingTodoType = true
+                    if (todoViewModel.todoStatus.value == 0) {
+                        item.setIcon(R.drawable.ic_todo)
+                        todoViewModel.todoStatus.value = 1
+                    } else {
+                        item.setIcon(R.drawable.ic_completed_todo)
+                        todoViewModel.todoStatus.value = 0
+                    }
                 }
             }
             R.id.newTodo -> {
+                // Show EditTodoDialog, NewTodoApi
             }
         }
         return super.onOptionsItemSelected(item)

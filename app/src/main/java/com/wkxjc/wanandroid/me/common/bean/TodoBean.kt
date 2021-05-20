@@ -11,4 +11,8 @@ data class TodoBean(
     val title: String,
     val type: Int,
     val userId: Int
-)
+) {
+    fun isCompleted(): Boolean {
+        return type == 1
+    }
+}

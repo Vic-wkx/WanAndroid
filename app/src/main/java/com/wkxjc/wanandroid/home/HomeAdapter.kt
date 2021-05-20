@@ -39,6 +39,10 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
     private lateinit var context: Context
     private var noMore = false
 
+    inner class BannerViewHolder(val binding: ItemBannerBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class LoadMoreViewHolder(val binding: ItemLoadMoreBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ArticleViewHolder(val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
         return when (viewType) {
@@ -47,10 +51,6 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
             else -> ArticleViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(context), parent, false))
         }
     }
-
-    inner class BannerViewHolder(val binding: ItemBannerBinding) : RecyclerView.ViewHolder(binding.root)
-    inner class LoadMoreViewHolder(val binding: ItemLoadMoreBinding) : RecyclerView.ViewHolder(binding.root)
-    inner class ArticleViewHolder(val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun getItemCount() = homeBean.articles.datas.size + HEADER_FOOTER_COUNT
 
@@ -106,10 +106,6 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
     }
 
     override fun getItemViewType(position: Int): Int {
-        return getViewTypeByPosition(position)
-    }
-
-    private fun getViewTypeByPosition(position: Int): Int {
         return when (position) {
             0 -> BANNER
             itemCount - 1 -> LOAD_MORE
@@ -117,7 +113,7 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
         }
     }
 
-    fun addMore(articles: Articles) {
+    fun loadMore(articles: Articles) {
         if (articles.datas.isNullOrEmpty()) {
             noMore = true
             notifyItemChanged(itemCount - 1)

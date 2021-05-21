@@ -31,7 +31,7 @@ abstract class BaseApi {
         get() {
             //手动创建一个OkHttpClient并设置超时时间缓存等设置
             val builder = OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Log.d("RxRetrofit", it) }))
+                .addInterceptor(HttpLoggingInterceptor { Log.d("RxRetrofit", it) })
                 .connectTimeout(apiConfig.timeOutConfig.connectionTime, TimeUnit.SECONDS)
                 .readTimeout(apiConfig.timeOutConfig.readTime, TimeUnit.SECONDS)
                 .writeTimeout(apiConfig.timeOutConfig.writeTime, TimeUnit.SECONDS)

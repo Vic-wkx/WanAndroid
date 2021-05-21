@@ -81,13 +81,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             viewModel.status.value = Status.LOADING
             initData()
         }
-        viewModel.isRefreshing.observe(this, Observer {
+        viewModel.isRefreshing.observe(this, {
             binding.refreshHome.isRefreshing = it
         })
-        viewModel.status.observe(this, Observer {
+        viewModel.status.observe(this, {
             statusView.setStatus(it)
         })
-        viewModel.homeBean.observe(this, Observer {
+        viewModel.homeBean.observe(this, {
             homeAdapter.refresh(it)
         })
     }

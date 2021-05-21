@@ -41,10 +41,10 @@ class PublicAccountsAuthorsFragment : BaseFragment<FragmentPublicAccountsAuthors
             viewModel.currentPublicAccountsAuthorId.value = it.id
         }
         binding.rvPublicAccountsAuthors.adapter = publicAccountsAuthorsAdapter
-        viewModel.publicAccountsAuthors.observe(viewLifecycleOwner, Observer {
+        viewModel.publicAccountsAuthors.observe(viewLifecycleOwner, {
             publicAccountsAuthorsAdapter.refresh(it.data)
         })
-        viewModel.publicAccountsStatus.observe(viewLifecycleOwner, Observer {
+        viewModel.publicAccountsStatus.observe(viewLifecycleOwner, {
             if (it == Status.LOADING) {
                 httpManager.request(publicAccountsAuthorsApi, publicAccountsAuthorsListener)
             }

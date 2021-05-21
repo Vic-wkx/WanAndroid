@@ -17,7 +17,7 @@ class PublicAccountsFragment : BaseFragment<FragmentPublicAccountsBinding>() {
         statusView.setOnRetryBtnClickListener {
             initData()
         }
-        viewModel.publicAccountsStatus.observe(this, Observer {
+        viewModel.publicAccountsStatus.observe(this, {
             statusView.setStatus(it)
         })
     }

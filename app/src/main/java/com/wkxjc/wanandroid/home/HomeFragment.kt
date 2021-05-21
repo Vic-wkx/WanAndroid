@@ -1,6 +1,5 @@
 package com.wkxjc.wanandroid.home
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,13 +15,13 @@ import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.common.artical.LINK
-import com.wkxjc.wanandroid.common.artical.WebActivity
-import com.wkxjc.wanandroid.databinding.FragmentHomeBinding
 import com.wkxjc.wanandroid.common.api.ArticleApi
 import com.wkxjc.wanandroid.common.api.BannerApi
+import com.wkxjc.wanandroid.common.artical.LINK
+import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.common.bean.ArticleBean
 import com.wkxjc.wanandroid.common.bean.HomeBean
+import com.wkxjc.wanandroid.databinding.FragmentHomeBinding
 import com.wkxjc.wanandroid.me.MeViewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -67,12 +66,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.status.value = Status.LOADING
-    }
+    override var lazyLoad = false
 
     override fun initView() {
+        viewModel.status.value = Status.LOADING
         homeAdapter.onItemClickListener = ::onItemClick
         homeAdapter.loadMore = ::loadMore
         binding.rvHome.layoutManager = LinearLayoutManager(context)

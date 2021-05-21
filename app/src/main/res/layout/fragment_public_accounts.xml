@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".publicAccounts.PublicAccountsFragment">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/publicAccountsAuthorFragment"
         android:name="com.wkxjc.wanandroid.publicAccounts.publicAccountsAuthors.PublicAccountsAuthorsFragment"
         android:layout_width="0dp"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/publicAccountsArticlesFragment"
         android:name="com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles.PublicAccountsArticlesFragment"
         android:layout_width="0dp"

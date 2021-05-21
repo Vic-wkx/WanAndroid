@@ -12,15 +12,25 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), IBase {
     private var _binding: T? = null
     protected val binding get() = _binding!!
     private var loaded = false
+    open var lazyLoad = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = initViewBinding(container) as T
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (!lazyLoad) {
+            loaded = true
+            initView()
+            initData()
+        }
+    }
+
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        if (!hidden && !loaded) {
+        if (lazyLoad && !hidden && !loaded) {
             loaded = true
             initView()
             initData()

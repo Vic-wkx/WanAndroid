@@ -10,6 +10,7 @@ import com.wkxjc.wanandroid.databinding.FragmentKnowledgeTreeBinding
 import com.wkxjc.wanandroid.common.api.KnowledgeTreeApi
 
 const val SPAN_COUNT = 4
+
 class KnowledgeTreeFragment : BaseFragment<FragmentKnowledgeTreeBinding>() {
 
     private val httpManager = HttpManager(this)

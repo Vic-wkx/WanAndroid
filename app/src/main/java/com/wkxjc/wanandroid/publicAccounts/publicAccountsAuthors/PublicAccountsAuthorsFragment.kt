@@ -1,7 +1,5 @@
 package com.wkxjc.wanandroid.publicAccounts.publicAccountsAuthors
 
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -10,9 +8,9 @@ import com.base.library.project.BaseFragment
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
-import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsAuthorsBinding
 import com.wkxjc.wanandroid.common.api.PublicAccountsAuthorsApi
 import com.wkxjc.wanandroid.common.bean.PublicAccountsAuthors
+import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsAuthorsBinding
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsViewModel
 
 class PublicAccountsAuthorsFragment : BaseFragment<FragmentPublicAccountsAuthorsBinding>() {
@@ -34,15 +32,9 @@ class PublicAccountsAuthorsFragment : BaseFragment<FragmentPublicAccountsAuthors
             }
         }
     }
+    override var lazyLoad = false
 
     override fun initView() {
-    }
-
-    override fun initData() {
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.rvPublicAccountsAuthors.layoutManager = LinearLayoutManager(context)
         binding.rvPublicAccountsAuthors.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         publicAccountsAuthorsAdapter.onItemClick = {
@@ -57,5 +49,8 @@ class PublicAccountsAuthorsFragment : BaseFragment<FragmentPublicAccountsAuthors
                 httpManager.request(publicAccountsAuthorsApi, publicAccountsAuthorsListener)
             }
         })
+    }
+
+    override fun initData() {
     }
 }

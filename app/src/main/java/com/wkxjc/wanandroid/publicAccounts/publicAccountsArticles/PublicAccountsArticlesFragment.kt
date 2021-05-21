@@ -52,14 +52,9 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
         }
     }
 
+    override var lazyLoad = false
+
     override fun initView() {
-    }
-
-    override fun initData() {
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.rvPublicAccountArticles.layoutManager = LinearLayoutManager(context)
         binding.rvPublicAccountArticles.adapter = publicAccountArticlesAdapter
         statusView.setOnRetryBtnClickListener {
@@ -70,27 +65,30 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
         publicAccountArticlesAdapter.loadMore = {
             viewModel.currentPublicAccountsArticlesPage.value = viewModel.currentPublicAccountsArticlesPage.value!! + 1
         }
-        viewModel.publicAccountsArticles.observe(viewLifecycleOwner, Observer {
+        val observe = viewModel.publicAccountsArticles.observe(viewLifecycleOwner) {
             publicAccountArticlesAdapter.refresh(it)
-        })
-        viewModel.publicAccountsArticlesStatus.observe(viewLifecycleOwner, {
+        }
+        viewModel.publicAccountsArticlesStatus.observe(viewLifecycleOwner) {
             statusView.setStatus(it)
-        })
+        }
 
-        viewModel.currentPublicAccountsAuthorId.observe(viewLifecycleOwner, {
+        viewModel.currentPublicAccountsAuthorId.observe(viewLifecycleOwner) {
             viewModel.publicAccountsArticlesStatus.value = Status.LOADING
             viewModel.currentPublicAccountsArticlesPage.value = 0
             httpManager.request(publicAccountArticlesApi.apply {
                 id = it
                 page = 0
             }, publicAccountsArticlesListener)
-        })
-        viewModel.currentPublicAccountsArticlesPage.observe(this, {
+        }
+        viewModel.currentPublicAccountsArticlesPage.observe(viewLifecycleOwner) {
             if (it == 0) return@observe
             httpManager.request(publicAccountArticlesApi.apply {
                 page = it
             }, publicAccountsArticlesLoadMoreListener)
-        })
+        }
+    }
+
+    override fun initData() {
     }
 
     private fun onItemClick(view: View, bean: ArticleBean, position: Int) {

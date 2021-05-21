@@ -9,7 +9,6 @@ import com.wkxjc.wanandroid.me.MeFragment
 import com.wkxjc.wanandroid.navigation.NavigationFragment
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsFragment
 
-
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val homeFragment by lazy { HomeFragment() }

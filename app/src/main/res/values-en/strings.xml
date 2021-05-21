@@ -33,4 +33,11 @@
     <string name="are_you_sure_to_login_out">Are you sure to login out?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="completed_todo">Completed Todo</string>
+    <string name="new_todo">New Todo</string>
+    <string name="save">Save</string>
+    <string name="content_cannot_be_empty">Content cannot be empty.</string>
+    <string name="are_you_sure_to_delete">Are you sure to delete?</string>
 </resources>

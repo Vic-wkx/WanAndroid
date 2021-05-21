@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.banner.ImageAdapter.BannerViewHolder
-import com.wkxjc.wanandroid.home.common.bean.BannerBean
+import com.wkxjc.wanandroid.common.bean.BannerBean
 import com.youth.banner.adapter.BannerAdapter
 
 class ImageAdapter(data: List<BannerBean>) : BannerAdapter<BannerBean, BannerViewHolder>(data) {

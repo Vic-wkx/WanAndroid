@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
 import com.wkxjc.wanandroid.databinding.ItemKnowledgeTreeChildBinding
 import com.wkxjc.wanandroid.databinding.ItemKnowledgeTreeGroupBinding
-import com.wkxjc.wanandroid.home.common.bean.DisplayedKnowledgeTreeBean
-import com.wkxjc.wanandroid.home.common.bean.DisplayedKnowledgeTreeBeanFactory
-import com.wkxjc.wanandroid.home.common.bean.KnowledgeTreeType
-import com.wkxjc.wanandroid.home.common.bean.KnowledgeTrees
+import com.wkxjc.wanandroid.common.bean.DisplayedKnowledgeTreeBean
+import com.wkxjc.wanandroid.common.bean.DisplayedKnowledgeTreeBeanFactory
+import com.wkxjc.wanandroid.common.bean.KnowledgeTreeType
+import com.wkxjc.wanandroid.common.bean.KnowledgeTrees
 import com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles.CATEGORY_ID
 import com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles.KnowledgeTreeArticlesActivity
 

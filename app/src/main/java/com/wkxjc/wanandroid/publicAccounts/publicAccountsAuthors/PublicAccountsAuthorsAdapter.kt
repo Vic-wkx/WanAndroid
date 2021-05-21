@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wkxjc.wanandroid.databinding.ItemPublicAccountsAuthorBinding
-import com.wkxjc.wanandroid.home.common.bean.PublicAccountsAuthorBean
-import com.wkxjc.wanandroid.home.common.bean.PublicAccountsAuthors
+import com.wkxjc.wanandroid.common.bean.PublicAccountsAuthorBean
+import com.wkxjc.wanandroid.common.bean.PublicAccountsAuthors
 
 
 class PublicAccountsAuthorsAdapter(private val publicAccountsAuthors: PublicAccountsAuthors = PublicAccountsAuthors()) : RecyclerView.Adapter<PublicAccountsAuthorsAdapter.PublicAccountViewHolder>() {

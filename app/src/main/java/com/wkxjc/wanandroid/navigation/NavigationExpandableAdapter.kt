@@ -10,9 +10,10 @@ import android.widget.TextView
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.ItemNavigationChildBinding
 import com.wkxjc.wanandroid.databinding.ItemNavigationGroupBinding
-import com.wkxjc.wanandroid.home.common.bean.ArticleBean
-import com.wkxjc.wanandroid.home.common.bean.NavigationBean
-import com.wkxjc.wanandroid.home.common.bean.Navigations
+import com.wkxjc.wanandroid.common.bean.ArticleBean
+import com.wkxjc.wanandroid.common.bean.NavigationBean
+import com.wkxjc.wanandroid.common.bean.Navigations
+import com.wkxjc.wanandroid.common.view.HeaderPinnedExpandableListAdapter
 
 class NavigationExpandableAdapter(private val context: Context?, private val navigations: Navigations = Navigations()) : HeaderPinnedExpandableListAdapter() {
 

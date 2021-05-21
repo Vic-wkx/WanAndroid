@@ -19,50 +19,51 @@ import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.FragmentHomeBinding
-import com.wkxjc.wanandroid.home.common.api.ArticleApi
-import com.wkxjc.wanandroid.home.common.api.BannerApi
-import com.wkxjc.wanandroid.home.common.bean.ArticleBean
-import com.wkxjc.wanandroid.home.common.bean.HomeBean
+import com.wkxjc.wanandroid.common.api.ArticleApi
+import com.wkxjc.wanandroid.common.api.BannerApi
+import com.wkxjc.wanandroid.common.bean.ArticleBean
+import com.wkxjc.wanandroid.common.bean.HomeBean
 import com.wkxjc.wanandroid.me.MeViewModel
-
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel by viewModels<HomeViewModel>()
-    private val httpManager = HttpManager(this)
-    private val bannerApi = BannerApi()
-    private val articleApi = ArticleApi()
+    private val meViewModel by activityViewModels<MeViewModel>()
     private val statusView by lazy { StatusView.initInFragment(context, binding.root) }
     private val homeAdapter by lazy { HomeAdapter() }
-    private val meViewModel by activityViewModels<MeViewModel>()
+    private val httpManager by lazy { HttpManager(this) }
+    private val bannerApi by lazy { BannerApi() }
+    private val articleApi by lazy { ArticleApi() }
+    private val homeListListener by lazy {
+        object : HttpListListener() {
+            override fun onNext(resultMap: HashMap<BaseApi, Any>) {
+                viewModel.isRefreshing.value = false
+                val banners = bannerApi.convert(resultMap)
+                val articles = articleApi.convert(resultMap)
+                if (banners.data.isNullOrEmpty() && articles.datas.isNullOrEmpty()) {
+                    viewModel.status.value = Status.EMPTY
+                } else {
+                    viewModel.homeBean.value = HomeBean(banners, articles)
+                    viewModel.status.value = Status.NORMAL
+                }
+            }
 
-    private val homeListListener = object : HttpListListener() {
-        override fun onNext(resultMap: HashMap<BaseApi, Any>) {
-            viewModel.isRefreshing.value = false
-            val banners = bannerApi.convert(resultMap)
-            val articles = articleApi.convert(resultMap)
-            if (banners.data.isNullOrEmpty() && articles.datas.isNullOrEmpty()) {
-                viewModel.status.value = Status.EMPTY
-            } else {
-                viewModel.status.value = Status.NORMAL
-                viewModel.homeBean.value = HomeBean(banners, articles)
+            override fun onError(error: Throwable) {
+                viewModel.isRefreshing.value = false
+                viewModel.status.value = Status.ERROR
             }
         }
-
-        override fun onError(error: Throwable) {
-            viewModel.isRefreshing.value = false
-            viewModel.status.value = Status.ERROR
-        }
     }
+    private val loadMoreListener by lazy {
+        object : HttpListener() {
+            override fun onNext(result: String) {
+                homeAdapter.loadMore(articleApi.convert(result))
+            }
 
-    private val loadMoreListener = object : HttpListener() {
-        override fun onNext(result: String) {
-            homeAdapter.loadMore(articleApi.convert(result))
-        }
-
-        override fun onError(error: Throwable) {
-            homeAdapter.isLoadingMore = false
-            statusView.setStatus(Status.ERROR)
+            override fun onError(error: Throwable) {
+                homeAdapter.isLoadingMore = false
+                statusView.setStatus(Status.ERROR)
+            }
         }
     }
 
@@ -72,12 +73,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initView() {
-        binding.rvHome.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = homeAdapter
-        }
         homeAdapter.onItemClickListener = ::onItemClick
         homeAdapter.loadMore = ::loadMore
+        binding.rvHome.layoutManager = LinearLayoutManager(context)
+        binding.rvHome.adapter = homeAdapter
         binding.refreshHome.setOnRefreshListener {
             initData()
         }
@@ -98,7 +97,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initData() {
         articleApi.resetPage()
-        // order the api, so that there will not be two subscriptions when retrying while no internet.
+        // order the api, so that there will not be two retrying subscriptions while no internet.
         httpManager.request(arrayOf(bannerApi, articleApi), homeListListener, HttpListConfig(order = true))
     }
 

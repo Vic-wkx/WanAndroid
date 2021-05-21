@@ -7,7 +7,7 @@
     android:layout_margin="4dp"
     app:cardCornerRadius="4dp"
     tools:layout_height="80dp"
-    tools:context=".me.user.collection.CollectionAdapter">
+    tools:context=".me.collection.CollectionAdapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

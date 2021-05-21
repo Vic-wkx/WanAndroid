@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@color/gray"
-    tools:context=".me.LoginDialog">
+    tools:context=".me.login.LoginDialog">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/etLoginUserName" />
 
-    <com.wkxjc.wanandroid.me.LoadingButtonLayout
+    <com.wkxjc.wanandroid.common.view.LoadingButtonLayout
         android:id="@+id/btnLogin"
         style="@style/btn_user_center_option"
         android:layout_width="match_parent"

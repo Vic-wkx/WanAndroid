@@ -7,7 +7,7 @@ import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.databinding.FragmentKnowledgeTreeBinding
-import com.wkxjc.wanandroid.home.common.api.KnowledgeTreeApi
+import com.wkxjc.wanandroid.common.api.KnowledgeTreeApi
 
 const val SPAN_COUNT = 4
 class KnowledgeTreeFragment : BaseFragment<FragmentKnowledgeTreeBinding>() {

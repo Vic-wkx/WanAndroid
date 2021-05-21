@@ -15,12 +15,11 @@ import com.wkxjc.wanandroid.common.banner.ImageAdapter
 import com.wkxjc.wanandroid.databinding.ItemArticleBinding
 import com.wkxjc.wanandroid.databinding.ItemBannerBinding
 import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
-import com.wkxjc.wanandroid.home.common.bean.ArticleBean
-import com.wkxjc.wanandroid.home.common.bean.Articles
-import com.wkxjc.wanandroid.home.common.bean.BannerBean
-import com.wkxjc.wanandroid.home.common.bean.HomeBean
+import com.wkxjc.wanandroid.common.bean.ArticleBean
+import com.wkxjc.wanandroid.common.bean.Articles
+import com.wkxjc.wanandroid.common.bean.BannerBean
+import com.wkxjc.wanandroid.common.bean.HomeBean
 import com.youth.banner.listener.OnBannerListener
-
 
 const val BANNER = 0x1
 const val ARTICLE = 0x2

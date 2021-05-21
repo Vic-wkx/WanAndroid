@@ -9,7 +9,7 @@ import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.FragmentNavigationBinding
-import com.wkxjc.wanandroid.home.common.api.NavigationApi
+import com.wkxjc.wanandroid.common.api.NavigationApi
 
 
 class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {

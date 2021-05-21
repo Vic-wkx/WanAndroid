@@ -13,8 +13,8 @@ import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.ActivityKnowledgeTreeArticlesBinding
-import com.wkxjc.wanandroid.home.common.api.KnowledgeTreeArticlesApi
-import com.wkxjc.wanandroid.home.common.bean.ArticleBean
+import com.wkxjc.wanandroid.common.api.KnowledgeTreeArticlesApi
+import com.wkxjc.wanandroid.common.bean.ArticleBean
 import com.wkxjc.wanandroid.me.MeViewModel
 
 const val CATEGORY_ID = "categoryId"

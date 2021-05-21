@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.ItemLoadMoreBinding
 import com.wkxjc.wanandroid.databinding.ItemPublicAccountsArticleBinding
-import com.wkxjc.wanandroid.home.common.bean.ArticleBean
-import com.wkxjc.wanandroid.home.common.bean.Articles
+import com.wkxjc.wanandroid.common.bean.ArticleBean
+import com.wkxjc.wanandroid.common.bean.Articles
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter

@@ -34,13 +34,11 @@
     <string name="are_you_sure_to_login_out">确定退出登陆吗？</string>
     <string name="yes">是</string>
     <string name="no">否</string>
-    <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
-    <string name="completed_todo">Completed Todo</string>
-    <string name="new_todo">New Todo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="save">Save</string>
-    <string name="content_cannot_be_empty">Content cannot be empty.</string>
+    <string name="edit">编辑</string>
+    <string name="delete">删除</string>
+    <string name="completed_todo">已完成待办</string>
+    <string name="new_todo">新建待办</string>
+    <string name="save">保存</string>
+    <string name="content_cannot_be_empty">内容不能为空</string>
     <string name="are_you_sure_to_delete">确定删除吗？</string>
 </resources>

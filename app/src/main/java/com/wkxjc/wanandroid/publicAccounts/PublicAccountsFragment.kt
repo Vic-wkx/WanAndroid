@@ -1,6 +1,7 @@
 package com.wkxjc.wanandroid.publicAccounts
 
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.base.library.project.BaseFragment
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
@@ -16,7 +17,7 @@ class PublicAccountsFragment : BaseFragment<FragmentPublicAccountsBinding>() {
         statusView.setOnRetryBtnClickListener {
             initData()
         }
-        viewModel.publicAccountsStatus.observe(this, {
+        viewModel.publicAccountsStatus.observe(this, Observer {
             statusView.setStatus(it)
         })
     }

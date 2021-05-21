@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/bg_login_out"
-    tools:context=".me.ConfirmLoginOutDialog"
+    tools:context=".me.login.ConfirmLoginOutDialog"
     tools:layout_height="200dp"
     tools:layout_width="300dp">
 

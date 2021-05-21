@@ -16,8 +16,8 @@ import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.common.artical.LINK
 import com.wkxjc.wanandroid.common.artical.WebActivity
 import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsArticlesBinding
-import com.wkxjc.wanandroid.home.common.api.PublicAccountsArticlesApi
-import com.wkxjc.wanandroid.home.common.bean.ArticleBean
+import com.wkxjc.wanandroid.common.api.PublicAccountsArticlesApi
+import com.wkxjc.wanandroid.common.bean.ArticleBean
 import com.wkxjc.wanandroid.me.MeViewModel
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsViewModel
 

@@ -3,7 +3,6 @@ package com.wkxjc.wanandroid.home
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity

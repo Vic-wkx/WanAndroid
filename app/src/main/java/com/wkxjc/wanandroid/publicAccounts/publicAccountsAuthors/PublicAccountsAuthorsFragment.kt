@@ -1,7 +1,6 @@
 package com.wkxjc.wanandroid.publicAccounts.publicAccountsAuthors
 
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment

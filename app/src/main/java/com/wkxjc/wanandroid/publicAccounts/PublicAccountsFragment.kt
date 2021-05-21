@@ -1,7 +1,6 @@
 package com.wkxjc.wanandroid.publicAccounts
 
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.base.library.project.BaseFragment
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView

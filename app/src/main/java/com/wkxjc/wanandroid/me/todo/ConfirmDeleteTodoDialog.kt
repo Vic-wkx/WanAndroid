@@ -6,6 +6,7 @@ import com.base.library.project.BaseDialogFragment
 import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
+import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.DialogConfimDeleteTodoBinding
 import com.wkxjc.wanandroid.common.api.DeleteTodoApi
 import com.wkxjc.wanandroid.me.todo.TodoViewModel
@@ -21,7 +22,7 @@ class ConfirmDeleteTodoDialog(val todoId: Int) : BaseDialogFragment<DialogConfim
             }
 
             override fun onError(error: Throwable) {
-                showToast("delete fail")
+                showToast(R.string.delete_fail)
             }
         }
     }

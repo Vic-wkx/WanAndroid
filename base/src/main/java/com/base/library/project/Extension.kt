@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.os.LocaleList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.base.library.BaseApp
+import com.base.library.project.utils.LanguageUtils
 import java.lang.reflect.ParameterizedType
 
 inline fun <reified T : Context> Context.myStartActivity(vararg pairs: Pair<String, Any?>) =
@@ -26,11 +28,11 @@ inline fun <reified T : Context> Context.myStartActivity(vararg pairs: Pair<Stri
 inline fun <reified T : Context> Fragment.myStartActivity(vararg pairs: Pair<String, Any?>) = context?.myStartActivity<T>(*pairs)
 
 fun showToast(content: String) {
-    Toast.makeText(BaseApp.application, content, Toast.LENGTH_SHORT).show()
+    Toast.makeText(LanguageUtils.getContextWithLanguage(BaseApp.application), content, Toast.LENGTH_SHORT).show()
 }
 
 fun showToast(@StringRes content: Int) {
-    Toast.makeText(BaseApp.application, content, Toast.LENGTH_SHORT).show()
+    Toast.makeText(LanguageUtils.getContextWithLanguage(BaseApp.application), content, Toast.LENGTH_SHORT).show()
 }
 
 fun Activity.initViewBinding(): ViewBinding {

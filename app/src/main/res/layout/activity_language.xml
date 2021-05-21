@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/btnChinese"
+        style="@style/btn_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/chinese"
@@ -15,6 +16,7 @@
 
     <Button
         android:id="@+id/btnEnglish"
+        style="@style/btn_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/english"

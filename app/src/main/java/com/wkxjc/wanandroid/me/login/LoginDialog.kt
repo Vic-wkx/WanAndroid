@@ -8,6 +8,7 @@ import com.base.library.project.myStartActivity
 import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
+import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.DialogLoginBinding
 import com.wkxjc.wanandroid.common.api.LoginApi
 import com.wkxjc.wanandroid.common.view.Status
@@ -22,14 +23,14 @@ class LoginDialog : BaseDialogFragment<DialogLoginBinding>() {
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
             val loginBean = loginApi.convert(result)
-            showToast("login success")
+            showToast(R.string.login_success)
             meViewModel.user.value?.loginOn(loginBean.publicName)
             meViewModel.user.value = NonTourist()
             dismiss()
         }
 
         override fun onError(error: Throwable) {
-            showToast("login fail")
+            showToast(R.string.login_fail)
             binding.btnLogin.status = Status.NORMAL
         }
     }
@@ -57,11 +58,11 @@ class LoginDialog : BaseDialogFragment<DialogLoginBinding>() {
 
     private fun inputNotValid(): Boolean {
         if (binding.etLoginUserName.text.isEmpty()) {
-            showToast("User name cannot be empty!")
+            showToast(R.string.user_name_cannot_be_empty)
             return true
         }
         if (binding.etLoginPassword.text.isEmpty()) {
-            showToast("Password cannot be empty!")
+            showToast(R.string.password_cannot_be_empty)
             return true
         }
         return false

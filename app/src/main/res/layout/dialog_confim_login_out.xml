@@ -35,7 +35,7 @@
 
     <Button
         android:id="@+id/btnYes"
-        style="@style/btn_user_center_option"
+        style="@style/btn_default"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="20dp"
@@ -48,7 +48,7 @@
 
     <Button
         android:id="@+id/btnNo"
-        style="@style/btn_user_center_option"
+        style="@style/btn_default"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="20dp"

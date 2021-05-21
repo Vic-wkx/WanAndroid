@@ -37,7 +37,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
                 user.onClickMyTODO(requireContext())
             }
             binding.btnWaiting.setOnClickListener {
-                showToast(getString(R.string.stay_tuned_hint))
+                showToast(R.string.stay_tuned_hint)
             }
         }
     }

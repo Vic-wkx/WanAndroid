@@ -41,4 +41,17 @@
     <string name="save">保存</string>
     <string name="content_cannot_be_empty">内容不能为空</string>
     <string name="are_you_sure_to_delete">确定删除吗？</string>
+    <string name="please_input_your_password_again">请再次输入密码确认</string>
+    <string name="register">注册</string>
+    <string name="register_successful">注册成功</string>
+    <string name="register_fail">注册失败</string>
+    <string name="password_cannot_be_empty">密码不能为空</string>
+    <string name="password_did_not_match">两次输入的密码不一致</string>
+    <string name="user_name_cannot_be_empty">用户名不能为空</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_fail">登录失败</string>
+    <string name="delete_fail">删除失败</string>
+    <string name="add_fail">添加失败</string>
+    <string name="update_fail">更新失败</string>
+    <string name="please_switch_to_uncompleted_todo_page">请切换到未完成页面再新建待办</string>
 </resources>

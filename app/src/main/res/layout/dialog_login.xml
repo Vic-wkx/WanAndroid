@@ -60,7 +60,7 @@
 
     <com.wkxjc.wanandroid.common.view.LoadingButtonLayout
         android:id="@+id/btnLogin"
-        style="@style/btn_user_center_option"
+        style="@style/btn_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foregroundGravity="center"
@@ -69,7 +69,7 @@
 
     <Button
         android:id="@+id/btnGoToRegister"
-        style="@style/btn_user_center_option"
+        style="@style/btn_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/go_to_register"

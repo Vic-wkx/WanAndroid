@@ -26,7 +26,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_avatar_non_tourist_fallback" />
+                tools:src="@drawable/ic_avatar_non_tourist" />
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -61,7 +61,7 @@
 
             <Button
                 android:id="@+id/btnLogin"
-                style="@style/btn_user_center_option"
+                style="@style/btn_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="22dp"
@@ -87,7 +87,7 @@
 
             <Button
                 android:id="@+id/btnChangeLanguage"
-                style="@style/btn_user_center_option"
+                style="@style/btn_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/change_language"
@@ -95,7 +95,7 @@
 
             <Button
                 android:id="@+id/btnMyTodo"
-                style="@style/btn_user_center_option"
+                style="@style/btn_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/my_todo"
@@ -103,7 +103,7 @@
 
             <Button
                 android:id="@+id/btnMyCollection"
-                style="@style/btn_user_center_option"
+                style="@style/btn_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/my_collection"
@@ -111,7 +111,7 @@
 
             <Button
                 android:id="@+id/btnWaiting"
-                style="@style/btn_user_center_option"
+                style="@style/btn_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/stay_tuned"

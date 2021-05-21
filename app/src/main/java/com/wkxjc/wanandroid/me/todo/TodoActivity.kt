@@ -133,7 +133,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
                     // Show EditTodoDialog, NewTodoApi
                     EditTodoDialog().show(supportFragmentManager, EditTodoDialog::class.java.simpleName)
                 } else {
-                    showToast("请切换到未完成页面再新建 Todo")
+                    showToast(R.string.please_switch_to_uncompleted_todo_page)
                 }
             }
         }

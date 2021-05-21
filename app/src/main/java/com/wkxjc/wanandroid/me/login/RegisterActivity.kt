@@ -4,8 +4,10 @@ import com.base.library.project.BaseActivity
 import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
+import com.wkxjc.wanandroid.R
 import com.wkxjc.wanandroid.databinding.ActivityRegisterBinding
 import com.wkxjc.wanandroid.common.api.RegisterApi
+import com.wkxjc.wanandroid.common.view.Status
 
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
@@ -13,19 +15,20 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     private val registerApi = RegisterApi()
     private val listener = object : HttpListener() {
         override fun onNext(result: String) {
-            showToast("注册成功")
+            showToast(R.string.register_successful)
             finish()
         }
 
         override fun onError(error: Throwable) {
-            binding.btnRegister.isEnabled = true
+            showToast(if (error.message == null) getString(R.string.register_fail) else error.message!!)
+            binding.btnRegister.status = Status.NORMAL
         }
     }
 
     override fun initView() {
         binding.btnRegister.setOnClickListener {
             if (inputNotValid()) return@setOnClickListener
-            binding.btnRegister.isEnabled = false
+            binding.btnRegister.status = Status.LOADING
             httpManager.request(registerApi.apply {
                 userName = binding.etRegisterUserName.text.toString()
                 password = binding.etRegisterPassword.text.toString()
@@ -35,16 +38,17 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     }
 
     private fun inputNotValid(): Boolean {
-        if (binding.etRegisterUserName.text.isEmpty()) {
-            showToast("User name cannot be empty!")
+        if (binding.etRegisterUserName.text.toString().isEmpty()) {
+            showToast(R.string.user_name_cannot_be_empty)
             return true
         }
-        if (binding.etRegisterPassword.text.isEmpty() || binding.etRegisterConfirmPassword.text.isEmpty()) {
-            showToast("Password cannot be empty!")
+        if (binding.etRegisterPassword.text.toString().isEmpty() || binding.etRegisterConfirmPassword.text.toString().isEmpty()) {
+            showToast(R.string.password_cannot_be_empty)
             return true
         }
-        if (binding.etRegisterPassword.text != binding.etRegisterConfirmPassword.text) {
-            showToast("两次输入的密码不一致！")
+        if (binding.etRegisterPassword.text.toString() != binding.etRegisterConfirmPassword.text.toString()) {
+            showToast(R.string.password_did_not_match)
+            return true
         }
         return false
     }

@@ -6,18 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".me.login.RegisterActivity">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_avatar_non_tourist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/etRegisterUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入用户名"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="8dp"
+        android:autofillHints="@string/please_input_your_account"
+        android:drawableStart="@drawable/ic_account"
+        android:drawablePadding="8dp"
+        android:hint="@string/please_input_your_account"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
     <EditText
         android:id="@+id/etRegisterPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入密码"
+        android:autofillHints="@string/please_input_your_password"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="8dp"
+        android:hint="@string/please_input_your_password"
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/etRegisterUserName" />
 
@@ -25,14 +44,18 @@
         android:id="@+id/etRegisterConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="请再次输入密码确认"
+        android:autofillHints="@string/please_input_your_password_again"
+        android:drawableStart="@drawable/ic_password"
+        android:drawablePadding="8dp"
+        android:hint="@string/please_input_your_password_again"
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/etRegisterPassword" />
 
-    <Button
+    <com.wkxjc.wanandroid.common.view.LoadingButtonLayout
         android:id="@+id/btnRegister"
+        style="@style/btn_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="注册"
+        android:text="@string/register"
         app:layout_constraintTop_toBottomOf="@id/etRegisterConfirmPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

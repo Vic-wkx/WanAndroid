@@ -14,5 +14,6 @@ class MyApplication : Application() {
         RxRetrofitApp.apiConfig = MyHttpApiConfig()
         RxRetrofitApp.httpListConfig = MyHttpListApiConfig()
     }
+
 }
 

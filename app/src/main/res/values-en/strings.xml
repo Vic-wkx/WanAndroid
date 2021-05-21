@@ -40,4 +40,17 @@
     <string name="save">Save</string>
     <string name="content_cannot_be_empty">Content cannot be empty.</string>
     <string name="are_you_sure_to_delete">Are you sure to delete?</string>
+    <string name="please_input_your_password_again">请再次输入密码确认</string>
+    <string name="register">Register</string>
+    <string name="register_successful">Register success</string>
+    <string name="register_fail">Register fail</string>
+    <string name="user_name_cannot_be_empty">User name cannot be empty</string>
+    <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="password_did_not_match">Password didn\'t match</string>
+    <string name="login_success">Login success</string>
+    <string name="login_fail">Login fail</string>
+    <string name="delete_fail">Delete fail</string>
+    <string name="add_fail">Add fail</string>
+    <string name="update_fail">Update fail</string>
+    <string name="please_switch_to_uncompleted_todo_page">Please switch to uncompleted todo page</string>
 </resources>

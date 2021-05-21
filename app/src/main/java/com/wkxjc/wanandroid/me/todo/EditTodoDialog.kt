@@ -26,7 +26,7 @@ class EditTodoDialog(val bean: TodoBean? = null) : BaseDialogFragment<DialogEdit
             }
 
             override fun onError(error: Throwable) {
-                showToast("add fail")
+                showToast(R.string.add_fail)
                 binding.btnSave.status = Status.NORMAL
             }
         }
@@ -39,7 +39,7 @@ class EditTodoDialog(val bean: TodoBean? = null) : BaseDialogFragment<DialogEdit
             }
 
             override fun onError(error: Throwable) {
-                showToast("update fail")
+                showToast(R.string.update_fail)
                 binding.btnSave.status = Status.NORMAL
             }
         }

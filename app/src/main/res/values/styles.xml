@@ -10,7 +10,7 @@
 
     <!--SplashActivityTheme-->
     <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:windowBackground">@mipmap/bg_splash</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowActionBar">false</item>
     </style>

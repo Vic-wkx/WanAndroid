@@ -21,7 +21,7 @@ class ImageAdapter(data: List<BannerBean>) : BannerAdapter<BannerBean, BannerVie
     }
 
     override fun onBindView(holder: BannerViewHolder, data: BannerBean, position: Int, size: Int) {
-        Glide.with(context).load(data.imagePath).placeholder(R.drawable.ic_img_placeholder).into(holder.imageView)
+        Glide.with(context).load(data.imagePath).placeholder(R.mipmap.ic_img_placeholder).into(holder.imageView)
     }
 
     class BannerViewHolder(val imageView: ImageView) : RecyclerView.ViewHolder(imageView)

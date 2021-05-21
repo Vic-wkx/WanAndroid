@@ -69,7 +69,7 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 }
                 if (bean.envelopePic.isNotEmpty()) {
                     holder.binding.ivEnvelope.visibility = View.VISIBLE
-                    Glide.with(context).load(bean.envelopePic).placeholder(R.drawable.ic_img_placeholder).into(holder.binding.ivEnvelope)
+                    Glide.with(context).load(bean.envelopePic).placeholder(R.mipmap.ic_img_placeholder).into(holder.binding.ivEnvelope)
                 } else {
                     holder.binding.ivEnvelope.visibility = View.GONE
                 }

@@ -6,6 +6,7 @@ import com.base.library.rxRetrofit.RxRetrofitApp
 import com.wkxjc.wanandroid.common.httpManager.MyHttpApiConfig
 import com.wkxjc.wanandroid.common.httpManager.MyHttpListApiConfig
 
+@Suppress("unused")
 class MyApplication : Application() {
 
     override fun onCreate() {

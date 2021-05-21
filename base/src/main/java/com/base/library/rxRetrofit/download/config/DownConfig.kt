@@ -25,13 +25,13 @@ class DownConfig {
             return field
         }
     /**保存的文件夹路径，如果不设置，默认路径是"应用缓存路径/download/",如果设置为外部路径，需要自己确保有读写权限*/
-    var saveDir: String = ""
+    private var saveDir: String = ""
         get() {
             if (field.isNotEmpty()) return field
             return RxRetrofitApp.downConfig.saveDir
         }
     /**保存的文件名字，如果不设置，默认名字是url的最后一段*/
-    var saveFileName: String = ""
+    private var saveFileName: String = ""
         get() {
             if (field.isNotEmpty()) return field
             if (url.isEmpty()) throw NullPointerException("download url is empty")

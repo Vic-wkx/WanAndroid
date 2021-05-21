@@ -10,8 +10,8 @@ import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.common.artical.LINK
-import com.wkxjc.wanandroid.common.artical.WebActivity
+import com.wkxjc.wanandroid.common.article.LINK
+import com.wkxjc.wanandroid.common.article.WebActivity
 import com.wkxjc.wanandroid.databinding.ActivityKnowledgeTreeArticlesBinding
 import com.wkxjc.wanandroid.common.api.KnowledgeTreeArticlesApi
 import com.wkxjc.wanandroid.common.bean.ArticleBean

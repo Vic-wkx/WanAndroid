@@ -10,9 +10,7 @@ import com.wkxjc.wanandroid.common.bean.ArticleBean
 const val LOGIN_INFO = "login_info"
 const val IS_LOGIN = "IS_LOGIN"
 const val USER_NAME = "USER_NAME"
-const val AVATAR = "AVATAR"
 const val DESCRIPTION = "DESCRIPTION"
-const val PASSWORD = "PASSWORD"
 
 interface User {
     val logonButtonDisplayedResId: Int

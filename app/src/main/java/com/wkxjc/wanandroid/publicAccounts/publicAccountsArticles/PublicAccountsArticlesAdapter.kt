@@ -28,7 +28,7 @@ const val PRE_LOAD = 10
 
 class PublicAccountsArticlesAdapter(private val articles: Articles = Articles()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var isLoadingMore = false
+    private var isLoadingMore = false
     lateinit var loadMore: () -> Unit
     lateinit var onItemClickListener: (View, ArticleBean, Int) -> Unit
     private lateinit var context: Context

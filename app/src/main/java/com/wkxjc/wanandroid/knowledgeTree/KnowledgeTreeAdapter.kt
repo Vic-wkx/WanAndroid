@@ -16,7 +16,7 @@ import com.wkxjc.wanandroid.common.bean.KnowledgeTrees
 import com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles.CATEGORY_ID
 import com.wkxjc.wanandroid.knowledgeTree.knowledgeTreeArticles.KnowledgeTreeArticlesActivity
 
-class KnowledgeTreeAdapter(val displayedKnowledgeTrees: MutableList<DisplayedKnowledgeTreeBean> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class KnowledgeTreeAdapter(private val displayedKnowledgeTrees: MutableList<DisplayedKnowledgeTreeBean> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context

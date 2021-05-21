@@ -41,7 +41,7 @@ class NavigationExpandableAdapter(private val context: Context?, private val nav
         notifyDataSetChanged()
     }
 
-    override fun getHeaderView(parent: ViewGroup) = LayoutInflater.from(context).inflate(R.layout.item_navigation_group, parent, false)
+    override fun getHeaderView(parent: ViewGroup): View = LayoutInflater.from(context).inflate(R.layout.item_navigation_group, parent, false)
 
     override fun onUpdateHeaderView(firstVisibleGroupPosition: Int, headerView: View?) {
         val tvNavigationGroupTitle = headerView?.findViewById<TextView>(R.id.tvNavigationGroupTitle)

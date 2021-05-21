@@ -17,8 +17,8 @@ class HeaderPinnedExpandableListView(context: Context, attrs: AttributeSet) : Fr
         addView(expandableListView)
     }
 
-    fun createView(): ExpandableListView {
-        val listView = ExpandableListView(context).apply {
+    private fun createView(): ExpandableListView {
+        return ExpandableListView(context).apply {
             setGroupIndicator(null)
             divider = null
             overScrollMode = View.OVER_SCROLL_NEVER
@@ -38,7 +38,6 @@ class HeaderPinnedExpandableListView(context: Context, attrs: AttributeSet) : Fr
                 }
             })
         }
-        return listView
     }
 
     private fun translateHeaderViewVertically(firstVisibleGroupPosition: Int) {

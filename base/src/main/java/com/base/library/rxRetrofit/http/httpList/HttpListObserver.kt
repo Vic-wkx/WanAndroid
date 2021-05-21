@@ -28,7 +28,7 @@ class HttpListObserver(
 ) : Observer<List<Unit>>, DefaultLifecycleObserver {
 
     var loading: ProgressDialog? = null
-    var disposable: Disposable? = null
+    private var disposable: Disposable? = null
 
 
     override fun onSubscribe(d: Disposable) {

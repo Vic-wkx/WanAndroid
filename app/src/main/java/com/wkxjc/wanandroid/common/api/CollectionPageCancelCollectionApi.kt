@@ -7,8 +7,8 @@ import io.reactivex.Observable
 import okhttp3.Headers
 
 class CollectionPageCancelCollectionApi(
-    var articleId: Int,
-    var originId: Int
+    private var articleId: Int,
+    private var originId: Int
 ) : BaseApi() {
 
     override fun getObservable(): Observable<String> {

@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.base.library.project.myStartActivity
 import com.bumptech.glide.Glide
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.common.artical.LINK
-import com.wkxjc.wanandroid.common.artical.WebActivity
+import com.wkxjc.wanandroid.common.article.LINK
+import com.wkxjc.wanandroid.common.article.WebActivity
 import com.wkxjc.wanandroid.common.banner.ImageAdapter
 import com.wkxjc.wanandroid.databinding.ItemArticleBinding
 import com.wkxjc.wanandroid.databinding.ItemBannerBinding
@@ -19,7 +19,6 @@ import com.wkxjc.wanandroid.common.bean.ArticleBean
 import com.wkxjc.wanandroid.common.bean.Articles
 import com.wkxjc.wanandroid.common.bean.BannerBean
 import com.wkxjc.wanandroid.common.bean.HomeBean
-import com.youth.banner.listener.OnBannerListener
 
 const val BANNER = 0x1
 const val ARTICLE = 0x2
@@ -57,11 +56,7 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
         when (holder) {
             is BannerViewHolder -> {
                 holder.binding.banner.adapter = ImageAdapter(homeBean.banners.data)
-                holder.binding.banner.setOnBannerListener(object : OnBannerListener<BannerBean> {
-                    override fun OnBannerClick(data: BannerBean?, position: Int) {
-                        context.myStartActivity<WebActivity>(LINK to data?.url)
-                    }
-                })
+                holder.binding.banner.setOnBannerListener { data, _ -> context.myStartActivity<WebActivity>(LINK to (data as BannerBean?)?.url) }
             }
             is ArticleViewHolder -> {
                 val bean = homeBean.articles.datas[position - HEADER_COUNT]

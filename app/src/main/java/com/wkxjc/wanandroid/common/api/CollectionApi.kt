@@ -9,7 +9,7 @@ import io.reactivex.Observable
 import okhttp3.Headers
 
 class CollectionApi : BaseApi() {
-    var page = 0
+    private var page = 0
 
     init {
         apiConfig.cacheConfig.cache = false

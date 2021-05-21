@@ -1,4 +1,4 @@
-package com.wkxjc.wanandroid.common.artical
+package com.wkxjc.wanandroid.common.article
 
 import android.view.ViewGroup.LayoutParams
 import android.widget.LinearLayout

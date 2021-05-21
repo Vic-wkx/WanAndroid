@@ -25,7 +25,7 @@ class HttpObserver(private val activity: AppCompatActivity?, private val fragmen
                    private val api: BaseApi, private val listener: HttpListener) : Observer<String>, DefaultLifecycleObserver {
 
     var loading: ProgressDialog? = null
-    var disposable: Disposable? = null
+    private var disposable: Disposable? = null
 
     override fun onSubscribe(d: Disposable) {
         disposable = d

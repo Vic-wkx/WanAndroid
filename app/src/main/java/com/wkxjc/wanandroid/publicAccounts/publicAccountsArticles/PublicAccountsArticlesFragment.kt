@@ -1,9 +1,7 @@
 package com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
@@ -13,11 +11,11 @@ import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.lewis.widget.ui.Status
 import com.lewis.widget.ui.view.StatusView
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.common.artical.LINK
-import com.wkxjc.wanandroid.common.artical.WebActivity
-import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsArticlesBinding
 import com.wkxjc.wanandroid.common.api.PublicAccountsArticlesApi
+import com.wkxjc.wanandroid.common.article.LINK
+import com.wkxjc.wanandroid.common.article.WebActivity
 import com.wkxjc.wanandroid.common.bean.ArticleBean
+import com.wkxjc.wanandroid.databinding.FragmentPublicAccountsArticlesBinding
 import com.wkxjc.wanandroid.me.MeViewModel
 import com.wkxjc.wanandroid.publicAccounts.PublicAccountsViewModel
 

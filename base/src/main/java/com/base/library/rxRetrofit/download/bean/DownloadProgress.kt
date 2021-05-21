@@ -10,7 +10,7 @@ import kotlin.math.roundToInt
  * @author  Alpinist Wang
  * Date:    2019-04-30
  */
-class DownloadProgress(var read: Long, var total: Long) {
+class DownloadProgress(var read: Long, private var total: Long) {
     val progress: Int
         get() = (read / (total * 1.0) * 100).roundToInt()
 

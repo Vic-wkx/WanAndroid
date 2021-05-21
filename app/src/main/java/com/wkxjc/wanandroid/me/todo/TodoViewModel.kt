@@ -8,5 +8,4 @@ class TodoViewModel : ViewModel() {
     var todoStatus = MutableLiveData(0)
     var todos = MutableLiveData<Todos>()
     var dataChanged = MutableLiveData(false)
-    var completedTodos = MutableLiveData<Todos>()
 }

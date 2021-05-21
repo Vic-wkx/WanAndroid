@@ -16,7 +16,7 @@
         <activity android:name="com.wkxjc.wanandroid.me.todo.TodoActivity" />
         <activity android:name=".me.login.RegisterActivity" />
         <activity android:name=".knowledgeTree.knowledgeTreeArticles.KnowledgeTreeArticlesActivity" />
-        <activity android:name=".common.artical.WebActivity" />
+        <activity android:name=".common.article.WebActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashActivity"

@@ -20,11 +20,11 @@ import okhttp3.Headers
  * Date:    2021/5/19
  */
 class TodoApi : BaseApi() {
-    var page = 1
+    private var page = 1
     var status: Int = 0
-    var type: Int? = null
-    var priority: Int? = null
-    var orderBy: Int? = null
+    private var type: Int? = null
+    private var priority: Int? = null
+    private var orderBy: Int? = null
 
     override fun getObservable(): Observable<String> {
         apiConfig.headers = Headers.headersOf(COOKIE_HEADER_KEY, SPUtils.getInstance(LOGIN_INFO).getString(COOKIE))

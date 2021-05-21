@@ -19,7 +19,7 @@ class NonTourist : User {
     override val name: String = SPUtils.getInstance(LOGIN_INFO).getString(USER_NAME)
     override val avatar: String? = null
     override val avatarFallbackResId = R.drawable.ic_avatar_non_tourist
-    override val logonButtonDisplayedResId: Int = com.wkxjc.wanandroid.R.string.login_out
+    override val logonButtonDisplayedResId: Int = R.string.login_out
     override fun loginOut() {
         SPUtils.getInstance(LOGIN_INFO).clear()
     }

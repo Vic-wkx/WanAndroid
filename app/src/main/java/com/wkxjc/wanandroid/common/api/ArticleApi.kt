@@ -16,7 +16,7 @@ class ArticleApi : BaseApi() {
         apiConfig.cacheConfig.cache = false
     }
 
-    var page = 0
+    private var page = 0
     override fun getObservable(): Observable<String> {
         apiConfig.headers = Headers.headersOf(COOKIE_HEADER_KEY, SPUtils.getInstance(LOGIN_INFO).getString(COOKIE))
         val apiService = retrofit.create(ApiService::class.java)

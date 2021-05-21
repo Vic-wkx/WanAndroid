@@ -7,11 +7,10 @@ import com.base.library.project.showToast
 import com.base.library.rxRetrofit.http.HttpManager
 import com.base.library.rxRetrofit.http.listener.HttpListener
 import com.wkxjc.wanandroid.R
-import com.wkxjc.wanandroid.databinding.DialogConfimDeleteTodoBinding
 import com.wkxjc.wanandroid.common.api.DeleteTodoApi
-import com.wkxjc.wanandroid.me.todo.TodoViewModel
+import com.wkxjc.wanandroid.databinding.DialogConfimDeleteTodoBinding
 
-class ConfirmDeleteTodoDialog(val todoId: Int) : BaseDialogFragment<DialogConfimDeleteTodoBinding>() {
+class ConfirmDeleteTodoDialog(private val todoId: Int) : BaseDialogFragment<DialogConfimDeleteTodoBinding>() {
     private val httpManager by lazy { HttpManager(this) }
     private val viewModel by activityViewModels<TodoViewModel>()
     private val httpListener by lazy {

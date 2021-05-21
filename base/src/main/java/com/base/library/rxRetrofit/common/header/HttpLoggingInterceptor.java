@@ -17,6 +17,7 @@ package com.base.library.rxRetrofit.common.header;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.concurrent.TimeUnit;
 
@@ -40,7 +41,7 @@ import okio.BufferedSource;
  * Date:    2019-05-05
  */
 public final class HttpLoggingInterceptor implements Interceptor {
-    private static final Charset UTF8 = Charset.forName("UTF-8");
+    private static final Charset UTF8 = StandardCharsets.UTF_8;
     private final Logger logger;
     private volatile Level level = Level.BODY;
 

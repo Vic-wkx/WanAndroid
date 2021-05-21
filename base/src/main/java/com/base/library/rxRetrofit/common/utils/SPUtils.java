@@ -25,7 +25,7 @@ import java.util.Set;
 public final class SPUtils {
 
     private static final SimpleArrayMap<String, SPUtils> SP_UTILS_MAP = new SimpleArrayMap<>();
-    private SharedPreferences sp;
+    private final SharedPreferences sp;
 
     /**
      * Return the single {@link SPUtils} instance

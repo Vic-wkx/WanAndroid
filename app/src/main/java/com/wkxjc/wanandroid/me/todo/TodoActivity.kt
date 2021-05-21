@@ -82,7 +82,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
         httpManager.request(getTodoApi, todoLoadMoreListener)
     }
 
-    fun onItemClick(view: View, bean: TodoBean, position: Int) {
+    private fun onItemClick(view: View, bean: TodoBean, position: Int) {
         when (view.id) {
             R.id.ivEdit -> {
                 // Show EditTodoDialog, UpdateTodoApi
@@ -96,7 +96,7 @@ class TodoActivity : BaseActivity<ActivityTodoBinding>() {
         }
     }
 
-    fun onCheckedChanged(isChecked: Boolean, bean: TodoBean, position: Int) {
+    private fun onCheckedChanged(isChecked: Boolean, bean: TodoBean, position: Int) {
         if (bean.isCompleted() && !isChecked) {
             httpManager.request(UpdateTodoCompleteStatusApi(bean.id!!, 0))
             todoAdapter.remove(position)

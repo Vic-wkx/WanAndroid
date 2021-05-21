@@ -28,7 +28,7 @@ const val PRE_LOAD = 10
 
 class CollectionAdapter(private val collections: Collections = Collections()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var isLoadingMore = false
+    private var isLoadingMore = false
     lateinit var loadMore: () -> Unit
     lateinit var onItemClickListener: (View, CollectionBean, Int) -> Unit
     private lateinit var context: Context

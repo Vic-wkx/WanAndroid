@@ -24,7 +24,7 @@ const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
 // preload more articles for better user experience
-const val PRE_LOAD = 10
+const val PRELOAD = 10
 
 class PublicAccountsArticlesAdapter(private val articles: Articles = Articles()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -67,7 +67,7 @@ class PublicAccountsArticlesAdapter(private val articles: Articles = Articles())
                 holder.binding.ivCollect.setOnClickListener {
                     onItemClickListener.invoke(it, bean, position)
                 }
-                if (position >= articles.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
+                if (position >= articles.datas.size - 1 - PRELOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true
                     loadMore.invoke()
                 }

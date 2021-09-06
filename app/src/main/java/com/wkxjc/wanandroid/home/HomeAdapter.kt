@@ -28,7 +28,7 @@ const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
 // preload more articles for better user experience
-const val PRE_LOAD = 10
+const val PRELOAD = 10
 
 class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var onItemClickListener: (View, ArticleBean, Int) -> Unit
@@ -87,7 +87,7 @@ class HomeAdapter(private val homeBean: HomeBean = HomeBean()) : RecyclerView.Ad
                 holder.binding.ivCollect.setOnClickListener {
                     onItemClickListener.invoke(it, bean, position)
                 }
-                if (position - HEADER_COUNT >= homeBean.articles.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
+                if (position - HEADER_COUNT >= homeBean.articles.datas.size - 1 - PRELOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true
                     loadMore.invoke()
                 }

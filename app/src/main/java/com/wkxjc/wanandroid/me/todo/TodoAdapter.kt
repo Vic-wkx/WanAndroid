@@ -20,7 +20,7 @@ const val FOOTER_COUNT = 1
 const val HEADER_FOOTER_COUNT = HEADER_COUNT + FOOTER_COUNT
 
 // preload more articles for better user experience
-const val PRE_LOAD = 10
+const val PRELOAD = 10
 
 class TodoAdapter(private val todos: Todos = Todos()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var onItemClickListener: (View, TodoBean, Int) -> Unit
@@ -70,7 +70,7 @@ class TodoAdapter(private val todos: Todos = Todos()) : RecyclerView.Adapter<Rec
                         onCheckChangedListener.invoke(isChecked, bean, holder.adapterPosition)
                     }
                 }
-                if (position - HEADER_COUNT >= todos.datas.size - 1 - PRE_LOAD && !isLoadingMore && !noMore) {
+                if (position - HEADER_COUNT >= todos.datas.size - 1 - PRELOAD && !isLoadingMore && !noMore) {
                     isLoadingMore = true
                     loadMore.invoke()
                 }

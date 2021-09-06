@@ -2,7 +2,6 @@ package com.wkxjc.wanandroid.publicAccounts.publicAccountsArticles
 
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
@@ -63,7 +62,7 @@ class PublicAccountsArticlesFragment : BaseFragment<FragmentPublicAccountsArticl
         publicAccountArticlesAdapter.loadMore = {
             viewModel.currentPublicAccountsArticlesPage.value = viewModel.currentPublicAccountsArticlesPage.value!! + 1
         }
-        val observe = viewModel.publicAccountsArticles.observe(viewLifecycleOwner) {
+        viewModel.publicAccountsArticles.observe(viewLifecycleOwner) {
             publicAccountArticlesAdapter.refresh(it)
         }
         viewModel.publicAccountsArticlesStatus.observe(viewLifecycleOwner) {

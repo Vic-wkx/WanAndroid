@@ -15,6 +15,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), IBase {
     open var lazyLoad = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        @Suppress("UNCHECKED_CAST")
         _binding = initViewBinding(container) as T
         return binding.root
     }

@@ -1,5 +1,6 @@
 package com.wkxjc.wanandroid
 
+import android.view.MenuItem
 import com.base.library.project.BaseActivity
 import com.base.library.utils.FragmentUtils
 import com.wkxjc.wanandroid.databinding.ActivityMainBinding
@@ -21,25 +22,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         FragmentUtils.add(supportFragmentManager, R.id.container, homeFragment, publicAccountsFragment, navigationFragment, knowledgeTreeFragment, meFragment)
         FragmentUtils.show(supportFragmentManager, homeFragment)
         binding.bottomMenu.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.homeFragment -> {
-                    FragmentUtils.show(supportFragmentManager, homeFragment)
-                }
-                R.id.publicAccountsFragment -> {
-                    FragmentUtils.show(supportFragmentManager, publicAccountsFragment)
-                }
-                R.id.navigationFragment -> {
-                    FragmentUtils.show(supportFragmentManager, navigationFragment)
-                }
-                R.id.knowledgeTreeFragment -> {
-                    FragmentUtils.show(supportFragmentManager, knowledgeTreeFragment)
-                }
-                R.id.meFragment -> {
-                    FragmentUtils.show(supportFragmentManager, meFragment)
-                }
-            }
+            FragmentUtils.show(supportFragmentManager, findMatchedFragment(it))
             true
         }
+    }
+
+    private fun findMatchedFragment(menuItem: MenuItem) = when (menuItem.itemId) {
+        R.id.homeFragment -> homeFragment
+        R.id.publicAccountsFragment -> publicAccountsFragment
+        R.id.navigationFragment -> navigationFragment
+        R.id.knowledgeTreeFragment -> knowledgeTreeFragment
+        R.id.meFragment -> meFragment
+        else -> throw Exception("Impossible")
     }
 
     override fun initData() {}

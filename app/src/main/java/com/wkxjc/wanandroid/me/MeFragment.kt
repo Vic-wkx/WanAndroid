@@ -3,7 +3,6 @@ package com.wkxjc.wanandroid.me
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
 import com.base.library.project.BaseFragment
 import com.base.library.project.myStartActivity
 import com.base.library.project.showToast
